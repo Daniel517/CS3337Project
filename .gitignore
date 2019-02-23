@@ -1,0 +1,7 @@
+/.git
+.classpath
+.project
+/.settings
+/bin
+build.fxbuild
+.DS_Store
