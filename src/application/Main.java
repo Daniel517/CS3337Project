@@ -25,8 +25,8 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 		ArrayList<Animal> list= new ArrayList<Animal>();
-		Dog a = new Dog("Dan",10,"Dog","Pit Bull");
-		Dog b = new Dog("Dan",10,"Dog","Rat");
+		Pet a = new Pet(10,"Dan","Dog","Pit Bull");
+		Pet b = new Pet(10,"Dan","Dog","Rat");
 		list.add(a);
 		list.add(b);
 		System.out.println(list);

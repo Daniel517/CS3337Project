@@ -2,21 +2,15 @@ package application;
 
 public class Animal {
 	
-	String name;
 	Integer emotion;
 	String type;
+	String breed;
 	
-	public Animal(String name, Integer emotion, String type) {
+	public Animal(Integer emotion, String type, String breed) {
 		super();
-		this.name = name;
 		this.emotion = emotion;
 		this.type = type;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+		this.breed = breed;
 	}
 	public Integer getEmotion() {
 		return emotion;
@@ -30,7 +24,11 @@ public class Animal {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
+	public String getBreed() {
+		return breed;
+	}
+	public void setBreed(String breed) {
+		this.breed = breed;
+	}
 
 }
