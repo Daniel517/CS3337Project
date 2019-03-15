@@ -1,17 +1,12 @@
 package application;
 
-public class Bird extends Animal implements AnimalActions{
+public class WildAnimal extends Animal implements AnimalActions{
+	String Breed="Squirrel";
 
-	String breed;
-	public Bird(String name, Integer emotion, String type, String breed) {
+	public WildAnimal(String name, Integer emotion, String type, String breed) {
 		super(name, emotion, type);
-		this.breed=breed;
+		Breed = breed;
 	}
-	
-	public String getBreed() {
-		return breed;
-	}
-
 
 	@Override
 	public String Fly() {
@@ -72,6 +67,5 @@ public class Bird extends Animal implements AnimalActions{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }
