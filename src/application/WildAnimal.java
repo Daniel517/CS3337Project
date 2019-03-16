@@ -4,7 +4,7 @@ public class WildAnimal extends Animal implements AnimalActions{
 	String Breed="Squirrel";
 
 	public WildAnimal(String name, Integer emotion, String type, String breed) {
-		super(name, emotion, type);
+		super(emotion, name, type);
 		Breed = breed;
 	}
 
