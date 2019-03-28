@@ -1,18 +1,10 @@
 
 package application;
 
-public class Animal {
+public abstract class Animal {
 	
-	Integer emotion;
+	Integer emotion=10;
 	String type;
-	String breed;
-	
-	public Animal(Integer emotion, String type, String breed) {
-		super();
-		this.emotion = emotion;
-		this.type = type;
-		this.breed = breed;
-	}
 	public Integer getEmotion() {
 		return emotion;
 	}
@@ -22,14 +14,11 @@ public class Animal {
 	public String getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public Animal(String type) {
+		super();
 		this.type = type;
 	}
-	public String getBreed() {
-		return breed;
-	}
-	public void setBreed(String breed) {
-		this.breed = breed;
-	}
+	
+	
 
 }

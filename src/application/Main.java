@@ -11,9 +11,11 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			@SuppressWarnings("unused")
-			MainMenu root = new MainMenu(primaryStage);
-			primaryStage.show();
+			//@SuppressWarnings("unused")
+			//MainMenu root = new MainMenu(primaryStage);
+			//primaryStage.show();
+			Simulator sim = new Simulator("PETS Simulator", 1300,1300/12*9);
+			sim.start();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
