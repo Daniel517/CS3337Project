@@ -1,5 +1,7 @@
 package application;
 
+import java.awt.image.BufferedImage;
+
 public class WildAnimal extends Animal implements AnimalActions{
 	String Breed="Squirrel";
 
@@ -69,6 +71,13 @@ public class WildAnimal extends Animal implements AnimalActions{
 	@Override
 	public String Rest() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public BufferedImage getAsset() {
+		
 		return null;
 	}
 

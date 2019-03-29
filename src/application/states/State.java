@@ -2,8 +2,8 @@ package application.states;
 
 import java.awt.Graphics;
 
-import application.Handler;
-import application.Simulator;
+import application.background.Handler;
+import application.background.Simulator;
 
 public abstract class State {
 	

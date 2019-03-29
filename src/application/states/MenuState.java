@@ -2,8 +2,8 @@ package application.states;
 
 import java.awt.Graphics;
 
-import application.Display;
-import application.Handler;
+import application.background.Handler;
+import gui.Display;
 
 public class MenuState extends State{
 

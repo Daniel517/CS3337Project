@@ -1,6 +1,8 @@
 
 package application;
 
+import java.awt.image.BufferedImage;
+
 public abstract class Animal {
 	
 	Integer emotion=10;
@@ -18,7 +20,7 @@ public abstract class Animal {
 		super();
 		this.type = type;
 	}
-	
+	public abstract BufferedImage getAsset();
 	
 
 }

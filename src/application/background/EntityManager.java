@@ -1,7 +1,9 @@
-package application;
+package application.background;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+
+import application.Human;
 
 public class EntityManager {
 	

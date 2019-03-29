@@ -1,4 +1,4 @@
-package application;
+package application.background;
 
 public class Handler {
 	
@@ -8,6 +8,9 @@ public class Handler {
 		this.sim = sim;
 	}
 
+	public KeyManager getKeyManager() {
+		return sim.getKeyManager();
+	}
 	
 	public int getWidth() {
 		return sim.getWidth();

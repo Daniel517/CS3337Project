@@ -1,7 +1,8 @@
-package application;
+package application.background;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -12,9 +13,11 @@ import application.states.CreationMenu;
 import application.states.GameState;
 import application.states.MenuState;
 import application.states.State;
+import gui.Display;
 
 public class Simulator implements Runnable{
-	
+	//I think i need to make a player class becasue they
+	//would be the only one to be able to move the list.
 	public Display display;
 	public int width, height;
 	public String title;
@@ -24,11 +27,12 @@ public class Simulator implements Runnable{
 	
 	private BufferStrategy bs;
 	private Graphics g;
-	
+	//States
 	private State gameState;
 	private State menuState;
 	private State creationMenu;
-	
+	//Input
+	private KeyManager keyManager;
 	private Handler handler;
 	
 	private AnimalList animalList;
@@ -37,6 +41,7 @@ public class Simulator implements Runnable{
 		this.width = width;
 		this.height = height;
 		this.title = title;
+		keyManager = new KeyManager();
 		
 		animalList = new AnimalList(handler);
 	}
@@ -44,6 +49,7 @@ public class Simulator implements Runnable{
 	public void init()
 	{
 		display = new Display(title,width,height);
+		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		
 		handler = new Handler(this);
@@ -89,14 +95,18 @@ public class Simulator implements Runnable{
 		stop();
 	}
 	
-	
+	public KeyManager getKeyManager() {
+		return keyManager;
+	}
 
 	private void tick() {
+		keyManager.tick();
+		animalList.tick();
 		if(State.getState() != null) {
 			State.getState().tick();
 		}
 		
-		animalList.tick();
+		
 	}
 	
 	private void render() {

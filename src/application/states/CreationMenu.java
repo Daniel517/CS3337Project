@@ -2,7 +2,7 @@ package application.states;
 
 import java.awt.Graphics;
 
-import application.Handler;
+import application.background.Handler;
 
 public class CreationMenu extends State{
 	

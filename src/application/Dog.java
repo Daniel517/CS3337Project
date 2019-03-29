@@ -1,8 +1,13 @@
 package application;
 
+import java.awt.image.BufferedImage;
+
+import application.gfx.Assets;
+
 public class Dog extends Animal implements AnimalActions  {
 	String name;
 	String breed;
+	private BufferedImage image = Assets.dog;
 	
 	public Dog(String type, String name, String breed) {
 		super(type);
@@ -10,6 +15,10 @@ public class Dog extends Animal implements AnimalActions  {
 		this.breed = breed;
 	}
 	
+	@Override
+	public BufferedImage getAsset() {
+		return image;
+	}
 	
 	public String getName() {
 		return name;
@@ -68,9 +77,5 @@ public class Dog extends Animal implements AnimalActions  {
 		String action="";
 		return action;
 	}
-	
-	
-	
-	
 
 }
