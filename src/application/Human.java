@@ -7,7 +7,7 @@ public class Human {
 	int report;
 	ArrayList<Animal> pets;
 	Animal[] interact;
-	public Human(String name, ArrayList<Pet> pet) {
+	public Human(String name, ArrayList<Animal> pet) {
 		super();
 		this.name = name;
 		report = 2;

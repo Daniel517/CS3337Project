@@ -2,6 +2,7 @@ package application.states;
 
 import java.awt.Graphics;
 
+import application.Handler;
 import application.Simulator;
 
 public abstract class State {
@@ -18,10 +19,10 @@ public abstract class State {
 	
 	
 	//class
-	protected Simulator game;
+	protected Handler handler;
 	
-	public State(Simulator game) {
-		this.game = game;
+	public State(Handler handler) {
+		this.handler = handler;
 	}
 	
 	

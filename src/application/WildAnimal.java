@@ -4,10 +4,14 @@ public class WildAnimal extends Animal implements AnimalActions{
 	String Breed="Squirrel";
 
 	public WildAnimal(String name, Integer emotion, String type, String breed) {
-		super(emotion, name, type);
+		super(name);
 		Breed = breed;
 	}
+	
 
+	public String getBreed() {
+		return Breed;
+	}
 	@Override
 	public String Fly() {
 		// TODO Auto-generated method stub

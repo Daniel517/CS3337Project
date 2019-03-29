@@ -3,6 +3,13 @@ package application;
 public class Cat extends Animal implements AnimalActions{
 	String name;
 	String breed;
+	
+	public Cat(String type, String name, String breed) {
+		super(type);
+		this.name = name;
+		this.breed = breed;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -15,60 +22,55 @@ public class Cat extends Animal implements AnimalActions{
 	public void setBreed(String breed) {
 		this.breed = breed;
 	}
-	public Cat(String type, String name, String breed) {
-		super(type);
-		this.name = name;
-		this.breed = breed;
-	}
 	@Override
 	public String Fly() {
-		// TODO Auto-generated method stub
-		return null;
+		String action="Dog looks at you Funny!";
+		return action;
 	}
 	@Override
-	public String Catch() {
-		// TODO Auto-generated method stub
-		return null;
+	public String Catch( ) {
+		String action="Dog get a hold of ";
+		return action;
 	}
 	@Override
 	public String Speak() {
-		// TODO Auto-generated method stub
-		return null;
+		String action="Braks!!";
+		return action;
 	}
 	@Override
 	public String Chase() {
-		// TODO Auto-generated method stub
-		return null;
+		String action="";
+		return action;
 	}
 	@Override
 	public String Flee() {
-		// TODO Auto-generated method stub
-		return null;
+		String action="";
+		return action;
 	}
 	@Override
 	public String Bite() {
-		// TODO Auto-generated method stub
-		return null;
+		String action="";
+		return action;
 	}
 	@Override
 	public String Play() {
-		// TODO Auto-generated method stub
-		return null;
+		String action="";
+		return action;
 	}
 	@Override
 	public String Fetch() {
-		// TODO Auto-generated method stub
-		return null;
+		String action="";
+		return action;
 	}
 	@Override
 	public String Lick() {
-		// TODO Auto-generated method stub
-		return null;
+		String action="";
+		return action;
 	}
 	@Override
 	public String Rest() {
-		// TODO Auto-generated method stub
-		return null;
+		String action="";
+		return action;
 	}
 	
 	

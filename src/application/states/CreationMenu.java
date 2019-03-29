@@ -2,12 +2,12 @@ package application.states;
 
 import java.awt.Graphics;
 
-import application.Simulator;
+import application.Handler;
 
 public class CreationMenu extends State{
 	
-	public CreationMenu(Simulator sim) {
-		super(sim);
+	public CreationMenu(Handler handler) {
+		super(handler);
 	}
 
 	@Override

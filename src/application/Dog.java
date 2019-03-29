@@ -9,6 +9,15 @@ public class Dog extends Animal implements AnimalActions  {
 		this.name = name;
 		this.breed = breed;
 	}
+	
+	
+	public String getName() {
+		return name;
+	}
+	public String getBreed() {
+		return breed;
+	}
+
 	@Override
 	public String Fly() {
 		String action="Dog looks at you Funny!";

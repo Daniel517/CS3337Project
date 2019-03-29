@@ -2,13 +2,13 @@ package application.states;
 
 import java.awt.Graphics;
 
-import application.Simulator;
+import application.Handler;
 import application.gfx.Assets;
 
 public class GameState extends State{
 
-	public GameState(Simulator sim) {
-		super(sim);
+	public GameState(Handler handler) {
+		super(handler);
 	}
 	
 	public void tick() {

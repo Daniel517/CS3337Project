@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import application.animalList.AnimalList;
 import application.gfx.Assets;
 import application.gfx.ImageLoader;
 import application.states.CreationMenu;
@@ -28,10 +29,16 @@ public class Simulator implements Runnable{
 	private State menuState;
 	private State creationMenu;
 	
+	private Handler handler;
+	
+	private AnimalList animalList;
+	
 	public Simulator(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.title = title;
+		
+		animalList = new AnimalList(handler);
 	}
 	
 	public void init()
@@ -39,9 +46,11 @@ public class Simulator implements Runnable{
 		display = new Display(title,width,height);
 		Assets.init();
 		
-		gameState = new GameState(this);
-		menuState = new MenuState(this);
-		creationMenu = new CreationMenu(this);
+		handler = new Handler(this);
+		
+		gameState = new GameState(handler);
+		menuState = new MenuState(handler);
+		creationMenu = new CreationMenu(handler);
 		State.setState(gameState);
 	}
 	
@@ -86,6 +95,8 @@ public class Simulator implements Runnable{
 		if(State.getState() != null) {
 			State.getState().tick();
 		}
+		
+		animalList.tick();
 	}
 	
 	private void render() {
@@ -101,6 +112,7 @@ public class Simulator implements Runnable{
 		if(State.getState() != null) {
 			State.getState().render(g);
 		}
+		animalList.render(g);
 		
 		bs.show();
 		g.dispose();
@@ -122,6 +134,14 @@ public class Simulator implements Runnable{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
 	}
 
 }
