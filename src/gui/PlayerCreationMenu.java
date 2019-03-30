@@ -59,7 +59,8 @@ public class PlayerCreationMenu {
 		userInfoBox.setSpacing(40);
 		
 		//Button which allows the user to start the game with the given information
-		Button startButton = new Button("Start Game");
+		Button startButton = new Button("Start Simulation");
+		//startButton.setOnAction(e-> new Simulation("Title", width, height);
 		/*
 		 * 
 		 * 			MAKE BUTTON SEND INFORMATION TO MODULE WHICH NEEDS IT
@@ -131,7 +132,8 @@ public class PlayerCreationMenu {
 		petInfoBox.setSpacing(20);
 		
 		//Button which allows the user to start the game which the given information
-		Button startButton = new Button("Start Game");
+		Button startButton = new Button("Start Simulation");
+		//startButton.setOnAction(e-> new Simulation("Title", width, height);
 		/*
 		 * 
 		 * 			MAKE BUTTON SEND INFORMATION TO MODULE WHICH NEEDS IT
@@ -232,7 +234,8 @@ public class PlayerCreationMenu {
 		pet2InfoBox.setSpacing(20);
 		
 		//Button which allows the user to start the game with the given information
-		Button startButton = new Button("Start Game");
+		Button startButton = new Button("Start Simulation");
+		//startButton.setOnAction(e-> new Simulation("Title", width, height);
 		/*
 		 * 
 		 * 			MAKE BUTTON SEND INFORMATION TO MODULE WHICH NEEDS IT
