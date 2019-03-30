@@ -11,13 +11,32 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * A set of graphical user interfaces that allow the user to create a player for the application. User can 
+ * add desired user name and then decide whether to have 0, 1, or 2 pets to their player.
+ * 
+ * @author danielramirez
+ *
+ */
 public class PlayerCreationMenu {
+	/**
+	 * Main stage for application
+	 */
 	Stage window;
+	/**
+	 * Constructor for Player Creation Menu
+	 * 
+	 * @param primaryStage Main stage
+	 */
 	public PlayerCreationMenu(Stage primaryStage) {
 		window = primaryStage;
-		startSinglePetPlayerCreationMenu();
+		startEmptyPetPlayerCreationMenu();
 	}
-	private void startSinglePetPlayerCreationMenu() {
+	/**
+	 * Displays a menu which allows the user to input their name and either add a pet to their user 
+	 * or start the game without a pet
+	 */
+	private void startEmptyPetPlayerCreationMenu() {
 		//Set up scene
 		BorderPane bp = new BorderPane();
 		Scene scene = new Scene(bp, 700, 500);
@@ -25,7 +44,7 @@ public class PlayerCreationMenu {
 		window.setScene(scene);
 		
 		//Label for heading
-		Label headingLabel = new Label("Create Character:");
+		Label headingLabel = new Label("Create Character: (Can start with 0 - 2 pets)");
 		headingLabel.getStyleClass().add("descriptionLabel");
 		
 		//Label for user's info
@@ -39,6 +58,55 @@ public class PlayerCreationMenu {
 		HBox userInfoBox = new HBox(userNameLabel, userNameInput);
 		userInfoBox.setSpacing(40);
 		
+		//Button which allows the user to start the game with the given information
+		Button startButton = new Button("Start Game");
+		/*
+		 * 
+		 * 			MAKE BUTTON SEND INFORMATION TO MODULE WHICH NEEDS IT
+		 * 
+		 */
+		
+		//Button to add another pet
+		Button addPetButton = new Button("+");
+		addPetButton.setOnAction(e -> startSinglePetPlayerCreationMenu(userNameInput.getText()));
+		
+		//HBox to horizontally align user information
+		HBox buttonsBox = new HBox(startButton, addPetButton);
+		buttonsBox.setSpacing(40);
+		
+		//VBox for all item to be displayed in gui
+		VBox box2 = new VBox(headingLabel, userInfoBox, buttonsBox);
+		box2.setSpacing(50);
+		bp.setCenter(box2);
+	}
+	/**
+	 * Displays a menu which allows the user to update their user name and add information for a single pet
+	 * 
+	 * @param userNameIn User name
+	 */
+	private void startSinglePetPlayerCreationMenu(String userNameIn) {
+		//Set up scene
+		BorderPane bp = new BorderPane();
+		Scene scene = new Scene(bp, 700, 500);
+		scene.getStylesheets().add("application/application.css");
+		window.setScene(scene);
+		
+		//Label for heading
+		Label headingLabel = new Label("Create Character: (Can start with 0 - 2 pets)");
+		headingLabel.getStyleClass().add("descriptionLabel");
+		
+		//Label for user's info
+		Label userNameLabel = new Label("User's Name: ");
+		userNameLabel.getStyleClass().add("nameLabel");
+		
+		//TextField for user to input name
+		TextField userNameInput = new TextField();
+		userNameInput.setText(userNameIn);
+		
+		//HBox to horizontally align user information
+		HBox userInfoBox = new HBox(userNameLabel, userNameInput);
+		userInfoBox.setSpacing(40);
+		
 		//Label for pet's info (Pet Type)
 		Label petTypeLabel = new Label("Pet Type: ");
 		petTypeLabel.getStyleClass().add("nameLabel");
@@ -47,6 +115,7 @@ public class PlayerCreationMenu {
 		ChoiceBox<String> petType = new ChoiceBox<String>();
 		petType.getItems().addAll("Select Pet", "Dog", "Cat", "Bird");
 		petType.setValue("Select Pet");
+		Platform.runLater(() -> petType.requestFocus()); //Request focus since user name text is filled
 		ChoiceBox<String> petBreed = new ChoiceBox<String>();
 		petType.setOnAction(e -> setUpSecondChoiceBox(petBreed, petType.getValue()));
 		
@@ -61,18 +130,36 @@ public class PlayerCreationMenu {
 		HBox petInfoBox = new HBox(petTypeLabel, petType, petBreed, petNameLabel, petNameInput);
 		petInfoBox.setSpacing(20);
 		
+		//Button which allows the user to start the game which the given information
+		Button startButton = new Button("Start Game");
+		/*
+		 * 
+		 * 			MAKE BUTTON SEND INFORMATION TO MODULE WHICH NEEDS IT
+		 * 
+		 */
+		
 		//Button to add another pet
 		Button addPetButton = new Button("+");
 		addPetButton.setOnAction(e -> startTwoPetPlayerCreationMenu(userNameInput.getText(), petNameInput.getText(), petType.getValue(), petBreed.getValue()));
 		
+		//HBox to horizontally align user information
+		HBox buttonsBox = new HBox(startButton, addPetButton);
+		buttonsBox.setSpacing(40);
+		
 		//VBox for all item to be displayed in gui
-		VBox box2 = new VBox(headingLabel, userInfoBox, petInfoBox, addPetButton);
+		VBox box2 = new VBox(headingLabel, userInfoBox, petInfoBox, buttonsBox);
 		box2.setSpacing(50);
 		bp.setCenter(box2);
-		
-		//Send info to module
-		//Add button to handle when done with info
 	}
+	/**
+	 * Displays a menu which allows the user to update their user name and first pet's information. User will also 
+	 * need to add information about their second pet's information.
+	 * 
+	 * @param userNameIn User name
+	 * @param pet1NameIn First pet's name
+	 * @param pet1TypeIn First pet's type
+	 * @param pet1BreedIn First pet's breed
+	 */
 	private void startTwoPetPlayerCreationMenu(String userNameIn, String pet1NameIn, String pet1TypeIn, String pet1BreedIn) {
 		//Set up scene
 		BorderPane bp = new BorderPane();
@@ -81,7 +168,7 @@ public class PlayerCreationMenu {
 		window.setScene(scene);
 		
 		//Label for heading
-		Label headingLabel = new Label("Create Character:");
+		Label headingLabel = new Label("Create Character: (Can start with 0 - 2 pets)");
 		headingLabel.getStyleClass().add("descriptionLabel");
 		
 		//Label for user's info
@@ -105,7 +192,8 @@ public class PlayerCreationMenu {
 		pet1Type.getItems().addAll("Select Pet", "Dog", "Cat", "Bird");
 		pet1Type.setValue(pet1TypeIn);
 		ChoiceBox<String> pet1Breed = new ChoiceBox<String>();
-		setUpSecondChoiceBox(pet1Breed, pet1Type.getValue(), pet1BreedIn);
+		setUpSecondChoiceBox(pet1Breed, pet1Type.getValue());
+		pet1Breed.setValue(pet1BreedIn); //Sets breed to value selected by user in previous scene
 		pet1Type.setOnAction(e -> setUpSecondChoiceBox(pet1Breed, pet1Type.getValue()));
 		
 		//Label for pet
@@ -143,14 +231,25 @@ public class PlayerCreationMenu {
 		HBox pet2InfoBox = new HBox(pet2TypeLabel, pet2Type, pet2Breed, pet2NameLabel, pet2NameInput);
 		pet2InfoBox.setSpacing(20);
 		
-		//Done Button -----CHANGE-------
-		Button button = new Button("Tester");
+		//Button which allows the user to start the game with the given information
+		Button startButton = new Button("Start Game");
+		/*
+		 * 
+		 * 			MAKE BUTTON SEND INFORMATION TO MODULE WHICH NEEDS IT
+		 * 
+		 */
 		
 		//VBox for all item to be displayed in gui
-		VBox allItems = new VBox(headingLabel, userInfoBox, pet1InfoBox, pet2InfoBox, button);
+		VBox allItems = new VBox(headingLabel, userInfoBox, pet1InfoBox, pet2InfoBox, startButton);
 		allItems.setSpacing(50);
 		bp.setCenter(allItems);
 	}
+	/**
+	 * Sets up second ChoiceBox which has breed options depending on the pet type selected by the user
+	 * 
+	 * @param petBreed ChoiceBox for breed options
+	 * @param petType Value of pet type chosen by user
+	 */
 	private void setUpSecondChoiceBox(ChoiceBox<String> petBreed, String petType) {
 		petBreed.getItems().clear();
 		switch (petType) {
@@ -165,22 +264,6 @@ public class PlayerCreationMenu {
 		case "Bird":
 			petBreed.getItems().addAll("Select Breed", "Pigeon", "Hawk", "Parrot", "Parakeet");
 			petBreed.setValue("Select Breed");
-		}
-	}
-	private void setUpSecondChoiceBox(ChoiceBox<String> petBreed, String petType, String breedType) {
-		petBreed.getItems().clear();
-		switch (petType) {
-		case "Dog":
-			petBreed.getItems().addAll("Select Breed", "Pitbull", "Rat Terrier", "Poodle", "Husky", "Maltese");
-			petBreed.setValue(breedType);
-			break;
-		case "Cat":
-			petBreed.getItems().addAll("Select Breed", "Siamese", "Tabicat", "Persian", "Sphinx");
-			petBreed.setValue(breedType);
-			break;
-		case "Bird":
-			petBreed.getItems().addAll("Select Breed", "Pigeon", "Hawk", "Parrot", "Parakeet");
-			petBreed.setValue(breedType);
 		}
 	}
 }

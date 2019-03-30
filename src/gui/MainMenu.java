@@ -7,12 +7,29 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Main Menu which allows the user to enter the application or quit
+ * 
+ * @author danielramirez
+ *
+ */
 public class MainMenu {
+	/**
+	 * Main stage for application
+	 */
 	Stage window;
+	/**
+	 * Main Menu constructor
+	 * 
+	 * @param primaryStage Main stage
+	 */
 	public MainMenu(Stage primaryStage) {
 		window = primaryStage;
 		startMainMenu();
 	}
+	/**
+	 * Displays the main menu to the user
+	 */
 	private void startMainMenu() {
 		//Set up scene
 		BorderPane bp = new BorderPane();
