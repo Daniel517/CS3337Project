@@ -1,10 +1,11 @@
-package application.gfx;
+package PracticeSim.Assets;
 
 import java.awt.image.BufferedImage;
+import PracticeSim.Assets.ImageLoader;;
 
 public class Assets {
 	
-	public static BufferedImage home, park,death,list,dog,cat,bird;
+public static BufferedImage home, park,death,list,dog,cat,bird;
 	
 	public static void init() {
 		
@@ -13,7 +14,7 @@ public class Assets {
 		death = ImageLoader.loadImage("/textures/unknown.jpg");
 		list = ImageLoader.loadImage("/textures/AnimalListSection.png");
 		dog =ImageLoader.loadImage("/textures/dog.png");
-		cat = ImageLoader.loadImage("/textures/Cat.png");
+		cat = ImageLoader.loadImage("/textures/cat2.png");
 		bird = ImageLoader.loadImage("/textures/bird.jpg");
 	}
 

@@ -1,4 +1,4 @@
-package application.gfx;
+package PracticeSim.Assets;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package application.background;
+package PracticeSim.background;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -65,5 +65,6 @@ public class KeyManager implements KeyListener{
 		}
 		keys[e.getKeyCode()] = false;
 	}
+
 
 }

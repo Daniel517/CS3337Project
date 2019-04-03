@@ -1,4 +1,4 @@
-package application;
+package PracticeSim;
 
 public interface AnimalActions {
 	

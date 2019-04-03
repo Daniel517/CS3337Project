@@ -1,21 +1,22 @@
-package application.animalList;
+package PracticeSim.AnimalList;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import java.awt.event.KeyEvent;
-import application.Animal;
-import application.Bird;
-import application.Cat;
-import application.Dog;
-import application.background.Handler;
-import application.gfx.Assets;
+import PracticeSim.WildAnimal;
+import PracticeSim.Animal;
+import PracticeSim.AnimalList.Text;
+import PracticeSim.background.Handler;
+import PracticeSim.Assets.Assets;;
+
 
 public class AnimalList {
 	
-	private Handler handler;
+	private PracticeSim.background.Handler handler;
 	private boolean active = false;
 	private ArrayList<Animal> animalsInPark;
 
@@ -36,8 +37,7 @@ public class AnimalList {
 	private int ACountX = 1232, ACountY = 90;
 	
 	private int selectedAnimal = 0;
-	
-	
+
 	public AnimalList(Handler handler) {
 		this.handler = handler;
 		animalsInPark = new ArrayList<Animal>();
@@ -46,31 +46,31 @@ public class AnimalList {
 		//this.countCat = 0;
 		//this.countWild =0;
 		
-		animalsInPark.add(new Dog("Dog", "Hook", "Pit Bull"));
-		animalsInPark.add(new Cat("Cat", "Fuffly", "Spix"));
-		animalsInPark.add(new Bird("Bird", "Tony", "Hank"));
+		animalsInPark.add(new Animal("Dog", "Hook", "Pit Bull"));
+		animalsInPark.add(new Animal("Cat", "Fuffly", "Spix"));
+		animalsInPark.add(new Animal("Bird", "Tony", "Hank"));
 	}
+	
 	public void tick() {
-		try {
-			if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
-				selectedAnimal--;
-			}
-			if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
-				selectedAnimal++;
-			}
-			
-			if(selectedAnimal < 0)
-			{
-				selectedAnimal = animalsInPark.size()-1;
-			}
-			else if(selectedAnimal >= animalsInPark.size()) {
-				selectedAnimal =0;
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		//count();
-		//System.out.println("pressed something");
+//		try {
+//			if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+//				selectedAnimal--;
+//			}
+//			if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+//				selectedAnimal++;
+//			}
+//			
+//			if(selectedAnimal < 0)
+//			{
+//				selectedAnimal = animalsInPark.size()-1;
+//			}
+//			else if(selectedAnimal >= animalsInPark.size()) {
+//				selectedAnimal =0;
+//			}
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		
 	}
 	public void render(Graphics g) {
 		g.drawImage(Assets.list, 1000,0,300,700, null);
@@ -97,31 +97,6 @@ public class AnimalList {
 		Animal animal = animalsInPark.get(selectedAnimal);
 		g.drawImage(animal.getAsset(), AImageWidth, AImageHeight, null);
 		Text.drawString(g, Integer.toString(animalsInPark.size()), ACountX, ACountY, true, c, font);
-	}
-	
-//	public void count() {
-//		for(Animal i : animalsInPark)
-//		{
-//			if(i.getType() == "Dog") {
-//				countDog++;
-//			}
-//			else if(i.getType() == "Cat") {
-//				countCat++;
-//			}
-//			else if(i.getType() == "Bird") {
-//				countBird++;
-//			}
-//		}
-//	}
-	
-	public void addAnimal(Animal e) {
-		animalsInPark.add(e);
-	}
-	public Handler getHandler() {
-		return handler;
-	}
-	public void setHandler(Handler handler) {
-		this.handler = handler;
 	}
 	
 

@@ -1,50 +1,43 @@
-package gui;
+package PracticeSim;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-public class Display {
-	
+public class Window extends Canvas{
+
+	private static final long serialVersionUID = -7606809190565392235L;
 	private JFrame frame;
 	private Canvas canvas;
-	
-	private String title;
-	private int width,height;
-	
-	public Display(String title, int width, int height) {
-		this.title = title;
-		this.width = width;
-		this.height = height;
-		
-		createDisplay();
-	}
-	
-	private void createDisplay() 
+
+	public Window(int width, int height , String title, Game game)
 	{
 		frame = new JFrame(title);
-		frame.setSize(width,height);
+		
+		frame.setPreferredSize(new Dimension(width,height));
+		frame.setMaximumSize(new Dimension(width,height));
+		frame.setMinimumSize(new Dimension(width,height));
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
 		
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width,height));
 		canvas.setMaximumSize(new Dimension(width,height));
 		canvas.setMinimumSize(new Dimension(width,height));
-		canvas.setFocusable(false);
 		
-		frame.add(canvas);
-		frame.pack();
-	}
-	
-	public Canvas getCanvas() {
-		return canvas;
+		frame.add(game);
+		frame.setVisible(true);
+		game.start();
+		
 	}
 	public JFrame getFrame() {
 		return frame;
-	} 
+	}
+	public Canvas getCanvas() {
+		return canvas;
+	}
 
 }

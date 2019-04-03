@@ -1,21 +1,52 @@
-package application;
+
+package PracticeSim;
 
 import java.awt.image.BufferedImage;
 
-import application.gfx.Assets;
+import PracticeSim.Assets.Assets;
 
-public class Dog extends Animal implements AnimalActions  {
-	String name;
-	String breed;
-	private BufferedImage image = Assets.dog;
+
+public class Animal implements AnimalActions{
 	
-	public Dog(String type, String name, String breed) {
-		super(type);
-		this.name = name;
+	Integer emotion=10;
+	protected String type;
+	protected String name;
+	protected String breed;
+	
+	protected final int dogID =0;
+	protected final int catID =1;
+	protected final int birdID =2;
+	protected int ID=4;
+	
+	private BufferedImage image;
+	
+	public Animal(String type,String name,String breed) {
+		super();
+		this.type = type;
+		this.name= name;
 		this.breed = breed;
+		if(type == "Dog") {
+			ID = dogID;
+			image = Assets.dog;
+		}
+		else if(type == "Cat") {
+			ID = catID;
+			image = Assets.cat;
+		}
+		else if(type == "Bird") {
+			ID = birdID;
+			image = Assets.bird;
+		}
 	}
-	
-	@Override
+	public Integer getEmotion() {
+		return emotion;
+	}
+	public void setEmotion(Integer emotion) {
+		this.emotion = emotion;
+	}
+	public String getType() {
+		return type;
+	}
 	public BufferedImage getAsset() {
 		return image;
 	}
