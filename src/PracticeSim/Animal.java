@@ -20,7 +20,7 @@ public class Animal implements AnimalActions{
 	
 	private BufferedImage image;
 	
-	public Animal(String type,String name,String breed) {
+	public Animal(String type,String breed,String name) {
 		super();
 		this.type = type;
 		this.name= name;

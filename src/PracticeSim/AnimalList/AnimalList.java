@@ -46,9 +46,9 @@ public class AnimalList {
 		//this.countCat = 0;
 		//this.countWild =0;
 		
-		animalsInPark.add(new Animal("Dog", "Hook", "Pit Bull"));
-		animalsInPark.add(new Animal("Cat", "Fuffly", "Spix"));
-		animalsInPark.add(new Animal("Bird", "Tony", "Hank"));
+		animalsInPark.add(new Animal("Dog", "Pit Bull", "Hook"));
+		animalsInPark.add(new Animal("Cat", "Spix", "Fuffly"));
+		animalsInPark.add(new Animal("Bird", "Hank", "Tony"));
 	}
 	
 	public void tick() {
