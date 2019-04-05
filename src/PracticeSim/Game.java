@@ -74,6 +74,7 @@ public class Game extends Canvas implements Runnable{
 		thread = new Thread(this);
 		thread.start();
 		running = true;
+		Assets.init();
 	}
 	
 	public synchronized  void stop() {
@@ -152,14 +153,13 @@ public class Game extends Canvas implements Runnable{
 		}
 		g = bs.getDrawGraphics();
 		
-		g.setColor(Color.black);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.clearRect(0, 0, WIDTH, HEIGHT);
 		
 		handler.render(g);
 		
 		if(gameState == STATE.Game) {
-			bs.getDrawGraphics();
-			//g.clearRect(0, 0, WIDTH, HEIGHT);
+			//bs.getDrawGraphics();
+			
 			g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
 			if(collision)
@@ -167,9 +167,13 @@ public class Game extends Canvas implements Runnable{
 			time.render(g);
 			
 		}else if(gameState == STATE.Menu) {
+			g.setColor(Color.black);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
 			menu.render(g);
 		}
 		else if(gameState == STATE.Creation) {
+			g.setColor(Color.black);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
 			creation.render(g);
 		}
 		

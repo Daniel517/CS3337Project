@@ -28,13 +28,13 @@ public class AnimalList {
 	private Color c = Color.white;
 	private Color c2 = Color.red;
 	
-	private int alcx = 1000 + 70,
+	private int alcx = 900 + 70,
 			alcy = 0 + 70,
 			spacing = 25;
-	private int AImageX = 1200,
+	private int AImageX = 1100,
 			AImageY = 50, AImageWidth =  AImageX,
 					AImageHeight = 17;
-	private int ACountX = 1232, ACountY = 90;
+	private int ACountX = 1132, ACountY = 90;
 	
 	private int selectedAnimal = 0;
 
@@ -73,7 +73,7 @@ public class AnimalList {
 //		
 	}
 	public void render(Graphics g) {
-		g.drawImage(Assets.list, 1000,0,300,700, null);
+		g.drawImage(Assets.list, 900,0,300,700, null);
 		
 		Text.drawString(g, "Animals", alcx, 25, true, c, font);
 		
