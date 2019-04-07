@@ -56,8 +56,8 @@ public class CreationMenu extends MouseAdapter{
 			//Start simulator
 			if(mouseOver(mx,my,960, 750, 215, 75)) {
 				game.gameState = STATE.Game;
-				handler.addObject(new WildAnimal(r.nextInt(game.WIDTH-300), 300, ID.WildAnimal,handler));
-				handler.addObject(new WildAnimal(r.nextInt(game.WIDTH-300), 300, ID.WildAnimal,handler));
+				handler.addObject(new WildAnimal(r.nextInt(game.WIDTH-300), r.nextInt(game.HEIGHT), ID.WildAnimal,handler));
+				handler.addObject(new WildAnimal(r.nextInt(game.WIDTH-300), r.nextInt(game.HEIGHT), ID.WildAnimal,handler));
 			}
 			
 			//Add pet
