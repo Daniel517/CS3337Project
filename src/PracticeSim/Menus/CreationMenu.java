@@ -58,6 +58,7 @@ public class CreationMenu extends MouseAdapter{
 				game.gameState = STATE.Game;
 				handler.addObject(new WildAnimal(r.nextInt(game.WIDTH-300), r.nextInt(game.HEIGHT), ID.WildAnimal,handler));
 				handler.addObject(new WildAnimal(r.nextInt(game.WIDTH-300), r.nextInt(game.HEIGHT), ID.WildAnimal,handler));
+				
 			}
 			
 			//Add pet

@@ -1,9 +1,13 @@
 package PracticeSim;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 public class Window extends Canvas{
 
@@ -27,6 +31,7 @@ public class Window extends Canvas{
 		canvas.setPreferredSize(new Dimension(width,height));
 		canvas.setMaximumSize(new Dimension(width,height));
 		canvas.setMinimumSize(new Dimension(width,height));
+		
 		
 		frame.add(game);
 		frame.setVisible(true);

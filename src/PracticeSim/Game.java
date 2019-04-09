@@ -6,7 +6,10 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 import PracticeSim.AnimalList.AnimalList;
 import PracticeSim.Assets.Assets;
@@ -129,6 +132,7 @@ public class Game extends Canvas implements Runnable{
 			aList.tick();
 			spawn.tick();
 			collision();
+			addTextArea();
 		}
 		else if(gameState == STATE.Menu) {
 			menu.tick();
@@ -160,7 +164,7 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.Game) {
 			//bs.getDrawGraphics();
 			
-			g.drawImage(Assets.home, 0, 0, null);
+			//g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
 			if(collision)
 				System.out.println("animal interaction");
@@ -215,6 +219,17 @@ public class Game extends Canvas implements Runnable{
 	
 	public KeyManager getKeyManager() {
 		return keyManager;
+	}
+	
+	public void addTextArea() {
+		JTextArea textarea = new JTextArea(5,25);
+		textarea.setEditable(false);
+		textarea.setBackground(Color.gray);
+		//textarea.setBounds(50, 600, 800, 280);
+		JScrollPane scrollBar = new JScrollPane(textarea);
+		scrollBar.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		window.getFrame().getContentPane().add(scrollBar);
+		
 	}
 	
 
