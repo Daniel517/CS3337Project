@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import PracticeSim.Animal;
@@ -17,14 +16,11 @@ import PracticeSim.WildAnimal;
 import PracticeSim.Game.STATE;
 import PracticeSim.background.Handler;
 import PracticeSim.background.ID;
-import javafx.scene.control.ChoiceBox;
 
 public class CreationMenu extends MouseAdapter{
 	
 	private Game game;
 	private Handler handler;
-	//private JTextArea textarea;
-	//private JTextField input = new JTextField("name",15);
 	private String name="";
 	private String Petname="";
 	private String PetType="";
@@ -56,9 +52,10 @@ public class CreationMenu extends MouseAdapter{
 			//Start simulator
 			if(mouseOver(mx,my,960, 750, 215, 75)) {
 				game.gameState = STATE.Game;
-				handler.addObject(new WildAnimal(r.nextInt(game.WIDTH-300), r.nextInt(game.HEIGHT), ID.WildAnimal,handler));
-				handler.addObject(new WildAnimal(r.nextInt(game.WIDTH-300), r.nextInt(game.HEIGHT), ID.WildAnimal,handler));
-				
+				game.window.sbar.setVisible(true);
+				handler.addObject(new WildAnimal(r.nextInt(900), r.nextInt(900), ID.WildAnimal,handler));
+				handler.addObject(new WildAnimal(r.nextInt(900),r.nextInt(900), ID.WildAnimal,handler));
+				handler.addObject(new WildAnimal(r.nextInt(900),r.nextInt(900), ID.WildAnimal,handler));
 			}
 			
 			//Add pet

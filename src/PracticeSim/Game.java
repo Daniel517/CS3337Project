@@ -8,18 +8,15 @@ import java.util.Random;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 import PracticeSim.AnimalList.AnimalList;
 import PracticeSim.Assets.Assets;
-import PracticeSim.Assets.ImageLoader;
 import PracticeSim.Menus.CreationMenu;
 import PracticeSim.Menus.Menu;
 import PracticeSim.background.GameObject;
 import PracticeSim.background.Handler;
 import PracticeSim.background.ID;
-import PracticeSim.background.KeyInput;
 import PracticeSim.background.KeyManager;
 import PracticeSim.background.Spawn;
 import PracticeSim.background.Time;
@@ -34,7 +31,7 @@ public class Game extends Canvas implements Runnable{
 	private boolean running =false;
 	
 	private Random r;
-	private Window window;
+	public Window window;
 	private Handler handler;
 	private AnimalList aList;
 	private KeyManager keyManager;
@@ -144,11 +141,6 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private void render() {
-//		bs = window.getCanvas().getBufferStrategy();
-//		if(bs == null) {
-//			window.getCanvas().createBufferStrategy(3);
-//			return;
-//		}
 		
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
@@ -166,8 +158,10 @@ public class Game extends Canvas implements Runnable{
 			
 			//g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
-			if(collision)
+			if(collision) {
 				System.out.println("animal interaction");
+				window.area.append("animal interaction\n");
+			}
 			time.render(g);
 			
 		}else if(gameState == STATE.Menu) {
