@@ -31,7 +31,7 @@ public class Game extends Canvas implements Runnable{
 	private boolean running =false;
 	
 	private Random r;
-	private Window window;
+	public Window window;
 	private Handler handler;
 	private AnimalList aList;
 	private KeyManager keyManager;
@@ -140,11 +140,6 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private void render() {
-//		bs = window.getCanvas().getBufferStrategy();
-//		if(bs == null) {
-//			window.getCanvas().createBufferStrategy(3);
-//			return;
-//		}
 		
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
@@ -160,10 +155,12 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.Game) {
 			//bs.getDrawGraphics();
 			
-			g.drawImage(Assets.home, 0, 0, null);
+			//g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
-			if(collision)
+			if(collision) {
 				System.out.println("animal interaction");
+				window.area.append("animal interaction\n");
+			}
 			time.render(g);
 			
 		}else if(gameState == STATE.Menu) {

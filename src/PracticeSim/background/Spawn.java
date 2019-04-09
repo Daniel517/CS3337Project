@@ -21,7 +21,7 @@ public class Spawn {
 	public void tick() {
 		if(time.getHour() % 2 == 1 && time.getTenth() == 0 && time.getMin() ==0) {
 			if(!added) {
-				handler.addObject(new WildAnimal(r.nextInt(900), 300, ID.WildAnimal,handler));
+				handler.addObject(new WildAnimal(r.nextInt(900), r.nextInt(900), ID.WildAnimal,handler));
 				added = true;
 			}
 		}
