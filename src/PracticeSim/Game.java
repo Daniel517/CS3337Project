@@ -46,7 +46,7 @@ public class Game extends Canvas implements Runnable{
 	private Menu menu;
 	private CreationMenu creation;
 	public enum STATE{
-		Menu, Creation, Game
+		Menu, Creation, GameHome,GamePark
 	};
 	
 	public STATE gameState = STATE.Menu;
@@ -55,12 +55,16 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler(this);
 		menu = new Menu(this,handler);
 		creation = new CreationMenu(this,handler);
-		this.addKeyListener(keyManager);
+		keyManager = new KeyManager();
+		
 		this.addMouseListener(menu);
 		this.addMouseListener(creation);
 		collision = false;
 		
 		window = new Window(WIDTH, HEIGHT, "PETS Simulator", this);
+		//window.getFrame().addKeyListener(keyManager);
+		//window.getCanvas().addKeyListener(keyManager);
+		this.addKeyListener(getKeyManager());
 		
 		aList = new AnimalList(handler);
 		time = new Time();
@@ -124,12 +128,17 @@ public class Game extends Canvas implements Runnable{
 	
 	private void tick() {
 		handler.tick();
+		keyManager.tick();
 		
-		if(gameState == STATE.Game) {
+		
+		if(gameState == STATE.GameHome) {
+			aList.tick();
+			addTextArea();
+		}
+		else if(gameState == STATE.GamePark) {
 			aList.tick();
 			spawn.tick();
 			collision();
-			addTextArea();
 		}
 		else if(gameState == STATE.Menu) {
 			menu.tick();
@@ -153,8 +162,14 @@ public class Game extends Canvas implements Runnable{
 		
 		handler.render(g);
 		
-		if(gameState == STATE.Game) {
-			//bs.getDrawGraphics();
+		if(gameState == STATE.GameHome) {
+			
+			g.drawImage(Assets.home, 0, 0, null);
+			aList.render(g);
+			time.render(g);
+			
+		}
+		else if(gameState == STATE.GamePark) {
 			
 			//g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
@@ -164,7 +179,8 @@ public class Game extends Canvas implements Runnable{
 			}
 			time.render(g);
 			
-		}else if(gameState == STATE.Menu) {
+		}
+		else if(gameState == STATE.Menu) {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 			menu.render(g);

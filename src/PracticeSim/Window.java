@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import PracticeSim.background.KeyManager;
+
 
 public class Window extends Canvas{
 
@@ -16,6 +18,7 @@ public class Window extends Canvas{
 	private Canvas canvas;
 	public JTextArea area;
 	public JScrollPane sbar;
+	private KeyManager keymanager= new KeyManager();
 
 
 	public Window(int width, int height , String title, Game game)

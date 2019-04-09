@@ -52,28 +52,24 @@ public class AnimalList {
 	}
 	
 	public void tick() {
-//		try {
-//			if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
-//				selectedAnimal--;
-//			}
-//			if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
-//				selectedAnimal++;
-//			}
-//			
-//			if(selectedAnimal < 0)
-//			{
-//				selectedAnimal = animalsInPark.size()-1;
-//			}
-//			else if(selectedAnimal >= animalsInPark.size()) {
-//				selectedAnimal =0;
-//			}
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		
+
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+			selectedAnimal--;
+		}
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+			selectedAnimal++;
+			System.out.println("S was pressed" + selectedAnimal);
+		}
+
+		if (selectedAnimal < 0) {
+			selectedAnimal = animalsInPark.size() - 1;
+		} else if (selectedAnimal >= animalsInPark.size()) {
+			selectedAnimal = 0;
+		}
+	
 	}
 	public void render(Graphics g) {
-		g.drawImage(Assets.list, 900,0,300,700, null);
+		g.drawImage(Assets.list, 900,0,300,600, null);
 		
 		Text.drawString(g, "Animals", alcx, 25, true, c, font);
 		
@@ -86,7 +82,7 @@ public class AnimalList {
 			if(selectedAnimal + i <0 || selectedAnimal +i >= len) {
 				continue;
 			}
-			if(i == selectedAnimal) {
+			if(selectedAnimal == i) {
 				Text.drawString(g,"->" + animalsInPark.get(selectedAnimal +i).getType(), alcx, alcy + i * spacing, true, c2, font);
 			}else {
 				Text.drawString(g, animalsInPark.get(selectedAnimal +i).getType(), alcx, alcy + i * spacing, true, c, font);
