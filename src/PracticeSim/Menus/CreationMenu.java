@@ -59,7 +59,7 @@ public class CreationMenu extends MouseAdapter{
 				game.window.sbar.setVisible(true);
 				handler.addObject(new WildAnimal(r.nextInt(900), r.nextInt(900), ID.WildAnimal,handler));
 				handler.addObject(new WildAnimal(r.nextInt(900),r.nextInt(900), ID.WildAnimal,handler));
-				//game.window.addTextArea();
+				handler.addObject(new WildAnimal(r.nextInt(900),r.nextInt(900), ID.WildAnimal,handler));
 			}
 			
 			//Add pet
