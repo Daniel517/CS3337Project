@@ -2,7 +2,7 @@ package PracticeSim;
 
 public interface AnimalActions {
 	
-	String Fly();
+	void Fly();
 	String Catch();
 	String Speak();
 	String Chase();

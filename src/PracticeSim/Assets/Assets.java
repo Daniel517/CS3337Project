@@ -5,7 +5,7 @@ import PracticeSim.Assets.ImageLoader;;
 
 public class Assets {
 	
-public static BufferedImage home, park,death,list,dog,cat,bird;
+public static BufferedImage home, park,death,list,dog,cat,bird,action;
 	
 	public static void init() {
 		
@@ -16,6 +16,8 @@ public static BufferedImage home, park,death,list,dog,cat,bird;
 		dog =ImageLoader.loadImage("/textures/dog.png");
 		cat = ImageLoader.loadImage("/textures/cat2.png");
 		bird = ImageLoader.loadImage("/textures/bird.jpg");
+		action = ImageLoader.loadImage("/textures/ActionSection.png");
+		
 	}
 
 }

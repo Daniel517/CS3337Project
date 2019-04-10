@@ -14,6 +14,7 @@ import PracticeSim.AnimalList.AnimalList;
 import PracticeSim.Assets.Assets;
 import PracticeSim.Menus.CreationMenu;
 import PracticeSim.Menus.Menu;
+import PracticeSim.actions.ActionSection;
 import PracticeSim.background.GameObject;
 import PracticeSim.background.Handler;
 import PracticeSim.background.ID;
@@ -34,6 +35,8 @@ public class Game extends Canvas implements Runnable{
 	public Window window;
 	private Handler handler;
 	private AnimalList aList;
+	private ActionSection action;
+	
 	private KeyManager keyManager;
 	
 	private BufferStrategy bs;
@@ -67,6 +70,7 @@ public class Game extends Canvas implements Runnable{
 		this.addKeyListener(getKeyManager());
 		
 		aList = new AnimalList(handler);
+		action = new ActionSection();
 		time = new Time();
 		spawn = new Spawn(handler,aList,time);
 		
@@ -166,18 +170,22 @@ public class Game extends Canvas implements Runnable{
 			
 			g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
+			action.render(g);
 			time.render(g);
+			
 			
 		}
 		else if(gameState == STATE.GamePark) {
 			
 			//g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
+			action.render(g);
+			time.render(g);
 			if(collision) {
 				System.out.println("animal interaction");
 				window.area.append("animal interaction\n");
 			}
-			time.render(g);
+			
 			
 		}
 		else if(gameState == STATE.Menu) {

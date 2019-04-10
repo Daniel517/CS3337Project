@@ -12,6 +12,7 @@ public class Animal implements AnimalActions{
 	protected String type;
 	protected String name;
 	protected String breed;
+	private String action;
 	
 	protected final int dogID =0;
 	protected final int catID =1;
@@ -57,11 +58,23 @@ public class Animal implements AnimalActions{
 	public String getBreed() {
 		return breed;
 	}
+	public String getAction() {
+		return action;
+	}
+	public void setAction(String act) {
+		this.action = act;
+	}
 
 	@Override
-	public String Fly() {
-		String action="Dog looks at you Funny!";
-		return action;
+	public void Fly() {
+		
+		if(getType() == "Dog" || getType() == "Cat"){
+			action= getType()+" looks at you Funny!";
+		}
+		else if(getType() == "Bird") {
+			action = getName()+" took off and is flying around";
+		}
+		setAction(action);
 	}
 	@Override
 	public String Catch( ) {

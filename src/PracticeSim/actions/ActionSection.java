@@ -1,5 +1,9 @@
 package PracticeSim.actions;
 
+import java.awt.Graphics;
+
+import PracticeSim.Assets.Assets;
+
 public class ActionSection {
 	/*
 	 * this will be where the actions will be chosen. if the game is in the game.home state than the home 
@@ -14,6 +18,20 @@ public class ActionSection {
 	 * the actions will be for now all possible actions for an animal. after a delay they will be a response by the user.
 	 * these responses will not change. 
 	 */
+	String[] actions = {"Fly","Catch","Speak","Chase","Flee","Bite","Play","Fetch","Lick","Rest","Quit"};
 	
+	
+	
+	public ActionSection() {
+		
+	}
+	public void tick() {
+		
+	}
+	
+	public void render(Graphics g) {
+		g.drawImage(Assets.action, 900,600,300,300, null);
+	}
+	 
 	
 }
