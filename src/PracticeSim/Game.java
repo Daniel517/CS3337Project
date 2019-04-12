@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable{
 	private Menu menu;
 	private CreationMenu creation;
 	public enum STATE{
-		Menu, Creation, GameHome,GamePark
+		Menu, Creation, GameHome, GamePark
 	};
 	
 	public STATE gameState = STATE.Menu;
@@ -62,6 +62,8 @@ public class Game extends Canvas implements Runnable{
 		
 		this.addMouseListener(menu);
 		this.addMouseListener(creation);
+		
+		
 		collision = false;
 		
 		window = new Window(WIDTH, HEIGHT, "PETS Simulator", this);
@@ -70,7 +72,8 @@ public class Game extends Canvas implements Runnable{
 		this.addKeyListener(getKeyManager());
 		
 		aList = new AnimalList(handler);
-		action = new ActionSection();
+		action = new ActionSection(this);
+		
 		time = new Time();
 		spawn = new Spawn(handler,aList,time);
 		
@@ -138,10 +141,12 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.GameHome) {
 			aList.tick();
 			addTextArea();
+			action.tick();
 		}
 		else if(gameState == STATE.GamePark) {
 			aList.tick();
 			spawn.tick();
+			action.tick();
 			collision();
 		}
 		else if(gameState == STATE.Menu) {

@@ -4,7 +4,9 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -18,12 +20,19 @@ public class Window extends Canvas{
 	private Canvas canvas;
 	public JTextArea area;
 	public JScrollPane sbar;
+	public JPanel actionPanel;
 	private KeyManager keymanager= new KeyManager();
 
 
 	public Window(int width, int height , String title, Game game)
 	{
 		frame = new JFrame(title);
+		
+		actionPanel = new JPanel();
+		actionPanel.setBounds(895,572,300,300);
+		actionPanel.setBackground(Color.GRAY);
+		actionPanel.setVisible(false);
+		frame.add(actionPanel);
 		
 		
 		area = new JTextArea("this is going to be displayed");
@@ -54,6 +63,13 @@ public class Window extends Canvas{
 		frame.setVisible(true);
 		game.start();
 		
+	}
+	
+	public void setPanel(JPanel a) {
+		this.actionPanel = a;
+	}
+	public JPanel getPanel() {
+		return actionPanel;
 	}
 
 	public JFrame getFrame() {

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 
 import PracticeSim.Game;
+import PracticeSim.Game.STATE;
 
 public class Handler {
 	
@@ -39,5 +40,17 @@ public class Handler {
 	
 	public void removeObject(GameObject object) {
 		this.object.remove(object);
+	}
+	
+	public STATE getGameState() {
+		return game.gameState;
+	}
+	
+	public STATE setGameState() {
+		return game.gameState = STATE.GamePark;
+	}
+	
+	public void addTextToArea(String str) {
+		game.window.area.append(str+"\n");
 	}
 }

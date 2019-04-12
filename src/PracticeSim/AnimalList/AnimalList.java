@@ -54,11 +54,13 @@ public class AnimalList {
 	public void tick() {
 
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+			System.out.println("W was pressed " + selectedAnimal);
 			selectedAnimal--;
 		}
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+			System.out.println("S was pressed " + selectedAnimal);
 			selectedAnimal++;
-			System.out.println("S was pressed" + selectedAnimal);
+			
 		}
 
 		if (selectedAnimal < 0) {
@@ -69,7 +71,7 @@ public class AnimalList {
 	
 	}
 	public void render(Graphics g) {
-		g.drawImage(Assets.list, 900,0,300,600, null);
+		g.drawImage(Assets.list, 895,0,300,600, null);
 		
 		Text.drawString(g, "Animals", alcx, 25, true, c, font);
 		
@@ -82,13 +84,14 @@ public class AnimalList {
 			if(selectedAnimal + i <0 || selectedAnimal +i >= len) {
 				continue;
 			}
-			if(selectedAnimal == i) {
-				Text.drawString(g,"->" + animalsInPark.get(selectedAnimal +i).getType(), alcx, alcy + i * spacing, true, c2, font);
+			if(i == selectedAnimal) {
+				Text.drawString(g,"->" + animalsInPark.get(selectedAnimal + i).getType(), alcx, alcy + i * spacing, true, c2, font);
 			}else {
-				Text.drawString(g, animalsInPark.get(selectedAnimal +i).getType(), alcx, alcy + i * spacing, true, c, font);
+				Text.drawString(g, animalsInPark.get(selectedAnimal + i).getType(), alcx, alcy + i * spacing, true, c, font);
 
 			}
 		}
+		
 		
 		Animal animal = animalsInPark.get(selectedAnimal);
 		g.drawImage(animal.getAsset(), AImageWidth, AImageHeight, null);
