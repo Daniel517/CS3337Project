@@ -178,11 +178,10 @@ public class Game extends Canvas implements Runnable{
 			action.render(g);
 			time.render(g);
 			
-			
 		}
 		else if(gameState == STATE.GamePark) {
 			
-			//g.drawImage(Assets.home, 0, 0, null);
+			g.drawImage(Assets.park, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);

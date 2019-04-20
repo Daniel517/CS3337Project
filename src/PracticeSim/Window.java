@@ -35,7 +35,7 @@ public class Window extends Canvas{
 		frame.add(actionPanel);
 		
 		
-		area = new JTextArea("this is going to be displayed");
+		area = new JTextArea("this is going to be displayed\n");
 		sbar = new JScrollPane(area);	
 		area.setBackground(Color.gray);
 		area.setEditable(false);

@@ -2,6 +2,8 @@ package PracticeSim.actions;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -48,15 +50,39 @@ public class ActionSection extends JPanel{
 			JButton b1 = new JButton("Stay Home");
 			b1.setBounds(980, 700, 150, 50);
 			b1.setBackground(Color.ORANGE);
-			//b1.addActionListener(this);
+			b1.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					System.out.println("Stay Home was pressed");
+					
+				}
+				
+			});
 			JButton b2 = new JButton("Go to Park");
 			b2.setBounds(980, 610, 150, 50);
 			b2.setBackground(Color.ORANGE);
-			//b2.addActionListener(this);
+			b2.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					game.gameState = STATE.GamePark;
+					
+				}
+				
+			});
 			JButton b3 = new JButton("Exit Simulator");
 			b3.setBounds(980, 790, 150, 50);
 			b3.setBackground(Color.ORANGE);
-			//b3.addActionListener(this);
+			b3.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					System.exit(1);
+					
+				}
+				
+			});
 			actionPanel.add(b1);
 			actionPanel.add(b2);
 			actionPanel.add(b3);
@@ -76,7 +102,7 @@ public class ActionSection extends JPanel{
 	}
 	
 	@SuppressWarnings("unused")
-	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void jButton2ActionPerformed(ActionEvent e) {
 			System.out.println("Stay Home was pressed");
 	}
 	
