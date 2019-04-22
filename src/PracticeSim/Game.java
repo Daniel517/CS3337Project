@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = -5495016350964169983L;
 	public static final int WIDTH = 1200, HEIGHT = WIDTH / 12 * 9;
 	
-	private Thread thread;
+	public Thread thread;
 	private boolean running =false;
 	
 	private Random r;

@@ -32,9 +32,16 @@ public class ActionSection extends JPanel{
 	private Game game;
 	private JPanel actionPanel;
 	private JPanel ParkActionPanel;
+	private JPanel ReactionPanel;
 	private boolean action;
 	private boolean added= false;
 	private boolean SecondAdd= false;
+	
+	//These are for the delay between actions on screen.
+	private boolean action1=false;
+	private boolean action2=false;
+	private boolean action3=false;
+	
 	
 	//Add a Jpanel to the window
 	public ActionSection(Game game) {
@@ -42,6 +49,10 @@ public class ActionSection extends JPanel{
 		action = false;
 		actionPanel = game.window.getPanel();
 		ParkActionPanel = game.window.getParkActionPanel();
+		ReactionPanel = game.window.getReactionPanel();
+		homeActions();
+		parkActions();
+		ActionReponse();
 		
 //		if(game.gameState == STATE.GameHome) {
 //			
@@ -51,7 +62,7 @@ public class ActionSection extends JPanel{
 	public void tick() {
 		
 		if(game.gameState == STATE.GameHome) {
-			homeActions();
+			game.window.actionPanel.setVisible(true);
 			if(added) {
 				game.window.actionPanel.add(actionPanel);
 				added = true;
@@ -59,12 +70,20 @@ public class ActionSection extends JPanel{
 		}
 		else if(game.gameState == STATE.GamePark) {
 			game.window.actionPanel.setVisible(false);
-			parkActions();
-		
-			if(SecondAdd) {
-				game.window.ParkActionPanel.add(ParkActionPanel);
-				added = true;
+			if(action1) {
+				game.window.ParkActionPanel.setVisible(true);
+				if(SecondAdd) {
+					game.window.ParkActionPanel.add(ParkActionPanel);
+					added = true;
+				}
 			}
+			
+			if(action2 && !action3) {
+				game.window.ParkActionPanel.setVisible(false);
+				sleep();
+				game.window.ReactionPanel.setVisible(true);
+			}
+			
 			
 			
 		}
@@ -100,6 +119,7 @@ public class ActionSection extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				game.gameState = STATE.GamePark;
+				action1=true;
 				
 			}
 			
@@ -119,7 +139,7 @@ public class ActionSection extends JPanel{
 		actionPanel.add(b1);
 		actionPanel.add(b2);
 		actionPanel.add(b3);
-		actionPanel.setVisible(true);
+		actionPanel.setVisible(false);
 	}
 	
 	private void parkActions() {
@@ -132,8 +152,8 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
-				
+				game.window.area.append("Fly was pressed\n");
+				action2 = true;
 			}
 			
 		});
@@ -190,14 +210,172 @@ public class ActionSection extends JPanel{
 			
 		});
 		spacer += 90;
+		JButton b7 = new JButton("Play Bite");
+		b7.setBounds(980, spacer, 150, 50);
+		b7.setBackground(Color.ORANGE);
+		b7.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Stay Home was pressed");
+				
+			}
+			
+		});
+		spacer += 90;
+		JButton b8 = new JButton("Play");
+		b8.setBounds(980, spacer, 150, 50);
+		b8.setBackground(Color.ORANGE);
+		b8.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Stay Home was pressed");
+				
+			}
+			
+		});
+		spacer += 90;
+		JButton b9 = new JButton("Fetch");
+		b9.setBounds(980, spacer, 150, 50);
+		b9.setBackground(Color.ORANGE);
+		b9.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Stay Home was pressed");
+				
+			}
+			
+		});
+		spacer += 90;
+		JButton b10 = new JButton("Lick");
+		b10.setBounds(980, spacer, 150, 50);
+		b10.setBackground(Color.ORANGE);
+		b10.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Stay Home was pressed");
+				
+			}
+			
+		});
+		spacer += 90;
+		JButton b11 = new JButton("Rest");
+		b11.setBounds(980, spacer, 150, 50);
+		b11.setBackground(Color.ORANGE);
+		b11.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Stay Home was pressed");
+				
+			}
+			
+		});
+		spacer += 90;
+		JButton b12 = new JButton("Exist Simulator");
+		b12.setBounds(980, spacer, 150, 50);
+		b12.setBackground(Color.ORANGE);
+		b12.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(1);
+				
+			}
+			
+		});
+		spacer += 90;
+		JButton b13 = new JButton("Go Home");
+		b13.setBounds(980, spacer, 150, 50);
+		b13.setBackground(Color.ORANGE);
+		b13.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				sleep();
+				game.gameState = STATE.GameHome;
+				action1= false;
+				added= false;
+			}
+			
+		});
+		spacer += 90;
+		
+		//Bite","Play","Fetch","Lick","Rest","Leave Park","Exist Simulator"
 		ParkActionPanel.add(b1);
 		ParkActionPanel.add(b2);
 		ParkActionPanel.add(b3);
 		ParkActionPanel.add(b4);
 		ParkActionPanel.add(b5);
-		ParkActionPanel.setVisible(true);
+		ParkActionPanel.add(b7);
+		ParkActionPanel.add(b8);
+		ParkActionPanel.add(b9);
+		ParkActionPanel.add(b10);
+		ParkActionPanel.add(b11);
+		ParkActionPanel.add(b12);
+		ParkActionPanel.add(b13);
+		ParkActionPanel.setVisible(false);
 	}
-	
+	public void ActionReponse() {
+		int spacer=610;
+		
+		JButton b14 = new JButton("Good job!");
+		b14.setBounds(980, spacer, 150, 50);
+		b14.setBackground(Color.ORANGE);
+		b14.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				game.window.area.append("Good Job was pressed\n");	
+				action2 = false;
+				action3 = true;
+				game.window.ReactionPanel.setVisible(false);
+			}
+			
+		});
+		spacer += 90;
+		JButton b15 = new JButton("Stay silent");
+		b15.setBounds(980, spacer, 150, 50);
+		b15.setBackground(Color.ORANGE);
+		b15.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				game.window.area.append("Hearing circkets\n");
+				action2=false;
+				action3=true;
+			}
+			
+		});
+		spacer += 90;
+		JButton b16 = new JButton("Hit Animal");
+		b16.setBounds(980, spacer, 150, 50);
+		b16.setBackground(Color.ORANGE);
+		b16.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+			
+		});
+		
+		ReactionPanel.add(b14);
+		ReactionPanel.add(b15);
+		ReactionPanel.add(b16);
+		ReactionPanel.setVisible(false);
+	}
+	public void sleep() {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void render(Graphics g) {
 		
 	}
