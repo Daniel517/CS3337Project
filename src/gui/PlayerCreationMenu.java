@@ -40,7 +40,7 @@ public class PlayerCreationMenu {
 		//Set up scene
 		BorderPane bp = new BorderPane();
 		Scene scene = new Scene(bp, 700, 500);
-		scene.getStylesheets().add("application/application.css");
+		scene.getStylesheets().add("app/application.css");
 		window.setScene(scene);
 		
 		//Label for heading
@@ -89,7 +89,7 @@ public class PlayerCreationMenu {
 		//Set up scene
 		BorderPane bp = new BorderPane();
 		Scene scene = new Scene(bp, 700, 500);
-		scene.getStylesheets().add("application/application.css");
+		scene.getStylesheets().add("app/application.css");
 		window.setScene(scene);
 		
 		//Label for heading
@@ -133,7 +133,7 @@ public class PlayerCreationMenu {
 		
 		//Button which allows the user to start the game which the given information
 		Button startButton = new Button("Start Simulation");
-		//startButton.setOnAction(e-> new Simulation("Title", width, height);
+		startButton.setOnAction(e-> new HomeGUI(window));
 		/*
 		 * 
 		 * 			MAKE BUTTON SEND INFORMATION TO MODULE WHICH NEEDS IT
@@ -166,7 +166,7 @@ public class PlayerCreationMenu {
 		//Set up scene
 		BorderPane bp = new BorderPane();
 		Scene scene = new Scene(bp, 700, 500);
-		scene.getStylesheets().add("application/application.css");
+		scene.getStylesheets().add("app/application.css");
 		window.setScene(scene);
 		
 		//Label for heading

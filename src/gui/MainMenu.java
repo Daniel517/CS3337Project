@@ -34,7 +34,7 @@ public class MainMenu {
 		//Set up scene
 		BorderPane bp = new BorderPane();
 		Scene scene = new Scene(bp, 700, 500);
-		scene.getStylesheets().add("application/application.css");
+		scene.getStylesheets().add("app/application.css");
 		window.setScene(scene);
 		
 		//Label for Title
