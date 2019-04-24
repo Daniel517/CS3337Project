@@ -80,7 +80,6 @@ public class ActionSection extends JPanel{
 			
 			if(action2 && !action3) {
 				game.window.ParkActionPanel.setVisible(false);
-				sleep();
 				game.window.ReactionPanel.setVisible(true);
 			}
 			
@@ -93,11 +92,6 @@ public class ActionSection extends JPanel{
 		
 	}
 	
-	@SuppressWarnings("unused")
-	private void jButton2ActionPerformed(ActionEvent e) {
-			System.out.println("Stay Home was pressed");
-	}
-	
 	private void homeActions() {
 		JButton b1 = new JButton("Stay Home");
 		b1.setBounds(980, 700, 150, 50);
@@ -106,7 +100,7 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
+				game.window.area.append("Chosen to stay home\n");
 				
 			}
 			
@@ -120,7 +114,7 @@ public class ActionSection extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				game.gameState = STATE.GamePark;
 				action1=true;
-				
+				tick();
 			}
 			
 		});
@@ -154,6 +148,8 @@ public class ActionSection extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				game.window.area.append("Fly was pressed\n");
 				action2 = true;
+				action3 = false;
+				tick();
 			}
 			
 		});
@@ -165,8 +161,10 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
-				
+				game.window.area.append("Catch was pressed\n");
+				action2 = true;
+				action3 = false;
+				tick();				
 			}
 			
 		});
@@ -178,8 +176,10 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
-				
+				game.window.area.append("Speak was pressed\n");
+				action2 = true;
+				action3 = false;
+				tick();				
 			}
 			
 		});
@@ -191,8 +191,10 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
-				
+				game.window.area.append("Chase was pressed\n");
+				action2 = true;
+				action3 = false;
+				tick();				
 			}
 			
 		});
@@ -204,21 +206,25 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
-				
+				game.window.area.append("Your pet was told to flee\n");
+				action2 = true;
+				action3 = false;
+				tick();				
 			}
 			
 		});
 		spacer += 90;
-		JButton b7 = new JButton("Play Bite");
+		JButton b7 = new JButton("Bite");
 		b7.setBounds(980, spacer, 150, 50);
 		b7.setBackground(Color.ORANGE);
 		b7.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
-				
+				game.window.area.append("Bite was pressed\n");
+				action2 = true;
+				action3 = false;
+				tick();				
 			}
 			
 		});
@@ -230,8 +236,10 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
-				
+				game.window.area.append("Play was pressed\n");
+				action2 = true;
+				action3 = false;
+				tick();				
 			}
 			
 		});
@@ -243,8 +251,10 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
-				
+				game.window.area.append("Fetch was pressed\n");
+				action2 = true;
+				action3 = false;
+				tick();				
 			}
 			
 		});
@@ -256,8 +266,10 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
-				
+				game.window.area.append("Lick was pressed\n");
+				action2 = true;
+				action3 = false;
+				tick();				
 			}
 			
 		});
@@ -269,8 +281,10 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Stay Home was pressed");
-				
+				game.window.area.append("Rest was pressed\n");
+				action2 = true;
+				action3 = false;
+				tick();				
 			}
 			
 		});
@@ -295,10 +309,13 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				sleep();
+				game.window.area.append("Going Home\n");
 				game.gameState = STATE.GameHome;
 				action1= false;
 				added= false;
+				game.window.ReactionPanel.setVisible(false);
+				game.window.ParkActionPanel.setVisible(false);
+				tick();
 			}
 			
 		});
@@ -333,6 +350,7 @@ public class ActionSection extends JPanel{
 				action2 = false;
 				action3 = true;
 				game.window.ReactionPanel.setVisible(false);
+				tick();
 			}
 			
 		});
@@ -347,6 +365,8 @@ public class ActionSection extends JPanel{
 				game.window.area.append("Hearing circkets\n");
 				action2=false;
 				action3=true;
+				game.window.ReactionPanel.setVisible(false);
+				tick();
 			}
 			
 		});
@@ -359,6 +379,8 @@ public class ActionSection extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
+				game.window.ReactionPanel.setVisible(false);
+				tick();
 			}
 			
 		});

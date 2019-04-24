@@ -31,12 +31,12 @@ public class Game extends Canvas implements Runnable{
 	
 	public Thread thread;
 	private boolean running =false;
-	
+	private int Ccounter=0;
 	private Random r;
 	public Window window;
 	private Handler handler;
 	private AnimalList aList;
-	private ActionSection action;
+	public ActionSection action;
 	
 	private KeyManager keyManager;
 	
@@ -142,12 +142,13 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.GameHome) {
 			aList.tick();
 			addTextArea();
-			action.tick();
+			//action.tick();
+			collision();
 		}
 		else if(gameState == STATE.GamePark) {
 			aList.tick();
 			spawn.tick();
-			action.tick();
+			//action.tick();
 			collision();
 		}
 		else if(gameState == STATE.Menu) {
@@ -217,6 +218,7 @@ public class Game extends Canvas implements Runnable{
 				if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
 					// collision code
 					collision = true;
+					
 				}
 				else 
 					collision = false;
