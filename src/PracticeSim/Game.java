@@ -9,6 +9,7 @@ import java.util.Random;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.text.DefaultCaret;
 
 import PracticeSim.AnimalList.AnimalList;
 import PracticeSim.Assets.Assets;
@@ -181,7 +182,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		else if(gameState == STATE.GamePark) {
 			
-			g.drawImage(Assets.park, 0, 0, null);
+			//g.drawImage(Assets.park, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
@@ -248,6 +249,8 @@ public class Game extends Canvas implements Runnable{
 		textarea.setEditable(false);
 		textarea.setBackground(Color.gray);
 		//textarea.setBounds(50, 600, 800, 280);
+		DefaultCaret caret = (DefaultCaret) textarea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 		JScrollPane scrollBar = new JScrollPane(textarea);
 		scrollBar.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		window.getFrame().getContentPane().add(scrollBar);
