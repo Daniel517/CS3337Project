@@ -12,10 +12,9 @@ import javax.swing.JOptionPane;
 
 import PracticeSim.Animal;
 import PracticeSim.Game;
-import PracticeSim.WildAnimal;
 import PracticeSim.Game.STATE;
+import PracticeSim.AnimalList.AnimalList;
 import PracticeSim.background.Handler;
-import PracticeSim.background.ID;
 
 public class CreationMenu extends MouseAdapter{
 	
@@ -26,14 +25,16 @@ public class CreationMenu extends MouseAdapter{
 	private String PetType="";
 	private String PetBreed="";
 	private Random r;
+	private AnimalList aList;
 	private ArrayList<Animal> pets; 
 	
 	private int count = 0;
 	
 
-	public CreationMenu(Game game, Handler handler ) {
+	public CreationMenu(Game game, Handler handler, AnimalList aList) {
 		this.game = game;
 		this.handler = handler;
+		this.aList = aList;
 		r = new Random();
 		pets = new ArrayList<Animal>();
 	}
@@ -138,7 +139,8 @@ public class CreationMenu extends MouseAdapter{
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
+			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
+			g.drawString(aList.getAnimal(0).getType() +" - "+ aList.getAnimal(0).getBreed() + ": " + aList.getAnimal(0).getName(), 235,385);
 		}
 		else if(count == 2) {
 			g.setColor(Color.white);
@@ -150,25 +152,30 @@ public class CreationMenu extends MouseAdapter{
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
+			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
+			g.drawString(aList.getAnimal(0).getType() +" - "+ aList.getAnimal(0).getBreed() + ": " + aList.getAnimal(0).getName(), 235,385);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() +": "+pets.get(1).getName(), 235,485);
+			//g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() +": "+pets.get(1).getName(), 235,485);
+			g.drawString(aList.getAnimal(1).getType() +" - "+ aList.getAnimal(1).getBreed() + ": " + aList.getAnimal(1).getName(), 235,485);
 			
 		}
 		else if(count == 3) {
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
+			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
+			g.drawString(aList.getAnimal(0).getType() +" - "+ aList.getAnimal(0).getBreed() + ": " + aList.getAnimal(0).getName(), 235,385);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() +": "+pets.get(1).getName(), 235,485);
+			//g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() +": "+pets.get(1).getName(), 235,485);
+			g.drawString(aList.getAnimal(1).getType() +" - "+ aList.getAnimal(1).getBreed() + ": " + aList.getAnimal(1).getName(), 235,485);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			g.drawString(pets.get(2).getType() +" - "+ pets.get(2).getBreed() +": "+pets.get(2).getName(), 235,585);
+			//g.drawString(pets.get(2).getType() +" - "+ pets.get(2).getBreed() +": "+pets.get(2).getName(), 235,585);
+			g.drawString(aList.getAnimal(2).getType() +" - "+ aList.getAnimal(2).getBreed() + ": " + aList.getAnimal(2).getName(), 235,585);
 		}
 	}
 	
@@ -178,7 +185,8 @@ public class CreationMenu extends MouseAdapter{
 	      name = inStr;
 	}
 	public void makePet(String type, String breed, String name) {
-		pets.add(new Animal(type,breed,name));
+		//pets.add(new Animal(type,breed,name));
+		aList.addAnimal(type, breed, name);
 		PetType ="";
 		PetBreed="";
 		Petname="";

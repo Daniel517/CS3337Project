@@ -46,9 +46,9 @@ public class AnimalList {
 		//this.countCat = 0;
 		//this.countWild =0;
 		
-		animalsInPark.add(new Animal("Dog", "Pit Bull", "Hook"));
-		animalsInPark.add(new Animal("Cat", "Spix", "Fuffly"));
-		animalsInPark.add(new Animal("Bird", "Hank", "Tony"));
+//		animalsInPark.add(new Animal("Dog", "Pit Bull", "Hook"));
+//		animalsInPark.add(new Animal("Cat", "Spix", "Fuffly"));
+//		animalsInPark.add(new Animal("Bird", "Hank", "Tony"));
 	}
 	
 	public void tick() {
@@ -97,6 +97,11 @@ public class AnimalList {
 		g.drawImage(animal.getAsset(), AImageWidth, AImageHeight, null);
 		Text.drawString(g, Integer.toString(animalsInPark.size()), ACountX, ACountY, true, c, font);
 	}
-	
+	public void addAnimal(String type, String breed, String name) {
+		animalsInPark.add(new Animal(type, breed, name));
+	}
+	public Animal getAnimal(int index) {
+		return animalsInPark.get(index);
+	}
 
 }

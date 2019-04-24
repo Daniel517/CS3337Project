@@ -57,7 +57,8 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 		handler = new Handler(this);
 		menu = new Menu(this,handler);
-		creation = new CreationMenu(this,handler);
+		aList = new AnimalList(handler);
+		creation = new CreationMenu(this,handler, aList);
 		keyManager = new KeyManager();
 		
 		this.addMouseListener(menu);
@@ -71,7 +72,6 @@ public class Game extends Canvas implements Runnable{
 		//window.getCanvas().addKeyListener(keyManager);
 		this.addKeyListener(getKeyManager());
 		
-		aList = new AnimalList(handler);
 		action = new ActionSection(this);
 		
 		time = new Time();
