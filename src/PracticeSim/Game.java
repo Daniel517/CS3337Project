@@ -28,14 +28,14 @@ public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = -5495016350964169983L;
 	public static final int WIDTH = 1200, HEIGHT = WIDTH / 12 * 9;
 	
-	private Thread thread;
+	public Thread thread;
 	private boolean running =false;
 	private int Ccounter=0;
 	private Random r;
 	public Window window;
 	private Handler handler;
 	private AnimalList aList;
-	private ActionSection action;
+	public ActionSection action;
 	
 	private KeyManager keyManager;
 	
@@ -109,7 +109,7 @@ public class Game extends Canvas implements Runnable{
 		
 		while(running) {
 			now = System.nanoTime();
-			delta += (now - lastTime) / timePerTick;
+			delta += (now - lastTime) / timePerTick; 
 			timer += now - lastTime;
 			lastTime = now;
 			
@@ -141,13 +141,13 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.GameHome) {
 			aList.tick();
 			addTextArea();
-			action.tick();
+			//action.tick();
 			collision();
 		}
 		else if(gameState == STATE.GamePark) {
 			aList.tick();
 			spawn.tick();
-			action.tick();
+			//action.tick();
 			collision();
 		}
 		else if(gameState == STATE.Menu) {
@@ -178,15 +178,11 @@ public class Game extends Canvas implements Runnable{
 			aList.render(g);
 			action.render(g);
 			time.render(g);
-			if(collision) {
-				System.out.println("animal interaction");
-				window.area.append("animal interaction\n");
-			}
 			
 		}
 		else if(gameState == STATE.GamePark) {
 			
-			//g.drawImage(Assets.home, 0, 0, null);
+			g.drawImage(Assets.park, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);

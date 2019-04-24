@@ -21,6 +21,9 @@ public class Window extends Canvas{
 	public JTextArea area;
 	public JScrollPane sbar;
 	public JPanel actionPanel;
+	public JPanel ParkActionPanel;
+	public JPanel ReactionPanel;
+//	public JPanel actionPanel;
 	private KeyManager keymanager= new KeyManager();
 
 
@@ -34,8 +37,19 @@ public class Window extends Canvas{
 		actionPanel.setVisible(false);
 		frame.add(actionPanel);
 		
+		ParkActionPanel = new JPanel();
+		ParkActionPanel.setBounds(895,572,300,300);
+		ParkActionPanel.setBackground(Color.GRAY);
+		ParkActionPanel.setVisible(false);
+		frame.add(ParkActionPanel);
 		
-		area = new JTextArea("this is going to be displayed");
+		ReactionPanel = new JPanel();
+		ReactionPanel.setBounds(895,572,300,300);
+		ReactionPanel.setBackground(Color.BLACK);
+		ReactionPanel.setVisible(false);
+		frame.add(ReactionPanel);
+		
+		area = new JTextArea("this is going to be displayed\n");
 		sbar = new JScrollPane(area);	
 		area.setBackground(Color.gray);
 		area.setEditable(false);
@@ -70,6 +84,14 @@ public class Window extends Canvas{
 	}
 	public JPanel getPanel() {
 		return actionPanel;
+	}
+	
+	public JPanel getReactionPanel() {
+		return ReactionPanel;
+	}
+	
+	public JPanel getParkActionPanel() {
+		return ParkActionPanel;
 	}
 
 	public JFrame getFrame() {
