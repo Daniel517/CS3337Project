@@ -53,6 +53,8 @@ public class CreationMenu extends MouseAdapter{
 			if(mouseOver(mx,my,960, 750, 215, 75)) {
 				game.gameState = STATE.GameHome;
 				game.window.sbar.setVisible(true);
+				handler.addObject(new WildAnimal(r.nextInt(900), r.nextInt(900), ID.WildAnimal,handler));
+				handler.addObject(new WildAnimal(r.nextInt(900), r.nextInt(900), ID.WildAnimal,handler));
 			}
 			
 			//Add pet

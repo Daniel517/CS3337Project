@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private Thread thread;
 	private boolean running =false;
-	
+	private int Ccounter=0;
 	private Random r;
 	public Window window;
 	private Handler handler;
@@ -142,6 +142,7 @@ public class Game extends Canvas implements Runnable{
 			aList.tick();
 			addTextArea();
 			action.tick();
+			collision();
 		}
 		else if(gameState == STATE.GamePark) {
 			aList.tick();
@@ -177,7 +178,10 @@ public class Game extends Canvas implements Runnable{
 			aList.render(g);
 			action.render(g);
 			time.render(g);
-			
+			if(collision) {
+				System.out.println("animal interaction");
+				window.area.append("animal interaction\n");
+			}
 			
 		}
 		else if(gameState == STATE.GamePark) {
@@ -217,6 +221,7 @@ public class Game extends Canvas implements Runnable{
 				if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
 					// collision code
 					collision = true;
+					
 				}
 				else 
 					collision = false;
