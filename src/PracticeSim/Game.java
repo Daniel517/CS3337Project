@@ -28,6 +28,8 @@ public class Game extends Canvas implements Runnable{
 	
 	private static final long serialVersionUID = -5495016350964169983L;
 	public static final int WIDTH = 1200, HEIGHT = WIDTH / 12 * 9;
+	//this will hold the users info and do all the actions with names.
+	public humanOwner user;
 	
 	public Thread thread;
 	private boolean running =false;
@@ -150,6 +152,9 @@ public class Game extends Canvas implements Runnable{
 			spawn.tick();
 			//action.tick();
 			collision();
+			if(collision) {
+				window.area.append("Animals interacted\n");
+			}
 		}
 		else if(gameState == STATE.Menu) {
 			menu.tick();
@@ -183,7 +188,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		else if(gameState == STATE.GamePark) {
 			
-			//g.drawImage(Assets.park, 0, 0, null);
+			g.drawImage(Assets.park, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
