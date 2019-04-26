@@ -41,14 +41,7 @@ public class AnimalList {
 	public AnimalList(Handler handler) {
 		this.handler = handler;
 		animalsInPark = new ArrayList<Animal>();
-		//this.countDog = 0;
-		//this.countBird = 0;
-		//this.countCat = 0;
-		//this.countWild =0;
-		
-//		animalsInPark.add(new Animal("Dog", "Pit Bull", "Hook"));
-//		animalsInPark.add(new Animal("Cat", "Spix", "Fuffly"));
-//		animalsInPark.add(new Animal("Bird", "Hank", "Tony"));
+
 	}
 	
 	public void tick() {

@@ -1,19 +1,22 @@
 
 package PracticeSim;
 
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import PracticeSim.Assets.Assets;
+import PracticeSim.background.GameObject;
 
 
 public class Animal implements AnimalActions{
 	
-	Integer emotion=10;
+	private int emotion=10;
 	protected String type;
 	protected String name;
 	protected String breed;
 	private String action;
-	
+	//IDs are for counts
 	protected final int dogID =0;
 	protected final int catID =1;
 	protected final int birdID =2;
@@ -21,6 +24,7 @@ public class Animal implements AnimalActions{
 	
 	private BufferedImage image;
 	
+	//there needs work to make sure the pets gets added to the background objects
 	public Animal(String type,String breed,String name) {
 		super();
 		this.type = type;
@@ -121,5 +125,22 @@ public class Animal implements AnimalActions{
 		String action="";
 		return action;
 	}
+	
+	//for the background boxes
+//	@Override
+//	public void tick() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	@Override
+//	public void render(Graphics g) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	@Override
+//	public Rectangle getBounds() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

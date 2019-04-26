@@ -180,12 +180,12 @@ public class CreationMenu extends MouseAdapter{
 	}
 	
 	public void getName() {
-		String inStr = JOptionPane.showInputDialog(null, "What name do you want to use?",
-	            "Input Dialog", JOptionPane.PLAIN_MESSAGE);
-	      name = inStr;
+		String inStr = JOptionPane.showInputDialog("What name to use?", "Nobody!");
+		name = inStr;
 	}
 	public void makePet(String type, String breed, String name) {
-		//pets.add(new Animal(type,breed,name));
+		//making sure the user has the pet saved as well.
+		game.user.addPet(new Animal(type,breed,name));
 		aList.addAnimal(type, breed, name);
 		PetType ="";
 		PetBreed="";

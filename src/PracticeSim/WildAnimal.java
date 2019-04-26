@@ -3,7 +3,9 @@ package PracticeSim;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
+import PracticeSim.Assets.Assets;
 import PracticeSim.background.GameObject;
 import PracticeSim.background.Handler;
 import PracticeSim.background.ID;
@@ -12,6 +14,8 @@ public class WildAnimal extends GameObject{
 
 	Handler handler;
 	private int size= 60;
+	public String name = "Squirrel";
+	private BufferedImage image;
 	
 	public WildAnimal(int x, int y, ID id,Handler handler) {
 		super(x, y, id);
@@ -19,6 +23,8 @@ public class WildAnimal extends GameObject{
 		
 		velX = 15;
 		velY = 15;
+		
+		image = Assets.squirrel;
 	}
 
 	public Rectangle getBounds() {	

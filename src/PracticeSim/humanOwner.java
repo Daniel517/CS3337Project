@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class humanOwner {
 	
-	private String humanName;
-	private ArrayList<Animal> pets;
-	private Animal activePet;
+	public String humanName;
+	public ArrayList<Animal> pets;
+	public Animal activePet;
 	private int report = 2;
 	
 	public humanOwner(String name,ArrayList<Animal> pets) {
@@ -14,11 +14,16 @@ public class humanOwner {
 		this.pets = pets;
 		
 	}
-	
+	public void addPet(Animal e) {
+		pets.add(e);
+	}
 	public String getHumanname() {
 		return humanName;
 	}
 	public void changeActivePet() {
+		
+	}
+	public void setActivePet() {
 		
 	}
 	
