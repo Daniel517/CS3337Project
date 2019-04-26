@@ -4,43 +4,51 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Time {
-	private int sec;
-	private int Tenthsec;
-	private int min;
-	private int tenthmin;
-	private int hour2;
+	private int seconds;
+	private int minutes;
+	private int hour;
+	private int AmOrPm;
+	
+	private boolean changed1 = false;
+	private boolean changed2 = false;
+	private boolean changed3 = false;
+	
 	public Time() {
-	//	this.hour = 0;
-		this.min = 0;
-		this.Tenthsec = 0;
-		this.tenthmin = 5;
-		this.hour2 =00;
+		seconds = 0;
+		minutes = 56;
+		hour =11;
+		AmOrPm = 1;
 	}
 	public void addMin(int sec) {
-		sec += sec;
-		if(sec % 10 == 0) {
-			Tenthsec += 1;
-			sec=0;
+		seconds += sec;
+		if(seconds % 60 == 0) {
+			minutes++;
+			seconds = 0;
+		}else if(minutes % 60 == 0 && !changed1) {
+			minutes = 0;
+			hour++;
+			changed1 = true;
+		}else if(hour % 13 == 0 && !changed2) {
+			hour = 1;
+			changed2 = true;
 		}
-		if(Tenthsec % 6 == 0) {
-			min++;
-			Tenthsec = 0;
-		}
-		if(min % 10 == 0) {
-			min=0;
-			tenthmin++;
-			
-			if(tenthmin%6 ==0) {
-				tenthmin =0;
-				hour2++;
-				
-			}
+		
+		if(hour == 12 && minutes == 0 && !changed3) {
+			changed3 = true;
+			AmOrPm += 1;
 		}
 		
 	}
 	public String getTimer() {
-		String format = String.format("%02d", hour2);
-		String time = "Time: " + format + ":"+tenthmin+min;
+		String ampm = "";
+		if(AmOrPm % 2 == 0) {
+			ampm= "PM";
+		}else {
+			ampm = "AM";
+		}
+		String format2 = String.format("%02d", minutes);
+		String format = String.format("%02d", hour);
+		String time = "Time: " + format + ":" + format2 +" "+ ampm;
 		return time;
 	}
 	public void render(Graphics g) {
@@ -48,18 +56,23 @@ public class Time {
 		g.drawString(getTimer(), 10, 25);
 		
 	}
+	public int getSeconds() {
+		return seconds;
+	}
+	public void setSeconds(int seconds) {
+		this.seconds = seconds;
+	}
+	public int getMinutes() {
+		return minutes;
+	}
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
+	}
 	public int getHour() {
-		return hour2;
+		return hour;
 	}
-	public int getMin() {
-		return min;
-	}
-	public int getTenth() {
-		return tenthmin;
-	}
-	public int getSec() {
-		return sec;
-	}
-	 
+	public void setHour(int hour) {
+		this.hour = hour;
+	}	 
 	
 }

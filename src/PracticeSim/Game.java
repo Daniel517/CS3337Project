@@ -124,7 +124,6 @@ public class Game extends Canvas implements Runnable{
 			}
 			
 			if(timer >= 1000000000) {
-				time.addMin(1);
 				System.out.println("Ticks and Frames: "+ ticks);
 				ticks = 0;
 				timer = 0;
@@ -146,10 +145,12 @@ public class Game extends Canvas implements Runnable{
 			addTextArea();
 			//action.tick();
 			collision();
+			time.addMin(1);
 		}
 		else if(gameState == STATE.GamePark) {
 			aList.tick();
 			spawn.tick();
+			time.addMin(1);
 			//action.tick();
 			collision();
 			if(collision) {

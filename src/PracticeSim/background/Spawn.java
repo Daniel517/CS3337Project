@@ -19,14 +19,14 @@ public class Spawn {
 		this.time = time;
 	}
 	public void tick() {
-		if(time.getHour() % 2 == 1 && time.getTenth() == 0 && time.getMin() ==0) {
+		if(time.getHour() % 2 == 1 && time.getMinutes() == 0) {
 			if(!added) {
 				handler.addObject(new WildAnimal(r.nextInt(900), r.nextInt(900), ID.WildAnimal,handler));
 				handler.addObject(new WildAnimal(r.nextInt(900), r.nextInt(900), ID.WildAnimal,handler));
 				added = true;
 			}
 		}
-		if(time.getHour() % 2 == 1 && time.getTenth() == 0 && time.getMin() == 1) {
+		if(time.getHour() % 2 == 1 && time.getMinutes() == 0 && time.getSeconds() == 1) {
 			added = false;
 		}
 	}
