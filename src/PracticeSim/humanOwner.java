@@ -9,26 +9,29 @@ public class humanOwner {
 	public Animal activePet;
 	private int report = 2;
 	
-	public humanOwner(String name,ArrayList<Animal> pets) {
+	public humanOwner(String name, ArrayList<Animal> pets) {
 		this.humanName = name;
 		this.pets = pets;
-		
 	}
 	public void addPet(Animal e) {
 		pets.add(e);
 	}
-	public String getHumanname() {
+	public void setHumanName(String humanName) {
+		this.humanName = humanName;
+	}
+	public String getHumanName() {
 		return humanName;
 	}
 	public void changeActivePet() {
 		
 	}
-	public void setActivePet() {
-		
+	public void setActivePet(Animal pet) {
+		activePet = pet;
 	}
-	
+	public ArrayList<Animal> getPets() {
+		return pets;
+	}
 	public void reportMade() {
 		report =- 1;
 	}
-
 }
