@@ -24,11 +24,13 @@ public class Time {
 		if(seconds % 60 == 0) {
 			minutes++;
 			seconds = 0;
-		}else if(minutes % 60 == 0 && !changed1) {
+		}
+		if(minutes % 60 == 0 && !changed1) {
 			minutes = 0;
 			hour++;
 			changed1 = true;
-		}else if(hour % 13 == 0 && !changed2) {
+		}
+		if(hour % 13 == 0 && !changed2) {
 			hour = 1;
 			changed2 = true;
 		}
