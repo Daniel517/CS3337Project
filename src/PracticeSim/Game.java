@@ -251,7 +251,9 @@ public class Game extends Canvas implements Runnable{
 	public KeyManager getKeyManager() {
 		return keyManager;
 	}
-	
+	public humanOwner getHuman() {
+		return user;
+	}
 	public void addTextArea() {
 		JTextArea textarea = new JTextArea(5,25);
 		textarea.setEditable(false);
