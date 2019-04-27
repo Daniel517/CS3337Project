@@ -1,17 +1,20 @@
 
 package PracticeSim;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import PracticeSim.Assets.Assets;
 import PracticeSim.background.GameObject;
+import PracticeSim.background.ID;
 
 
-public class Animal implements AnimalActions{
+public class Animal extends GameObject implements AnimalActions{
 	
 	private int emotion=10;
+	private int size =20;
 	protected String type;
 	protected String name;
 	protected String breed;
@@ -23,10 +26,11 @@ public class Animal implements AnimalActions{
 	protected int ID=4;
 	
 	private BufferedImage image;
+
 	
 	//there needs work to make sure the pets gets added to the background objects
-	public Animal(String type,String breed,String name) {
-		super();
+	public Animal(String type,String breed,String name,ID id,int x, int y) {
+		super(x,y,id);
 		this.type = type;
 		this.name= name;
 		this.breed = breed;
@@ -42,6 +46,8 @@ public class Animal implements AnimalActions{
 			ID = birdID;
 			image = Assets.bird;
 		}
+		velX = 15;
+		velY = 15;
 	}
 	public Integer getEmotion() {
 		return emotion;
@@ -126,21 +132,25 @@ public class Animal implements AnimalActions{
 		return action;
 	}
 	
-	//for the background boxes
-//	@Override
-//	public void tick() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//	@Override
-//	public void render(Graphics g) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//	@Override
-//	public Rectangle getBounds() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	
+	//for background boxes
+	public Rectangle getBounds() {	
+		return new Rectangle(x,y,size,size);
+	}
+	
+	public void tick() {
+		x += velX;
+		y += velY;
+		
+		if(y <= 0 || y >= Game.HEIGHT-38)
+			velY *= -1;
+		if(x <= 0 || x >= Game.WIDTH-300)
+			velX *= -1;
+	}
+
+	public void render(Graphics g) {
+		g.setColor(Color.red);
+		g.fillRect(x, y, size, size);
+	}
 
 }

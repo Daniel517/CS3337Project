@@ -1,3 +1,4 @@
+
 package PracticeSim.Menus;
 
 import java.awt.Color;
@@ -16,6 +17,7 @@ import PracticeSim.Game.STATE;
 import PracticeSim.humanOwner;
 import PracticeSim.AnimalList.AnimalList;
 import PracticeSim.background.Handler;
+import PracticeSim.background.ID;
 
 public class CreationMenu extends MouseAdapter{
 	
@@ -30,7 +32,7 @@ public class CreationMenu extends MouseAdapter{
 	private ArrayList<Animal> pets; 
 	
 	private int count = 0;
-	
+	private int spacerforpets = 5;
 
 	public CreationMenu(Game game, Handler handler, AnimalList aList) {
 		this.game = game;
@@ -56,7 +58,9 @@ public class CreationMenu extends MouseAdapter{
 				game.user= new humanOwner(name,pets);
 				game.gameState = STATE.GameHome;
 				game.window.sbar.setVisible(true);
+				game.window.area.append(game.user.getHumanName() +" has woken up!\n");
 				game.action.tick();
+				addToHandler();
 
 			}
 			
@@ -71,6 +75,13 @@ public class CreationMenu extends MouseAdapter{
 			}
 		}
 		
+	}
+	
+	public void addToHandler() {
+		for(int i=0;i<game.user.pets.size();i++) {
+			handler.addObject(game.user.pets.get(i));
+			
+		}
 	}
 	
 	public void mouseReleased(MouseEvent e) {
@@ -142,7 +153,7 @@ public class CreationMenu extends MouseAdapter{
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
 			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
-			g.drawString(aList.getAnimal(0).getType() +" - "+ aList.getAnimal(0).getBreed() + ": " + aList.getAnimal(0).getName(), 235,385);
+			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() + ": " + pets.get(0).getName(), 235,385);
 		}
 		else if(count == 2) {
 			g.setColor(Color.white);
@@ -155,29 +166,29 @@ public class CreationMenu extends MouseAdapter{
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
 			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
-			g.drawString(aList.getAnimal(0).getType() +" - "+ aList.getAnimal(0).getBreed() + ": " + aList.getAnimal(0).getName(), 235,385);
+			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() + ": " + pets.get(0).getName(), 235,385);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
 			//g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() +": "+pets.get(1).getName(), 235,485);
-			g.drawString(aList.getAnimal(1).getType() +" - "+ aList.getAnimal(1).getBreed() + ": " + aList.getAnimal(1).getName(), 235,485);
+			g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() + ": " + pets.get(1).getName(), 235,485);
 			
 		}
 		else if(count == 3) {
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
 			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
-			g.drawString(aList.getAnimal(0).getType() +" - "+ aList.getAnimal(0).getBreed() + ": " + aList.getAnimal(0).getName(), 235,385);
+			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() + ": " + pets.get(0).getName(), 235,385);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
 			//g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() +": "+pets.get(1).getName(), 235,485);
-			g.drawString(aList.getAnimal(1).getType() +" - "+ aList.getAnimal(1).getBreed() + ": " + aList.getAnimal(1).getName(), 235,485);
+			g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() + ": " + pets.get(1).getName(), 235,485);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
 			//g.drawString(pets.get(2).getType() +" - "+ pets.get(2).getBreed() +": "+pets.get(2).getName(), 235,585);
-			g.drawString(aList.getAnimal(2).getType() +" - "+ aList.getAnimal(2).getBreed() + ": " + aList.getAnimal(2).getName(), 235,585);
+			g.drawString(pets.get(2).getType() +" - "+ pets.get(2).getBreed() + ": " + pets.get(2).getName(), 235,585);
 		}
 	}
 	
@@ -187,11 +198,12 @@ public class CreationMenu extends MouseAdapter{
 	}
 	public void makePet(String type, String breed, String name) {
 		//making sure the user has the pet saved as well.
-		pets.add(new Animal(type,breed,name));
-		aList.addAnimal(type, breed, name);
+		pets.add(new Animal(type,breed,name,ID.Pet,spacerforpets,spacerforpets));
+		aList.addAnimal(type, breed, name,ID.Pet);
 		PetType ="";
 		PetBreed="";
 		Petname="";
+		spacerforpets *= 5;
 	}
 	public void getPet() {
 		String[] type = {"Select One","Dog", "Cat", "Bird"};
