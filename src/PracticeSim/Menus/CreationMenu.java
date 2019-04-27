@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import PracticeSim.Animal;
 import PracticeSim.Game;
 import PracticeSim.Game.STATE;
+import PracticeSim.humanOwner;
 import PracticeSim.AnimalList.AnimalList;
 import PracticeSim.background.Handler;
 
@@ -52,6 +53,7 @@ public class CreationMenu extends MouseAdapter{
 			
 			//Start simulator
 			if(mouseOver(mx,my,960, 750, 215, 75)) {
+				game.user= new humanOwner(name,pets);
 				game.gameState = STATE.GameHome;
 				game.window.sbar.setVisible(true);
 				game.action.tick();
@@ -185,7 +187,7 @@ public class CreationMenu extends MouseAdapter{
 	}
 	public void makePet(String type, String breed, String name) {
 		//making sure the user has the pet saved as well.
-		game.user.addPet(new Animal(type,breed,name));
+		pets.add(new Animal(type,breed,name));
 		aList.addAnimal(type, breed, name);
 		PetType ="";
 		PetBreed="";
