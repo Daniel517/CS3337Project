@@ -9,8 +9,9 @@ public class humanOwner {
 	public Animal activePet;
 	private int report = 2;
 	
-	public humanOwner(String name) {
+	public humanOwner(String name, ArrayList<Animal> pets) {
 		this.humanName = name;
+		this.pets = pets;
 	}
 	public void addPet(Animal e) {
 		pets.add(e);
