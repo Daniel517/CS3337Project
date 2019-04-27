@@ -1,2 +1,7 @@
+<<<<<<< HEAD
+Daniel Geiser
+So far just the the idea but we are doing a collective mix on the document.
+=======
 Daniel Ramirez
 Responsibilities TBD
+>>>>>>> DanielRamirez
