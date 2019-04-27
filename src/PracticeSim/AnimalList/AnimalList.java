@@ -11,6 +11,7 @@ import PracticeSim.WildAnimal;
 import PracticeSim.Animal;
 import PracticeSim.AnimalList.Text;
 import PracticeSim.background.Handler;
+import PracticeSim.background.ID;
 import PracticeSim.Assets.Assets;;
 
 
@@ -90,8 +91,8 @@ public class AnimalList {
 		g.drawImage(animal.getAsset(), AImageWidth, AImageHeight, null);
 		Text.drawString(g, Integer.toString(animalsInPark.size()), ACountX, ACountY, true, c, font);
 	}
-	public void addAnimal(String type, String breed, String name) {
-		animalsInPark.add(new Animal(type, breed, name));
+	public void addAnimal(String type, String breed, String name, ID id) {
+		animalsInPark.add(new Animal(type, breed, name, id,0,0));
 	}
 	public Animal getAnimal(int index) {
 		return animalsInPark.get(index);

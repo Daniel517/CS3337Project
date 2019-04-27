@@ -13,7 +13,7 @@ import PracticeSim.background.ID;
 public class WildAnimal extends GameObject{
 
 	Handler handler;
-	private int size= 60;
+	private int size= 30;
 	public String name = "Squirrel";
 	private BufferedImage image;
 	
