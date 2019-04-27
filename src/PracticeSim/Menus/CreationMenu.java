@@ -58,7 +58,7 @@ public class CreationMenu extends MouseAdapter{
 				game.user= new humanOwner(name,pets);
 				game.gameState = STATE.GameHome;
 				game.window.sbar.setVisible(true);
-				game.window.area.append(game.user.getHumanname() +" has woken up!\n");
+				game.window.area.append(game.user.getHumanName() +" has woken up!\n");
 				game.action.tick();
 				addToHandler();
 
