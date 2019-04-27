@@ -206,25 +206,23 @@ public class CreationMenu extends MouseAdapter{
 		spacerforpets *= 5;
 	}
 	public void getPet() {
-		String[] type = {"Select One","Dog", "Cat", "Bird"};
-		String[] breedD = {"Select One","Pitbull", "Rat Terrier", "Poodle", "Husky", "Maltese"};
-		String[] breedC = {"Select One","Siamese", "Tabicat", "Persian", "Sphinx"};
-		String[] breedB = {"Select One","Pigeon", "Hawk", "Parrot", "Parakeet"};
+		String[] type = {"Dog", "Cat", "Bird"};
+		String[] breedD = {"Pitbull", "Rat Terrier", "Poodle", "Husky", "Maltese"};
+		String[] breedC = {"Siamese", "Tabicat", "Persian", "Sphinx"};
+		String[] breedB = {"Pigeon", "Hawk", "Parrot", "Parakeet"};
 		
-		do {
-			PetType = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, type, "Select One");
-		} while(PetType == "Select One");
+		PetType = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, type, "Dog");
 		
 		if(PetType == "Dog") {
-			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedD, "Select One");
+			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedD, "Pitbull");
 			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
 		}
 		else if(PetType == "Cat") {
-			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedC, "Select One");
+			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedC, "Siamese");
 			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
 		}
 		else if(PetType == "Bird") {
-			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedB, "Select One");
+			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedB, "Pigeon");
 			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
 		}
 		count +=1;
