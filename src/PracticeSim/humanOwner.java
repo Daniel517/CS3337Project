@@ -13,6 +13,12 @@ public class humanOwner {
 		this.humanName = name;
 		this.pets = pets;
 	}
+	
+	public humanOwner(String name,Animal pet) {
+		this.humanName = name;
+		this.activePet = pet;
+	}
+	
 	public void addPet(Animal e) {
 		pets.add(e);
 	}

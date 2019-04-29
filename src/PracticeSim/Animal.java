@@ -79,72 +79,115 @@ public class Animal extends GameObject implements AnimalActions{
 	public void Fly() {
 		
 		if(getType() == "Dog" || getType() == "Cat"){
-			action= getType()+" looks at you Funny!";
+			action= getName()+" looks at you Funny!";
 		}
 		else if(getType() == "Bird") {
 			action = getName()+" took off and is flying around";
 		}
 		setAction(action);
 	}
+	
 	@Override
-	public String Catch( ) {
-		String action="Dog get a hold of ";
-		return action;
+	public void Catch() {
+		if(getType() == "Dog"){
+			action= getName()+" trys to catch a squirrel.";
+		}
+		else if(getType() == "Bird") {
+			action = getName()+" trys to catch something";
+		}
+		else if(getType() == "Cat") {
+			action = getName() + "trys to catch a bird.";
+					
+		}
+		setAction(action);
 	}
 	@Override
-	public String Speak() {
-		String action="Braks!!";
-		return action;
+	public void Speak() {
+		if(getType() == "Dog"){
+			action= getName()+" BARKS!!";
+		}
+		else if(getType() == "Bird") {
+			action = getName()+" makes a noise";
+		}
+		else if(getType() == "Cat") {
+			action = getName() + "MEOW!!";
+					
+		}
+		setAction(action);
 	}
 	@Override
-	public String Chase() {
-		String action="";
-		return action;
+	public void Chase() {
+		if(getType() == "Bird" || getType() == "Cat"){
+			action= getName()+" ignores you!";
+		}
+		else if(getType() == "Dog") {
+			action = getName()+" catches a squirrel!";
+		}
+		setAction(action);
 	}
 	@Override
-	public String Flee() {
-		String action="";
-		return action;
+	public void Flee() {
+		if(emotion >3){
+			action= getName()+" does nothing.";
+		}
+		else {
+			action = getName()+" runs aways and slowly comes back with head down.";
+		}
+		setAction(action);
 	}
 	@Override
-	public String Bite() {
-		String action="";
-		return action;
+	public void Bite() {
+		if(emotion >3){
+			action= getName()+" does nothing.";
+		}
+		else {
+			action = getName()+" bites owner";
+		}
+		setAction(action);
 	}
 	@Override
-	public String Play() {
-		String action="";
-		return action;
+	public void Play() {
+		action= getName() + "is playing.";
+		setAction(action);
 	}
 	@Override
-	public String Fetch() {
-		String action="";
-		return action;
+	public void Fetch() {
+		if(getType() == "Dog" || getType() == "Cat"){
+			action= getName()+" looks at the directions and runs away from you.\nComes back with nothing";
+		}
+		else if(getType() == "Bird") {
+			action = getName()+" flys away and circles.\nReturns to you.";
+		}
+		setAction(action);
 	}
 	@Override
-	public String Lick() {
-		String action="";
-		return action;
+	public void Lick() {
+		if(getType() == "Dog" || getType() == "Cat"){
+			action= getName()+" is trying to lick your face!";
+		}
+		else if(getType() == "Bird") {
+			action = getName()+" tongue isnt long enough.";
+		}
+		setAction(action);
 	}
 	@Override
-	public String Rest() {
-		String action="";
-		return action;
+	public void Rest() {
+		action = getName()+" is resting";
+		setAction(action);
 	}
 	
-	
-	//for background boxes
-	public Rectangle getBounds() {	
-		return new Rectangle(x,y,size,size);
+	// for background boxes
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, size, size);
 	}
-	
+
 	public void tick() {
 		x += velX;
 		y += velY;
-		
-		if(y <= 0 || y >= Game.HEIGHT-38)
+
+		if (y <= 0 || y >= Game.HEIGHT - 38)
 			velY *= -1;
-		if(x <= 0 || x >= Game.WIDTH-300)
+		if (x <= 0 || x >= Game.WIDTH - 300)
 			velX *= -1;
 	}
 

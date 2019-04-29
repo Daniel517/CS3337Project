@@ -16,6 +16,7 @@ public class WildAnimal extends GameObject{
 	private int size= 30;
 	public String name = "Squirrel";
 	private BufferedImage image;
+	private String action;
 	
 	public WildAnimal(int x, int y, ID id,Handler handler) {
 		super(x, y, id);
@@ -44,6 +45,19 @@ public class WildAnimal extends GameObject{
 	public void render(Graphics g) {
 		g.setColor(Color.red);
 		g.fillRect(x, y, size, size);
+	}
+	
+	public void takeAction() {
+		action = "exploring area.";
+		setAction(action);
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
 	}
 	
 	

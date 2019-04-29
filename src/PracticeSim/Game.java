@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
@@ -40,6 +41,7 @@ public class Game extends Canvas implements Runnable{
 	private AnimalList aList;
 	public ActionSection action;
 	
+	private boolean picked=false;
 	private KeyManager keyManager;
 	
 	private BufferStrategy bs;
@@ -135,6 +137,25 @@ public class Game extends Canvas implements Runnable{
 		
 	}
 	
+	public void pickAanimal() {
+		if(user.pets.size()==1) {
+			user.activePet = user.pets.get(0);
+		}
+		else {
+			Object[] options = new Object[user.pets.size()];
+			for (int i = 0; i < user.pets.size(); i++) {
+				options[i] = user.pets.get(i).getName();
+			}
+			int choice = JOptionPane.showOptionDialog(null, "Which animal would you like to play with?",
+					"Chose who to play with?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+					options, options[0]);
+
+			user.activePet = user.pets.get(choice);
+		}
+		
+		picked = true;
+	}
+	
 	private void tick() {
 		handler.tick();
 		keyManager.tick();
@@ -148,10 +169,14 @@ public class Game extends Canvas implements Runnable{
 			time.addMin(1);
 		}
 		else if(gameState == STATE.GamePark) {
+			
+			
 			aList.tick();
 			spawn.tick();
 			time.addMin(1);
-			//action.tick();
+			if(user.pets.size()>=1 && !picked) {
+				pickAanimal();
+			}
 			collision();
 			if(collision) {
 				window.area.append("Animals interacted\n");

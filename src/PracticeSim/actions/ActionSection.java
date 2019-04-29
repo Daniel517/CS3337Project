@@ -100,7 +100,7 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Chosen to stay home\n");
+				game.window.area.append(game.user.getHumanName()+" has choosen to stay home\n");
 				
 			}
 			
@@ -112,6 +112,7 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				game.window.area.append(game.user.getHumanName()+" has choosen to go to the Park!\n");
 				game.gameState = STATE.GamePark;
 				action1=true;
 				tick();
@@ -146,7 +147,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Fly was pressed\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to fly.\n");
+				game.user.activePet.Fly();
+				game.window.area.append(game.user.activePet.getAction()+"\n");
 				action2 = true;
 				action3 = false;
 				tick();

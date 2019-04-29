@@ -79,6 +79,7 @@ public class CreationMenu extends MouseAdapter{
 		
 	}
 	
+	
 	public void addToHandler() {
 		for(int i=0;i<game.user.pets.size();i++) {
 			handler.addObject(game.user.pets.get(i));
