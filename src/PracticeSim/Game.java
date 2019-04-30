@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -40,7 +41,8 @@ public class Game extends Canvas implements Runnable{
 	private Handler handler;
 	private AnimalList aList;
 	public ActionSection action;
-	
+
+
 	private boolean picked=false;
 	private KeyManager keyManager;
 	
@@ -54,7 +56,7 @@ public class Game extends Canvas implements Runnable{
 	private Menu menu;
 	private CreationMenu creation;
 	public enum STATE{
-		Menu, Creation, GameHome, GamePark
+		Menu, Creation, GameHome, GamePark, Death
 	};
 	
 	public STATE gameState = STATE.Menu;
@@ -124,44 +126,13 @@ public class Game extends Canvas implements Runnable{
 				ticks++;
 				delta--;
 			}
-			
 			if(timer >= 1000000000) {
 				System.out.println("Ticks and Frames: "+ ticks);
 				ticks = 0;
 				timer = 0;
 			}
 		}
-		
 		stop();
-		
-		
-	}
-	
-	public void pickAanimal() {
-		if(user.pets.size()==1) {
-			user.activePet = user.pets.get(0);
-			user.activePet.setIsUserPet(true);
-		}
-		else {
-			Object[] options = new Object[user.pets.size()];
-			for (int i = 0; i < user.pets.size(); i++) {
-				options[i] = user.pets.get(i).getName();
-				user.pets.get(i).setIsUserPet(true);
-				user.pets.get(i).setIsNotActive(true);
-			}
-			int choice = JOptionPane.showOptionDialog(null, "Which animal would you like to play with?",
-					"Chose who to play with?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-					options, options[0]);
-
-			user.activePet = user.pets.get(choice);
-			user.activePet.setIsNotActive(false);
-		}
-		
-		picked = true;
-	}
-	
-	public void newVisable() {
-		window.area.setCaretPosition(window.area.getDocument().getLength());
 	}
 	
 	private void tick() {
@@ -244,6 +215,11 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 		
 	}
+
+	public void setPicked(boolean picked) {
+		this.picked = picked;
+	}
+	
 	public void collision() {
 		for (int i = 0; i < handler.object.size()-1; i++) {
 			for(int j = i+1;j<handler.object.size();j++) {
@@ -263,8 +239,79 @@ public class Game extends Canvas implements Runnable{
 						collision=false;
 					}
 				}
+				
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.WildAnimal || tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.UserPet) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
+				}
+				
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet || tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
+				}
+				
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.Pet || tempObject.getId() == ID.Pet && tempObject2.getId() == ID.UserPet) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
+				}
 			}
 		}
+	}
+	
+	public void pickAanimal() {
+		if(user.pets.size()==1) {
+			user.activePet = user.pets.get(0);
+			user.activePet.setIsUserPet(true);
+			user.activePet.setId(ID.ActivePet);
+		}
+		else {
+			Object[] options = new Object[user.pets.size()];
+			for (int i = 0; i < user.pets.size(); i++) {
+				options[i] = user.pets.get(i).getName();
+				user.pets.get(i).setIsUserPet(true);
+				user.pets.get(i).setIsNotActive(true);
+			}
+			int choice = JOptionPane.showOptionDialog(null, "Which animal would you like to play with?",
+					"Chose who to play with?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+					options, options[0]);
+
+			user.activePet = user.pets.get(choice);
+			user.activePet.setIsNotActive(false);
+			user.activePet.setId(ID.ActivePet);
+		}
+		
+		picked = true;
+	}
+	
+	public void newVisable() {
+		window.area.setCaretPosition(window.area.getDocument().getLength());
 	}
 
 	public static int clamp(int var, int min, int max) {

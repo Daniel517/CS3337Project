@@ -335,6 +335,7 @@ public class ActionSection extends JPanel{
 				game.gameState = STATE.GameHome;
 				action1= false;
 				added= false;
+				game.setPicked(false);
 				game.window.ReactionPanel.setVisible(false);
 				game.window.ParkActionPanel.setVisible(false);
 				tick();

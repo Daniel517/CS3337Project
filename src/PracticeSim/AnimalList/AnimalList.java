@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import PracticeSim.WildAnimal;
@@ -91,8 +92,8 @@ public class AnimalList {
 		g.drawImage(animal.getAsset(), AImageWidth, AImageHeight, null);
 		Text.drawString(g, Integer.toString(animalsInPark.size()), ACountX, ACountY, true, c, font);
 	}
-	public void addAnimal(String type, String breed, String name, ID id) {
-		animalsInPark.add(new Animal(type, breed, name, id,0,0));
+	public void addAnimal(String type, String breed, String name, ID id,BufferedImage img) {
+		animalsInPark.add(new Animal(type, breed, name, id,0,0,img));
 	}
 	public Animal getAnimal(int index) {
 		return animalsInPark.get(index);

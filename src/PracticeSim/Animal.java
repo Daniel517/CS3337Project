@@ -36,22 +36,20 @@ public class Animal extends GameObject implements AnimalActions{
 
 	
 	//there needs work to make sure the pets gets added to the background objects
-	public Animal(String type,String breed,String name,ID id,int x, int y) {
+	public Animal(String type,String breed,String name,ID id,int x, int y, BufferedImage img) {
 		super(x,y,id);
 		this.type = type;
 		this.name= name;
 		this.breed = breed;
-		if(type == "Dog") {
+		this.image = img;
+		if(breed == "Dog") {
 			ID = dogID;
-			image = Assets.dog;
 		}
 		else if(type == "Cat") {
 			ID = catID;
-			image = Assets.cat;
 		}
 		else if(type == "Bird") {
 			ID = birdID;
-			image = Assets.bird;
 		}
 		velX = 15;
 		velY = 15;
@@ -269,7 +267,7 @@ public class Animal extends GameObject implements AnimalActions{
 			setFighting(true);
 		}
 		if(wild) {
-			setAwayAction("the "+getName() + " is play with another");
+			setAwayAction("the "+getName() + " is playing with ");
 		}
 		
 	}

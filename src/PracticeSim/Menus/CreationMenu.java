@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,6 +17,7 @@ import PracticeSim.Game;
 import PracticeSim.Game.STATE;
 import PracticeSim.humanOwner;
 import PracticeSim.AnimalList.AnimalList;
+import PracticeSim.Assets.Assets;
 import PracticeSim.background.Handler;
 import PracticeSim.background.ID;
 
@@ -205,12 +207,58 @@ public class CreationMenu extends MouseAdapter{
 	}
 	public void makePet(String type, String breed, String name) {
 		//making sure the user has the pet saved as well.
-		pets.add(new Animal(type,breed,name,ID.Pet,spacerforpets,spacerforpets));
+		BufferedImage picture = null;
+		picture= getImage(breed);
+		pets.add(new Animal(type,breed,name,ID.UserPet,r.nextInt(600),r.nextInt(900),picture));
 		PetType ="";
 		PetBreed="";
 		Petname="";
 		spacerforpets *= 5;
 	}
+	public BufferedImage getImage(String e) {
+		BufferedImage pic=null;
+		if(e=="Pitbull") {
+			pic = Assets.Pitbull;
+		}
+		else if(e == "Rat Terrier") {
+			pic = Assets.RatTerrier;
+		}
+		else if(e == "Poodle") {
+			pic = Assets.Poodle;
+		}
+		else if(e == "Parakeet") {
+			pic = Assets.Parakeet;
+		}
+		else if(e == "Parrot") {
+			pic = Assets.Parrot;
+		}
+		else if(e == "Hawk") {
+			pic = Assets.Hawk;
+		}
+		else if(e == "Pigeon") {
+			pic = Assets.Pigeon;
+		}
+		else if(e == "Sphinx") {
+			pic = Assets.Sphinx;
+		}
+		else if(e == "Persian") {
+			pic = Assets.Persian;
+		}
+		else if(e == "Tabicat") {
+			pic = Assets.Tabicat;
+		}
+		else if(e == "Siamese") {
+			pic = Assets.Siamese;
+		}
+		else if(e == "Maltese") {
+			pic = Assets.Maltese;
+		}
+		else if(e == "Husky") {
+			pic = Assets.Husky;
+		}
+		return pic;
+	}
+	
 	public void getPet() {
 		String[] type = {"Select One","Dog", "Cat", "Bird"};
 		String[] breedD = {"Select One","Pitbull", "Rat Terrier", "Poodle", "Husky", "Maltese"};
