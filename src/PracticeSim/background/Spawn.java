@@ -2,6 +2,7 @@ package PracticeSim.background;
 
 import java.util.Random;
 
+import PracticeSim.Animal;
 import PracticeSim.WildAnimal;
 import PracticeSim.AnimalList.AnimalList;
 
@@ -21,8 +22,10 @@ public class Spawn {
 	public void tick() {
 		if(time.getHour() % 2 == 1 && time.getMinutes() == 59) {
 			if(!added) {
-				handler.addObject(new WildAnimal(r.nextInt(900), r.nextInt(900), ID.WildAnimal,handler));
-				handler.addObject(new WildAnimal(r.nextInt(900), r.nextInt(900), ID.WildAnimal,handler));
+				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				handler.addObject(an);
+				handler.addObject(an2);
 				added = true;
 			}
 		}

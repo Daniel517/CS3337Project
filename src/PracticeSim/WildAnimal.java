@@ -25,7 +25,7 @@ public class WildAnimal extends GameObject{
 		velX = 15;
 		velY = 15;
 		
-		image = Assets.squirrel;
+		setImage(Assets.squirrel);
 	}
 
 	public Rectangle getBounds() {	
@@ -58,6 +58,24 @@ public class WildAnimal extends GameObject{
 
 	public void setAction(String action) {
 		this.action = action;
+	}
+
+	@Override
+	public void awayAction() {
+		setAwayAction("the "+getName() + " is play with another");
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 	
 	

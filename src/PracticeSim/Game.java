@@ -140,20 +140,28 @@ public class Game extends Canvas implements Runnable{
 	public void pickAanimal() {
 		if(user.pets.size()==1) {
 			user.activePet = user.pets.get(0);
+			user.activePet.setIsUserPet(true);
 		}
 		else {
 			Object[] options = new Object[user.pets.size()];
 			for (int i = 0; i < user.pets.size(); i++) {
 				options[i] = user.pets.get(i).getName();
+				user.pets.get(i).setIsUserPet(true);
+				user.pets.get(i).setIsNotActive(true);
 			}
 			int choice = JOptionPane.showOptionDialog(null, "Which animal would you like to play with?",
 					"Chose who to play with?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 					options, options[0]);
 
 			user.activePet = user.pets.get(choice);
+			user.activePet.setIsNotActive(false);
 		}
 		
 		picked = true;
+	}
+	
+	public void newVisable() {
+		window.area.setCaretPosition(window.area.getDocument().getLength());
 	}
 	
 	private void tick() {
@@ -164,9 +172,9 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.GameHome) {
 			aList.tick();
 			addTextArea();
-			//action.tick();
 			collision();
 			time.addMin(1);
+			newVisable();
 		}
 		else if(gameState == STATE.GamePark) {
 			
@@ -179,8 +187,9 @@ public class Game extends Canvas implements Runnable{
 			}
 			collision();
 			if(collision) {
-				window.area.append("Animals interacted\n");
+				System.out.println("interacted");
 			}
+			newVisable();
 		}
 		else if(gameState == STATE.Menu) {
 			menu.tick();
@@ -206,7 +215,7 @@ public class Game extends Canvas implements Runnable{
 		
 		if(gameState == STATE.GameHome) {
 			
-			g.drawImage(Assets.home, 0, 0, null);
+			//g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
@@ -214,15 +223,10 @@ public class Game extends Canvas implements Runnable{
 		}
 		else if(gameState == STATE.GamePark) {
 			
-			g.drawImage(Assets.park, 0, 0, null);
+			//g.drawImage(Assets.park, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
-			if(collision) {
-				System.out.println("animal interaction");
-				window.area.append("animal interaction\n");
-			}
-			
 			
 		}
 		else if(gameState == STATE.Menu) {
@@ -242,19 +246,24 @@ public class Game extends Canvas implements Runnable{
 	}
 	public void collision() {
 		for (int i = 0; i < handler.object.size()-1; i++) {
-			GameObject tempObject = handler.object.get(i);
-			GameObject tempObject2 = handler.object.get(i+1);
+			for(int j = i+1;j<handler.object.size();j++) {
+				GameObject tempObject = handler.object.get(i);
+				GameObject tempObject2 = handler.object.get(j);
 
-			if (tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.WildAnimal) {
-				if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-					// collision code
-					collision = true;
-					
+				if (tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.WildAnimal) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
 				}
-				else 
-					collision = false;
 			}
-
 		}
 	}
 
@@ -287,12 +296,19 @@ public class Game extends Canvas implements Runnable{
 		DefaultCaret caret = (DefaultCaret) textarea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 		JScrollPane scrollBar = new JScrollPane(textarea);
-		scrollBar.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollBar.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);		
 		window.getFrame().getContentPane().add(scrollBar);
 		
 	}
 	
-
+	public void addtoAList(Animal a) {
+		aList.addToList(a);
+	}
+	
+	public void leavingPark() {
+		aList.GoingHomeFromPark();
+	}
+	
 	public static void main(String args[]) {
 		new Game();
 	}

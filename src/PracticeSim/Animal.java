@@ -14,7 +14,7 @@ import PracticeSim.background.ID;
 public class Animal extends GameObject implements AnimalActions{
 	
 	private int emotion=10;
-	private int size =20;
+	private int size =25;
 	protected String type;
 	protected String name;
 	protected String breed;
@@ -24,6 +24,13 @@ public class Animal extends GameObject implements AnimalActions{
 	protected final int catID =1;
 	protected final int birdID =2;
 	protected int ID=4;
+	//actions when away and keeping track of user pets
+	private boolean fighting= false;
+	private boolean IsUserPet= false;
+	private boolean IsNotActive = false;
+	
+	//for wild
+	private boolean wild=false;
 	
 	private BufferedImage image;
 
@@ -49,6 +56,40 @@ public class Animal extends GameObject implements AnimalActions{
 		velX = 15;
 		velY = 15;
 	}
+	//This is for wild animals
+	public Animal(ID id,int x, int y) {
+		super(x,y,id);
+		wild = true;
+		name="Squirrel";
+		type="Squirrel";
+		breed="Squirrel";
+		
+		velX = 15;
+		velY = 15;
+		
+		image = Assets.squirrel;
+		
+	}
+	public void stayedHome() {
+		if(emotion<=10 && emotion>0) {
+			emotion -= 1;
+		}
+		else {
+			emotion=0;
+		}
+		
+	}
+	public void WentToPark() {
+		if(emotion<10 && emotion>=0) {
+			emotion += 1;
+		}
+		else {
+			emotion=10;
+		}
+	}
+	public void Hit() {
+		emotion -= 1;
+	}
 	public Integer getEmotion() {
 		return emotion;
 	}
@@ -61,7 +102,7 @@ public class Animal extends GameObject implements AnimalActions{
 	public BufferedImage getAsset() {
 		return image;
 	}
-	
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -74,7 +115,25 @@ public class Animal extends GameObject implements AnimalActions{
 	public void setAction(String act) {
 		this.action = act;
 	}
-
+	public boolean isFighting() {
+		return fighting;
+	}
+	public void setFighting(boolean fighting) {
+		this.fighting = fighting;
+	}
+	public boolean isIsUserPet() {
+		return IsUserPet;
+	}
+	public void setIsUserPet(boolean isUserPet) {
+		IsUserPet = isUserPet;
+	}
+	public boolean isIsNotActive() {
+		return IsNotActive;
+	}
+	public void setIsNotActive(boolean isNotActive) {
+		IsNotActive = isNotActive;
+	}
+	
 	@Override
 	public void Fly() {
 		
@@ -176,6 +235,7 @@ public class Animal extends GameObject implements AnimalActions{
 		setAction(action);
 	}
 	
+	
 	// for background boxes
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, size, size);
@@ -195,5 +255,22 @@ public class Animal extends GameObject implements AnimalActions{
 		g.setColor(Color.red);
 		g.fillRect(x, y, size, size);
 	}
-
+	@Override
+	public void awayAction() {
+		
+		if(emotion >7) {
+			setAwayAction(getName() + " is playing with ");
+		}
+		else if(emotion >3 && emotion<7) {
+			setAwayAction(getName() + " is walking slowly around with ");
+		}
+		else if(emotion >3) {
+			setAwayAction(getName() + " is fighting with ");
+			setFighting(true);
+		}
+		if(wild) {
+			setAwayAction("the "+getName() + " is play with another");
+		}
+		
+	}
 }

@@ -17,7 +17,7 @@ import PracticeSim.Assets.Assets;;
 
 public class AnimalList {
 	
-	private PracticeSim.background.Handler handler;
+	private Handler handler;
 	private boolean active = false;
 	private ArrayList<Animal> animalsInPark;
 
@@ -30,7 +30,7 @@ public class AnimalList {
 	private Color c2 = Color.red;
 	
 	private int alcx = 900 + 70,
-			alcy = 0 + 70,
+			alcy = 210 + 70,
 			spacing = 25;
 	private int AImageX = 1100,
 			AImageY = 50, AImageWidth =  AImageX,
@@ -96,6 +96,21 @@ public class AnimalList {
 	}
 	public Animal getAnimal(int index) {
 		return animalsInPark.get(index);
+	}
+
+	public void addToList(Animal a) {
+		animalsInPark.add(a);
+	}
+	public void GoingHomeFromPark() {
+		
+		for(int i =0;i<animalsInPark.size();i++) {
+			if(!animalsInPark.get(i).isIsUserPet()) {
+				handler.removeObject(animalsInPark.get(i));
+				animalsInPark.remove(animalsInPark.get(i));
+				i--;
+			}
+		}
+		
 	}
 
 }
