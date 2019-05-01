@@ -186,7 +186,7 @@ public class Game extends Canvas implements Runnable{
 		
 		if(gameState == STATE.GameHome) {
 			
-			//g.drawImage(Assets.home, 0, 0, null);
+			g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
@@ -194,7 +194,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		else if(gameState == STATE.GamePark) {
 			
-			//g.drawImage(Assets.park, 0, 0, null);
+			g.drawImage(Assets.park, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
@@ -354,6 +354,18 @@ public class Game extends Canvas implements Runnable{
 	
 	public void leavingPark() {
 		aList.GoingHomeFromPark();
+	}
+	
+	public int getOpenHour() {
+		return time.getHour();
+	}
+	
+	public int getOpenMin() {
+		return time.getMinutes();
+	}
+	
+	public void changeTime(int h, int m) {
+		time.changeTime(h, m);
 	}
 	
 	public static void main(String args[]) {

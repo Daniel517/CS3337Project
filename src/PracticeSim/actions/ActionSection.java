@@ -111,11 +111,16 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append(game.user.getHumanName()+" has choosen to go to the Park!\n");
-				game.user.WentToPark();
-				game.gameState = STATE.GamePark;
-				action1=true;
-				tick();
+				if(game.getOpenHour()>7 && game.getOpenMin()>0) {
+					game.window.area.append(game.user.getHumanName()+" has choosen to go to the Park!\n");
+					game.user.WentToPark();
+					game.gameState = STATE.GamePark;
+					action1=true;
+					tick();
+				}
+				else {
+					game.window.area.append(game.user.getHumanName()+" the Park isn't Open Yet.");
+				}
 			}
 			
 		});
@@ -338,6 +343,7 @@ public class ActionSection extends JPanel{
 				game.setPicked(false);
 				game.window.ReactionPanel.setVisible(false);
 				game.window.ParkActionPanel.setVisible(false);
+				game.changeTime(6, 0);
 				tick();
 			}
 			
