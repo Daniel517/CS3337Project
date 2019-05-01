@@ -13,6 +13,12 @@ public class humanOwner {
 		this.humanName = name;
 		this.pets = pets;
 	}
+	
+	public humanOwner(String name,Animal pet) {
+		this.humanName = name;
+		this.activePet = pet;
+	}
+	
 	public void addPet(Animal e) {
 		pets.add(e);
 	}
@@ -31,7 +37,24 @@ public class humanOwner {
 	public ArrayList<Animal> getPets() {
 		return pets;
 	}
+	public void HitAnimal() {
+		activePet.Hit();
+	}
 	public void reportMade() {
-		report =- 1;
+		report -= 1;
+	}
+	public void StayHome() {
+		for(int i = 0;i<pets.size();i++) {
+			pets.get(i).stayedHome();
+		}
+	}
+	public void WentToPark() {
+		for(int i = 0;i<pets.size();i++) {
+			pets.get(i).WentToPark();
+		}
+	}
+
+	public int getReport() {
+		return report;
 	}
 }

@@ -38,4 +38,16 @@ public class Player extends GameObject{
 		return new Rectangle(x,y,16,16);
 	}
 
+	@Override
+	public void awayAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

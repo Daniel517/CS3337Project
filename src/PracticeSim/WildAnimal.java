@@ -16,6 +16,7 @@ public class WildAnimal extends GameObject{
 	private int size= 30;
 	public String name = "Squirrel";
 	private BufferedImage image;
+	private String action;
 	
 	public WildAnimal(int x, int y, ID id,Handler handler) {
 		super(x, y, id);
@@ -24,7 +25,7 @@ public class WildAnimal extends GameObject{
 		velX = 15;
 		velY = 15;
 		
-		image = Assets.squirrel;
+		setImage(Assets.squirrel);
 	}
 
 	public Rectangle getBounds() {	
@@ -44,6 +45,37 @@ public class WildAnimal extends GameObject{
 	public void render(Graphics g) {
 		g.setColor(Color.red);
 		g.fillRect(x, y, size, size);
+	}
+	
+	public void takeAction() {
+		action = "exploring area.";
+		setAction(action);
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	@Override
+	public void awayAction() {
+		setAwayAction("the "+getName() + " is play with another");
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 	
 	

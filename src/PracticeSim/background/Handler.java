@@ -3,6 +3,7 @@ package PracticeSim.background;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import PracticeSim.Animal;
 import PracticeSim.Game;
 import PracticeSim.Game.STATE;
 
@@ -36,6 +37,7 @@ public class Handler {
 
 	public void addObject(GameObject object) {
 		this.object.add(object);
+		game.addtoAList((Animal) object);
 	}
 	
 	public void removeObject(GameObject object) {

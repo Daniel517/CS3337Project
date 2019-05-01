@@ -8,16 +8,20 @@ public abstract class GameObject {
 	protected int x, y;
 	protected ID id;
 	protected int velX, velY;
+	public String awayaction;
 	
 	public GameObject(int x, int y,ID id) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
+		awayaction="";
 	}
 	
 	public abstract void tick();
 	public abstract void render(Graphics g);
 	public abstract Rectangle getBounds();
+	public abstract void awayAction();
+	public abstract String getName();
 
 	public int getX() {
 		return x;
@@ -58,7 +62,10 @@ public abstract class GameObject {
 	public void setId(ID id) {
 		this.id = id;
 	}
-
-	
-
+	public String getAwayAction() {
+		return awayaction;
+	}
+	public void setAwayAction(String action) {
+		this.awayaction = action;
+	}
 }

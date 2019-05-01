@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import PracticeSim.WildAnimal;
@@ -17,7 +18,7 @@ import PracticeSim.Assets.Assets;;
 
 public class AnimalList {
 	
-	private PracticeSim.background.Handler handler;
+	private Handler handler;
 	private boolean active = false;
 	private ArrayList<Animal> animalsInPark;
 
@@ -30,7 +31,7 @@ public class AnimalList {
 	private Color c2 = Color.red;
 	
 	private int alcx = 900 + 70,
-			alcy = 0 + 70,
+			alcy = 210 + 70,
 			spacing = 25;
 	private int AImageX = 1100,
 			AImageY = 50, AImageWidth =  AImageX,
@@ -91,11 +92,26 @@ public class AnimalList {
 		g.drawImage(animal.getAsset(), AImageWidth, AImageHeight, null);
 		Text.drawString(g, Integer.toString(animalsInPark.size()), ACountX, ACountY, true, c, font);
 	}
-	public void addAnimal(String type, String breed, String name, ID id) {
-		animalsInPark.add(new Animal(type, breed, name, id,0,0));
+	public void addAnimal(String type, String breed, String name, ID id,BufferedImage img) {
+		animalsInPark.add(new Animal(type, breed, name, id,0,0,img));
 	}
 	public Animal getAnimal(int index) {
 		return animalsInPark.get(index);
+	}
+
+	public void addToList(Animal a) {
+		animalsInPark.add(a);
+	}
+	public void GoingHomeFromPark() {
+		
+		for(int i =0;i<animalsInPark.size();i++) {
+			if(!animalsInPark.get(i).isIsUserPet()) {
+				handler.removeObject(animalsInPark.get(i));
+				animalsInPark.remove(animalsInPark.get(i));
+				i--;
+			}
+		}
+		
 	}
 
 }

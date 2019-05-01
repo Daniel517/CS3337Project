@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
@@ -39,7 +41,9 @@ public class Game extends Canvas implements Runnable{
 	private Handler handler;
 	private AnimalList aList;
 	public ActionSection action;
-	
+
+
+	private boolean picked=false;
 	private KeyManager keyManager;
 	
 	private BufferStrategy bs;
@@ -52,7 +56,7 @@ public class Game extends Canvas implements Runnable{
 	private Menu menu;
 	private CreationMenu creation;
 	public enum STATE{
-		Menu, Creation, GameHome, GamePark
+		Menu, Creation, GameHome, GamePark, Death
 	};
 	
 	public STATE gameState = STATE.Menu;
@@ -122,17 +126,13 @@ public class Game extends Canvas implements Runnable{
 				ticks++;
 				delta--;
 			}
-			
 			if(timer >= 1000000000) {
 				System.out.println("Ticks and Frames: "+ ticks);
 				ticks = 0;
 				timer = 0;
 			}
 		}
-		
 		stop();
-		
-		
 	}
 	
 	private void tick() {
@@ -143,19 +143,24 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.GameHome) {
 			aList.tick();
 			addTextArea();
-			//action.tick();
 			collision();
 			time.addMin(1);
+			newVisable();
 		}
 		else if(gameState == STATE.GamePark) {
+			
+			
 			aList.tick();
 			spawn.tick();
 			time.addMin(1);
-			//action.tick();
+			if(user.pets.size()>=1 && !picked) {
+				pickAanimal();
+			}
 			collision();
 			if(collision) {
-				window.area.append("Animals interacted\n");
+				System.out.println("interacted");
 			}
+			newVisable();
 		}
 		else if(gameState == STATE.Menu) {
 			menu.tick();
@@ -193,11 +198,6 @@ public class Game extends Canvas implements Runnable{
 			aList.render(g);
 			action.render(g);
 			time.render(g);
-			if(collision) {
-				System.out.println("animal interaction");
-				window.area.append("animal interaction\n");
-			}
-			
 			
 		}
 		else if(gameState == STATE.Menu) {
@@ -215,22 +215,103 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 		
 	}
+
+	public void setPicked(boolean picked) {
+		this.picked = picked;
+	}
+	
 	public void collision() {
 		for (int i = 0; i < handler.object.size()-1; i++) {
-			GameObject tempObject = handler.object.get(i);
-			GameObject tempObject2 = handler.object.get(i+1);
+			for(int j = i+1;j<handler.object.size();j++) {
+				GameObject tempObject = handler.object.get(i);
+				GameObject tempObject2 = handler.object.get(j);
 
-			if (tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.WildAnimal) {
-				if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-					// collision code
-					collision = true;
-					
+				if (tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.WildAnimal) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
 				}
-				else 
-					collision = false;
+				
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.WildAnimal || tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.UserPet) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
+				}
+				
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet || tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
+				}
+				
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.Pet || tempObject.getId() == ID.Pet && tempObject2.getId() == ID.UserPet) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
+				}
 			}
-
 		}
+	}
+	
+	public void pickAanimal() {
+		if(user.pets.size()==1) {
+			user.activePet = user.pets.get(0);
+			user.activePet.setIsUserPet(true);
+			user.activePet.setId(ID.ActivePet);
+		}
+		else {
+			Object[] options = new Object[user.pets.size()];
+			for (int i = 0; i < user.pets.size(); i++) {
+				options[i] = user.pets.get(i).getName();
+				user.pets.get(i).setIsUserPet(true);
+				user.pets.get(i).setIsNotActive(true);
+			}
+			int choice = JOptionPane.showOptionDialog(null, "Which animal would you like to play with?",
+					"Chose who to play with?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+					options, options[0]);
+
+			user.activePet = user.pets.get(choice);
+			user.activePet.setIsNotActive(false);
+			user.activePet.setId(ID.ActivePet);
+		}
+		
+		picked = true;
+	}
+	
+	public void newVisable() {
+		window.area.setCaretPosition(window.area.getDocument().getLength());
 	}
 
 	public static int clamp(int var, int min, int max) {
@@ -262,12 +343,31 @@ public class Game extends Canvas implements Runnable{
 		DefaultCaret caret = (DefaultCaret) textarea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 		JScrollPane scrollBar = new JScrollPane(textarea);
-		scrollBar.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollBar.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);		
 		window.getFrame().getContentPane().add(scrollBar);
 		
 	}
 	
-
+	public void addtoAList(Animal a) {
+		aList.addToList(a);
+	}
+	
+	public void leavingPark() {
+		aList.GoingHomeFromPark();
+	}
+	
+	public int getOpenHour() {
+		return time.getHour();
+	}
+	
+	public int getOpenMin() {
+		return time.getMinutes();
+	}
+	
+	public void changeTime(int h, int m) {
+		time.changeTime(h, m);
+	}
+	
 	public static void main(String args[]) {
 		new Game();
 	}

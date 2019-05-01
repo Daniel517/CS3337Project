@@ -75,6 +75,11 @@ public class Time {
 	}
 	public void setHour(int hour) {
 		this.hour = hour;
-	}	 
+	}
+	public void changeTime(int h, int m) {
+		setHour(h);
+		setMinutes(m);
+		AmOrPm -=1;
+	}
 	
 }

@@ -14,7 +14,7 @@ import PracticeSim.background.ID;
 public class Animal extends GameObject implements AnimalActions{
 	
 	private int emotion=10;
-	private int size =20;
+	private int size =25;
 	protected String type;
 	protected String name;
 	protected String breed;
@@ -24,30 +24,69 @@ public class Animal extends GameObject implements AnimalActions{
 	protected final int catID =1;
 	protected final int birdID =2;
 	protected int ID=4;
+	//actions when away and keeping track of user pets
+	private boolean fighting= false;
+	private boolean IsUserPet= false;
+	private boolean IsNotActive = false;
+	
+	//for wild
+	private boolean wild=false;
 	
 	private BufferedImage image;
 
 	
 	//there needs work to make sure the pets gets added to the background objects
-	public Animal(String type,String breed,String name,ID id,int x, int y) {
+	public Animal(String type,String breed,String name,ID id,int x, int y, BufferedImage img) {
 		super(x,y,id);
 		this.type = type;
 		this.name= name;
 		this.breed = breed;
-		if(type == "Dog") {
+		this.image = img;
+		if(breed == "Dog") {
 			ID = dogID;
-			image = Assets.dog;
 		}
 		else if(type == "Cat") {
 			ID = catID;
-			image = Assets.cat;
 		}
 		else if(type == "Bird") {
 			ID = birdID;
-			image = Assets.bird;
 		}
 		velX = 15;
 		velY = 15;
+	}
+	//This is for wild animals
+	public Animal(ID id,int x, int y) {
+		super(x,y,id);
+		wild = true;
+		name="Squirrel";
+		type="Squirrel";
+		breed="Squirrel";
+		
+		velX = 15;
+		velY = 15;
+		
+		image = Assets.squirrel;
+		
+	}
+	public void stayedHome() {
+		if(emotion<=10 && emotion>0) {
+			emotion -= 1;
+		}
+		else {
+			emotion=0;
+		}
+		
+	}
+	public void WentToPark() {
+		if(emotion<10 && emotion>=0) {
+			emotion += 1;
+		}
+		else {
+			emotion=10;
+		}
+	}
+	public void Hit() {
+		emotion -= 1;
 	}
 	public Integer getEmotion() {
 		return emotion;
@@ -61,7 +100,7 @@ public class Animal extends GameObject implements AnimalActions{
 	public BufferedImage getAsset() {
 		return image;
 	}
-	
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -74,77 +113,139 @@ public class Animal extends GameObject implements AnimalActions{
 	public void setAction(String act) {
 		this.action = act;
 	}
-
+	public boolean isFighting() {
+		return fighting;
+	}
+	public void setFighting(boolean fighting) {
+		this.fighting = fighting;
+	}
+	public boolean isIsUserPet() {
+		return IsUserPet;
+	}
+	public void setIsUserPet(boolean isUserPet) {
+		IsUserPet = isUserPet;
+	}
+	public boolean isIsNotActive() {
+		return IsNotActive;
+	}
+	public void setIsNotActive(boolean isNotActive) {
+		IsNotActive = isNotActive;
+	}
+	
 	@Override
 	public void Fly() {
 		
 		if(getType() == "Dog" || getType() == "Cat"){
-			action= getType()+" looks at you Funny!";
+			action= getName()+" looks at you Funny!";
 		}
 		else if(getType() == "Bird") {
 			action = getName()+" took off and is flying around";
 		}
 		setAction(action);
 	}
+	
 	@Override
-	public String Catch( ) {
-		String action="Dog get a hold of ";
-		return action;
+	public void Catch() {
+		if(getType() == "Dog"){
+			action= getName()+" trys to catch a squirrel.";
+		}
+		else if(getType() == "Bird") {
+			action = getName()+" trys to catch something";
+		}
+		else if(getType() == "Cat") {
+			action = getName() + "trys to catch a bird.";
+					
+		}
+		setAction(action);
 	}
 	@Override
-	public String Speak() {
-		String action="Braks!!";
-		return action;
+	public void Speak() {
+		if(getType() == "Dog"){
+			action= getName()+" BARKS!!";
+		}
+		else if(getType() == "Bird") {
+			action = getName()+" makes a noise";
+		}
+		else if(getType() == "Cat") {
+			action = getName() + "MEOW!!";
+					
+		}
+		setAction(action);
 	}
 	@Override
-	public String Chase() {
-		String action="";
-		return action;
+	public void Chase() {
+		if(getType() == "Bird" || getType() == "Cat"){
+			action= getName()+" ignores you!";
+		}
+		else if(getType() == "Dog") {
+			action = getName()+" catches a squirrel!";
+		}
+		setAction(action);
 	}
 	@Override
-	public String Flee() {
-		String action="";
-		return action;
+	public void Flee() {
+		if(emotion >3){
+			action= getName()+" does nothing.";
+		}
+		else {
+			action = getName()+" runs aways and slowly comes back with head down.";
+		}
+		setAction(action);
 	}
 	@Override
-	public String Bite() {
-		String action="";
-		return action;
+	public void Bite() {
+		if(emotion >3){
+			action= getName()+" does nothing.";
+		}
+		else {
+			action = getName()+" bites owner";
+		}
+		setAction(action);
 	}
 	@Override
-	public String Play() {
-		String action="";
-		return action;
+	public void Play() {
+		action= getName() + "is playing.";
+		setAction(action);
 	}
 	@Override
-	public String Fetch() {
-		String action="";
-		return action;
+	public void Fetch() {
+		if(getType() == "Dog" || getType() == "Cat"){
+			action= getName()+" looks at the directions and runs away from you.\nComes back with nothing";
+		}
+		else if(getType() == "Bird") {
+			action = getName()+" flys away and circles.\nReturns to you.";
+		}
+		setAction(action);
 	}
 	@Override
-	public String Lick() {
-		String action="";
-		return action;
+	public void Lick() {
+		if(getType() == "Dog" || getType() == "Cat"){
+			action= getName()+" is trying to lick your face!";
+		}
+		else if(getType() == "Bird") {
+			action = getName()+" tongue isnt long enough.";
+		}
+		setAction(action);
 	}
 	@Override
-	public String Rest() {
-		String action="";
-		return action;
+	public void Rest() {
+		action = getName()+" is resting";
+		setAction(action);
 	}
 	
 	
-	//for background boxes
-	public Rectangle getBounds() {	
-		return new Rectangle(x,y,size,size);
+	// for background boxes
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, size, size);
 	}
-	
+
 	public void tick() {
 		x += velX;
 		y += velY;
-		
-		if(y <= 0 || y >= Game.HEIGHT-38)
+
+		if (y <= 0 || y >= Game.HEIGHT - 38)
 			velY *= -1;
-		if(x <= 0 || x >= Game.WIDTH-300)
+		if (x <= 0 || x >= Game.WIDTH - 300)
 			velX *= -1;
 	}
 
@@ -152,5 +253,22 @@ public class Animal extends GameObject implements AnimalActions{
 		g.setColor(Color.red);
 		g.fillRect(x, y, size, size);
 	}
-
+	@Override
+	public void awayAction() {
+		
+		if(emotion >7) {
+			setAwayAction(getName() + " is playing with ");
+		}
+		else if(emotion >3 && emotion<7) {
+			setAwayAction(getName() + " is walking slowly around with ");
+		}
+		else if(emotion >3) {
+			setAwayAction(getName() + " is fighting with ");
+			setFighting(true);
+		}
+		if(wild) {
+			setAwayAction("the "+getName() + " is playing with ");
+		}
+		
+	}
 }

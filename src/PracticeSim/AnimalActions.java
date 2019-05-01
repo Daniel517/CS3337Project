@@ -3,14 +3,14 @@ package PracticeSim;
 public interface AnimalActions {
 	
 	void Fly();
-	String Catch();
-	String Speak();
-	String Chase();
-	String Flee();
-	String Bite();
-	String Play();
-	String Fetch();
-	String Lick();
-	String Rest();
+	void Catch();
+	void Speak();
+	void Chase();
+	void Flee();
+	void Bite();
+	void Play();
+	void Fetch();
+	void Lick();
+	void Rest();
 
 }

@@ -86,11 +86,10 @@ public class ActionSection extends JPanel{
 			
 			
 		}
-//		else if(game.gameState == STATE.GamePark && action == true) {
-//			action= false;
-//		}
+
 		
 	}
+	
 	
 	private void homeActions() {
 		JButton b1 = new JButton("Stay Home");
@@ -100,8 +99,8 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Chosen to stay home\n");
-				
+				game.window.area.append(game.user.getHumanName()+" has choosen to stay home\n");
+				game.user.StayHome();
 			}
 			
 		});
@@ -112,9 +111,16 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.gameState = STATE.GamePark;
-				action1=true;
-				tick();
+				if(game.getOpenHour()>7 && game.getOpenMin()>0) {
+					game.window.area.append(game.user.getHumanName()+" has choosen to go to the Park!\n");
+					game.user.WentToPark();
+					game.gameState = STATE.GamePark;
+					action1=true;
+					tick();
+				}
+				else {
+					game.window.area.append(game.user.getHumanName()+" the Park isn't Open Yet.");
+				}
 			}
 			
 		});
@@ -146,7 +152,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Fly was pressed\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to fly.\n");
+				game.user.activePet.Fly();
+				game.window.area.append(game.user.activePet.getAction()+"\n");
 				action2 = true;
 				action3 = false;
 				tick();
@@ -161,7 +169,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Catch was pressed\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to catch.\n");
+				game.user.activePet.Catch();
+				game.window.area.append(game.user.activePet.getAction()+"\n");				
 				action2 = true;
 				action3 = false;
 				tick();				
@@ -176,7 +186,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Speak was pressed\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to speak.\n");
+				game.user.activePet.Speak();
+				game.window.area.append(game.user.activePet.getAction()+"\n");
 				action2 = true;
 				action3 = false;
 				tick();				
@@ -191,7 +203,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Chase was pressed\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to chase.\n");
+				game.user.activePet.Chase();
+				game.window.area.append(game.user.activePet.getAction()+"\n");				
 				action2 = true;
 				action3 = false;
 				tick();				
@@ -206,7 +220,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Your pet was told to flee\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to flee.\n");
+				game.user.activePet.Flee();
+				game.window.area.append(game.user.activePet.getAction()+"\n");
 				action2 = true;
 				action3 = false;
 				tick();				
@@ -221,7 +237,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Bite was pressed\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to bite.\n");
+				game.user.activePet.Bite();
+				game.window.area.append(game.user.activePet.getAction()+"\n");
 				action2 = true;
 				action3 = false;
 				tick();				
@@ -236,7 +254,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Play was pressed\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to play.\n");
+				game.user.activePet.Play();
+				game.window.area.append(game.user.activePet.getAction()+"\n");
 				action2 = true;
 				action3 = false;
 				tick();				
@@ -251,7 +271,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Fetch was pressed\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to fetch.\n");
+				game.user.activePet.Fetch();
+				game.window.area.append(game.user.activePet.getAction()+"\n");
 				action2 = true;
 				action3 = false;
 				tick();				
@@ -266,7 +288,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Lick was pressed\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to lick.\n");
+				game.user.activePet.Lick();
+				game.window.area.append(game.user.activePet.getAction()+"\n");
 				action2 = true;
 				action3 = false;
 				tick();				
@@ -281,7 +305,9 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Rest was pressed\n");
+				game.window.area.append(game.user.activePet.getName()+" was told to rest.\n");
+				game.user.activePet.Rest();
+				game.window.area.append(game.user.activePet.getAction()+"\n");
 				action2 = true;
 				action3 = false;
 				tick();				
@@ -310,11 +336,14 @@ public class ActionSection extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				game.window.area.append("Going Home\n");
+				game.leavingPark();
 				game.gameState = STATE.GameHome;
 				action1= false;
 				added= false;
+				game.setPicked(false);
 				game.window.ReactionPanel.setVisible(false);
 				game.window.ParkActionPanel.setVisible(false);
+				game.changeTime(6, 0);
 				tick();
 			}
 			
@@ -378,7 +407,8 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				game.window.area.append(game.user.activePet.getName()+" hit "+game.user.activePet.getName()+".\n");
+				game.user.HitAnimal();
 				game.window.ReactionPanel.setVisible(false);
 				tick();
 			}
