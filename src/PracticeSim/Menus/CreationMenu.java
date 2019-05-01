@@ -161,7 +161,6 @@ public class CreationMenu extends MouseAdapter{
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
 			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() + ": " + pets.get(0).getName(), 235,385);
 		}
 		else if(count == 2) {
@@ -174,36 +173,32 @@ public class CreationMenu extends MouseAdapter{
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
 			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() + ": " + pets.get(0).getName(), 235,385);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() +": "+pets.get(1).getName(), 235,485);
 			g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() + ": " + pets.get(1).getName(), 235,485);
 			
 		}
 		else if(count == 3) {
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
 			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() + ": " + pets.get(0).getName(), 235,385);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() +": "+pets.get(1).getName(), 235,485);
 			g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() + ": " + pets.get(1).getName(), 235,485);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(2).getType() +" - "+ pets.get(2).getBreed() +": "+pets.get(2).getName(), 235,585);
 			g.drawString(pets.get(2).getType() +" - "+ pets.get(2).getBreed() + ": " + pets.get(2).getName(), 235,585);
 		}
 	}
 	
 	public void getName() {
-		String inStr = JOptionPane.showInputDialog("What name to use?", "Nobody!");
-		name = inStr;
+		do {
+			name = JOptionPane.showInputDialog("Enter the name you would like to use?");
+		} while(name.equals(""));
 	}
 	public void makePet(String type, String breed, String name) {
 		//making sure the user has the pet saved as well.
@@ -269,18 +264,26 @@ public class CreationMenu extends MouseAdapter{
 		
 		if(PetType == "Dog") {
 			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedD, "Pitbull");
-			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+			getPetName();
+			//Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
 		}
 		else if(PetType == "Cat") {
 			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedC, "Siamese");
-			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+			//Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+			getPetName();
 		}
 		else if(PetType == "Bird") {
 			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedB, "Pigeon");
-			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+			//Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+			getPetName();
 		}
 		count +=1;
 		makePet(PetType,PetBreed,Petname);
+	}
+	public void getPetName() {
+		do {
+			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+		} while(Petname.equals(""));
 	}
 	
 
