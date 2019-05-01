@@ -52,17 +52,19 @@ public class CreationMenu extends MouseAdapter{
 				getName();
 				//game.gameState = STATE.Game;
 			}
-			
-			//Start simulator
-			if(mouseOver(mx,my,960, 750, 215, 75)) {
-				game.user= new humanOwner(name,pets);
-				game.gameState = STATE.GameHome;
-				game.window.sbar.setVisible(true);
-				game.window.area.append(game.user.getHumanName() +" has woken up!\n");
-				game.action.tick();
-				addToHandler();
+			if(pets.size()>=1) {
+				// Start simulator
+				if (mouseOver(mx, my, 960, 750, 215, 75)) {
+					game.user = new humanOwner(name, pets);
+					game.gameState = STATE.GameHome;
+					game.window.sbar.setVisible(true);
+					game.window.area.append(game.user.getHumanName() + " has woken up!\n");
+					game.action.tick();
+					addToHandler();
 
+				}
 			}
+			
 			
 			//Add pet
 			if(mouseOver(mx,my,720, 750, 180, 75)) {
@@ -127,12 +129,16 @@ public class CreationMenu extends MouseAdapter{
 		g.setColor(Color.WHITE);
 		g.drawString("Quit", 30, 800);
 		
-		g.setColor(Color.white);
-		g.drawRect(960, 750, 215, 75);
 		
-		g.setFont(fnt2);
-		g.setColor(Color.WHITE);
-		g.drawString("Enter Sim", 975, 800);
+		if(pets.size()>=1) {
+			g.setColor(Color.white);
+			g.drawRect(960, 750, 215, 75);
+			
+			g.setFont(fnt2);
+			g.setColor(Color.WHITE);
+			g.drawString("Enter Sim", 975, 800);
+		}
+		
 		if(count == 0) {
 			g.setColor(Color.white);
 			g.drawRect(720, 750, 180, 75);
