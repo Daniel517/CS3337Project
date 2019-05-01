@@ -19,7 +19,9 @@ public class Spawn {
 	private boolean added= false;
 	private ArrayList<Animal> RandomPets= new ArrayList<Animal>();
 	private String[] type = {"Dog", "Cat", "Bird"};
-	private String[] breeds = {"Pitbull","Hawk","Siamese","Poodle","Pigeon","Tabicat","Maltese","Parrot","Persian","Sphinx","Rat Terrier","Parakeet","Husky"};
+	private String[] breedD = {"Pitbull", "Rat Terrier", "Poodle", "Husky", "Maltese"};
+	private String[] breedC = {"Siamese", "Tabicat", "Persian", "Sphinx"};
+	private String[] breedB = {"Pigeon", "Hawk", "Parrot", "Parakeet"};
 	private String[] PetNames = {"Max","Fluffy","Dragon","Pat","Million","Billion","Boss","King","Queen","Prince","Royal","Being","Love","Drake","Sam","Bella","Grace","Luke","Vader","Star"};
 	private String[] HumanName = {"Olivia","Oliver","Amelia","Harry","Isla","Jack","Emily","George","Ava","Noah","Lily","Charlie","Mia","Jacob","Sophia","Alfie","Isabella","Freddie","Grace","Oscar"};
 	
@@ -45,20 +47,54 @@ public class Spawn {
 	public ArrayList<Animal> getRandomPets() {
 		return RandomPets;
 	}
+	
 	public String getType(int e) {
 		return type[e];
 	}
-	public String getBreeds(int e) {
-		return breeds[e];
+	
+	public String getBreedD(int e) {
+		return breedD[e];
+	}
+	
+	public String getBreedC(int e) {
+		return breedC[e];
+	}
+	
+	public String getBreedB(int e) {
+		return breedB[e];
+	}
+	
+	public String getHName(int e) {
+		return HumanName[e];
+	}
+	
+	public String getPName(int e) {
+		return PetNames[e];
 	}
 	
 	public humanOwner getComHuman() {
-		humanOwner computer=null;
-		int breedInt = r.nextInt(breeds.length);
+		int NumberOfPets= r.nextInt(3)+1;
+		int NameSelection = r.nextInt(HumanName.length-1);
 		int x=r.nextInt(900);
 		int y=r.nextInt(900);
-		RandomPets.add(new Animal(getType(r.nextInt(type.length)),getBreeds(breedInt),getPetNames(r.nextInt(PetNames.length)),ID.Pet,x,y,getImage(getBreeds(breedInt))));
-		
+		for(int i =0;i<NumberOfPets;i++) {
+			int t = r.nextInt(type.length);
+			int PetSelection = r.nextInt(PetNames.length-1);
+		//	int breedInt = r.nextInt(breeds.length);
+			if(t == 0) {
+				int breedInt = r.nextInt(breedD.length);
+				RandomPets.add(new Animal(getType(t),getBreedD(breedInt),getPName(PetSelection),ID.Pet,x,y,getImage(getBreedD(breedInt))));
+			}
+			if(t == 1) {
+				int breedInt = r.nextInt(breedC.length);
+				RandomPets.add(new Animal(getType(t),getBreedC(breedInt),getPName(PetSelection),ID.Pet,x,y,getImage(getBreedC(breedInt))));
+			}
+			if(t == 2) {
+				int breedInt = r.nextInt(breedB.length);
+				RandomPets.add(new Animal(getType(t),getBreedB(breedInt),getPName(PetSelection),ID.Pet,x,y,getImage(getBreedB(breedInt))));
+			}
+		}
+		humanOwner computer=new humanOwner(getHName(NameSelection),RandomPets);
 		return computer;
 	}
 	public BufferedImage getImage(String e) {

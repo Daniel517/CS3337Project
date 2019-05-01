@@ -50,7 +50,7 @@ public class CreationMenu extends MouseAdapter{
 		
 		if(game.gameState == STATE.Creation) {
 			//play button
-			if(mouseOver(mx,my,440, 300, 400, 175)) {
+			if(mouseOver(mx,my,230, 230, 270, 80)) {
 				getName();
 				//game.gameState = STATE.Game;
 			}
@@ -77,6 +77,10 @@ public class CreationMenu extends MouseAdapter{
 			if(mouseOver(mx,my,25, 750, 100, 75)) {
 				System.exit(1);
 			}
+			//Random maker
+			if(mouseOver(mx,my,135, 750, 200, 75)) {
+				doRandom();
+			}
 		}
 		
 	}
@@ -102,6 +106,18 @@ public class CreationMenu extends MouseAdapter{
 	}
 	
 	public void tick() {
+		
+	}
+	public void doRandom() {
+		humanOwner temp = game.doingRandom();
+		name = temp.getHumanName();
+		for(int i=0;i<temp.pets.size();i++) {
+			pets.add(temp.pets.get(i));
+			count++;
+		}
+		for(int i=0;i<temp.pets.size();i++) {
+			System.out.println("was created " + pets.get(i).getType() +" - "+ pets.get(i).getBreed() + ": " + pets.get(i).getName());
+		}
 		
 	}
 	
@@ -131,6 +147,13 @@ public class CreationMenu extends MouseAdapter{
 		g.setFont(fnt2);
 		g.setColor(Color.WHITE);
 		g.drawString("Quit", 30, 800);
+		
+		g.setColor(Color.white);
+		g.drawRect(135, 750, 200, 75);
+		
+		g.setFont(fnt2);
+		g.setColor(Color.WHITE);
+		g.drawString("Random", 150, 800);
 		
 		
 		if(pets.size()>=1) {

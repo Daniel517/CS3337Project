@@ -215,6 +215,10 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 		
 	}
+	
+	public humanOwner doingRandom() {
+		return spawn.getComHuman();
+	}
 
 	public void setPicked(boolean picked) {
 		this.picked = picked;
