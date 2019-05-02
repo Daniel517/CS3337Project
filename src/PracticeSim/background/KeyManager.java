@@ -27,9 +27,7 @@ public class KeyManager implements KeyListener{
 			}
 		}
 		
-		
-		//if(keyJustPressed(KeyEvent.VK_E)) { System.out.println("pressed something"); }
-		 
+				 
 		up = keys[KeyEvent.VK_W];
 		down = keys[KeyEvent.VK_S];
 		
@@ -54,7 +52,6 @@ public class KeyManager implements KeyListener{
 			return;
 		
 		keys[e.getKeyCode()] = true;
-		//System.out.println("pressed something");
 	}
 
 	@Override

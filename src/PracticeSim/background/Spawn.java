@@ -35,8 +35,34 @@ public class Spawn {
 			if(!added) {
 				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				//for testing animalList
+//				Animal an3 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an23 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an4 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an24 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an5 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an25 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an6 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an26 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an7 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an27 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an8 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an28 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 				handler.addObject(an);
 				handler.addObject(an2);
+				//For testing animalList
+//				handler.addObject(an3);
+//				handler.addObject(an23);
+//				handler.addObject(an4);
+//				handler.addObject(an24);
+//				handler.addObject(an5);
+//				handler.addObject(an25);
+//				handler.addObject(an6);
+//				handler.addObject(an26);
+//				handler.addObject(an7);
+//				handler.addObject(an27);
+//				handler.addObject(an8);
+//				handler.addObject(an28);
 				added = true;
 			}
 		}

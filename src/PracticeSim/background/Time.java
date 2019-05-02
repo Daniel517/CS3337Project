@@ -25,8 +25,11 @@ public class Time {
 			minutes++;
 			seconds = 0;
 		}
+		if(minutes == 59) {
+			changed1=false;
+		}
 		if(minutes % 60 == 0 && !changed1) {
-			minutes = 0;
+			minutes = minutes % 60;
 			hour++;
 			changed1 = true;
 		}
@@ -79,7 +82,13 @@ public class Time {
 	public void changeTime(int h, int m) {
 		setHour(h);
 		setMinutes(m);
-		AmOrPm -=1;
+		if(AmOrPm == 1) {
+			AmOrPm = 1;
+		}
+		else {
+			AmOrPm -= 1;
+		}
+		
 	}
 	
 }

@@ -75,8 +75,6 @@ public class Game extends Canvas implements Runnable{
 		collision = false;
 		
 		window = new Window(WIDTH, HEIGHT, "PETS Simulator", this);
-		//window.getFrame().addKeyListener(keyManager);
-		//window.getCanvas().addKeyListener(keyManager);
 		this.addKeyListener(getKeyManager());
 		
 		action = new ActionSection(this);
@@ -127,7 +125,7 @@ public class Game extends Canvas implements Runnable{
 				delta--;
 			}
 			if(timer >= 1000000000) {
-				System.out.println("Ticks and Frames: "+ ticks);
+				//System.out.println("Ticks and Frames: "+ ticks);
 				ticks = 0;
 				timer = 0;
 			}
@@ -157,9 +155,6 @@ public class Game extends Canvas implements Runnable{
 				pickAanimal();
 			}
 			collision();
-			if(collision) {
-				System.out.println("interacted");
-			}
 			newVisable();
 		}
 		else if(gameState == STATE.Menu) {
@@ -343,7 +338,6 @@ public class Game extends Canvas implements Runnable{
 		JTextArea textarea = new JTextArea(5,25);
 		textarea.setEditable(false);
 		textarea.setBackground(Color.gray);
-		//textarea.setBounds(50, 600, 800, 280);
 		DefaultCaret caret = (DefaultCaret) textarea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 		JScrollPane scrollBar = new JScrollPane(textarea);

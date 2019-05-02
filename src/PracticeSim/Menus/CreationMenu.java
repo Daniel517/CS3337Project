@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import PracticeSim.Animal;
 import PracticeSim.Game;
@@ -115,10 +116,6 @@ public class CreationMenu extends MouseAdapter{
 			pets.add(temp.pets.get(i));
 			count++;
 		}
-		for(int i=0;i<temp.pets.size();i++) {
-			System.out.println("was created " + pets.get(i).getType() +" - "+ pets.get(i).getBreed() + ": " + pets.get(i).getName());
-		}
-		
 	}
 	
 	public void render(Graphics g) {
@@ -135,7 +132,7 @@ public class CreationMenu extends MouseAdapter{
 		
 		g.setFont(fnt2);
 		g.setColor(Color.WHITE);
-		g.drawString("Using Name: ", 235,285);
+		g.drawString("Enter Name", 235,285);
 		
 		g.setFont(fnt2);
 		g.setColor(Color.WHITE);
@@ -184,7 +181,6 @@ public class CreationMenu extends MouseAdapter{
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
 			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() + ": " + pets.get(0).getName(), 235,385);
 		}
 		else if(count == 2) {
@@ -197,35 +193,33 @@ public class CreationMenu extends MouseAdapter{
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
 			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() + ": " + pets.get(0).getName(), 235,385);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() +": "+pets.get(1).getName(), 235,485);
 			g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() + ": " + pets.get(1).getName(), 235,485);
 			
 		}
 		else if(count == 3) {
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() +": "+pets.get(0).getName(), 235,385);
 			g.drawString(pets.get(0).getType() +" - "+ pets.get(0).getBreed() + ": " + pets.get(0).getName(), 235,385);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() +": "+pets.get(1).getName(), 235,485);
 			g.drawString(pets.get(1).getType() +" - "+ pets.get(1).getBreed() + ": " + pets.get(1).getName(), 235,485);
 			
 			g.setFont(fnt2);
 			g.setColor(Color.WHITE);
-			//g.drawString(pets.get(2).getType() +" - "+ pets.get(2).getBreed() +": "+pets.get(2).getName(), 235,585);
 			g.drawString(pets.get(2).getType() +" - "+ pets.get(2).getBreed() + ": " + pets.get(2).getName(), 235,585);
 		}
 	}
 	
 	public void getName() {
-		String inStr = JOptionPane.showInputDialog("What name to use?", "Nobody!");
+		String inStr="";
+		do {
+			 inStr = JOptionPane.showInputDialog("What name to use?", "Nobody!");
+		} while(inStr == null);
 		name = inStr;
 	}
 	public void makePet(String type, String breed, String name) {
@@ -283,27 +277,49 @@ public class CreationMenu extends MouseAdapter{
 	}
 	
 	public void getPet() {
-		String[] type = {"Select One","Dog", "Cat", "Bird"};
-		String[] breedD = {"Select One","Pitbull", "Rat Terrier", "Poodle", "Husky", "Maltese"};
-		String[] breedC = {"Select One","Siamese", "Tabicat", "Persian", "Sphinx"};
-		String[] breedB = {"Select One","Pigeon", "Hawk", "Parrot", "Parakeet"};
+		String[] type = {"Dog", "Cat", "Bird"};
+		String[] breedD = {"Pitbull", "Rat Terrier", "Poodle", "Husky", "Maltese"};
+		String[] breedC = {"Siamese", "Tabicat", "Persian", "Sphinx"};
+		String[] breedB = {"Pigeon", "Hawk", "Parrot", "Parakeet"};
+		String[] options = {"OK"};
+		int selection = -1;
 		
+		do {
+			PetType = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, null, type, "Dog");
+		} while(PetType == null);
 		
-		PetType = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, type, "Select One");
 		if(PetType == "Dog") {
-			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedD, "Select One");
-			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+			do {
+				selection = JOptionPane.showOptionDialog(null,new JPanel() , "Pet Breed", JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, breedD , options[0]);
+			} while(selection == -1);
+			PetBreed = breedD[selection];
+			Petname = getPETName();
 		}
 		else if(PetType == "Cat") {
-			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedC, "Select One");
-			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+			do {
+				selection = JOptionPane.showOptionDialog(null,new JPanel() , "Pet Breed", JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, breedC , options[0]);
+			} while(selection == -1);
+			PetBreed = breedC[selection];
+			Petname = getPETName();		
 		}
 		else if(PetType == "Bird") {
-			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedB, "Select One");
-			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+			do {
+				selection = JOptionPane.showOptionDialog(null,new JPanel() , "Pet Breed", JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, breedB , options[0]);
+			} while(selection == -1);
+			PetBreed = breedB[selection];
+			Petname = getPETName();		
 		}
 		count +=1;
 		makePet(PetType,PetBreed,Petname);
+	}
+	public String getPETName() {
+		String nametemp = "";
+		
+		do {
+			nametemp = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.CLOSED_OPTION);
+		} while(nametemp == null);
+		
+		return nametemp;
 	}
 	
 
