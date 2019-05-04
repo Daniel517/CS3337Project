@@ -8,6 +8,7 @@ public class Time {
 	private int minutes;
 	private int hour;
 	private int AmOrPm;
+	private int MILHour;
 	
 	private boolean changed1 = false;
 	private boolean changed2 = false;
@@ -17,6 +18,7 @@ public class Time {
 		seconds = 0;
 		minutes = 56;
 		hour =11;
+		MILHour=hour;
 		AmOrPm = 1;
 	}
 	public void addMin(int sec) {
@@ -31,6 +33,7 @@ public class Time {
 		if(minutes % 60 == 0 && !changed1) {
 			minutes = minutes % 60;
 			hour++;
+			MILHour++;
 			changed1 = true;
 		}
 		if(hour % 13 == 0 && !changed2) {
@@ -79,8 +82,12 @@ public class Time {
 	public void setHour(int hour) {
 		this.hour = hour;
 	}
+	public int getAmOrPm() {
+		return AmOrPm;
+	}
 	public void changeTime(int h, int m) {
 		setHour(h);
+		setMILHour(h);
 		setMinutes(m);
 		if(AmOrPm == 1) {
 			AmOrPm = 1;
@@ -89,6 +96,12 @@ public class Time {
 			AmOrPm -= 1;
 		}
 		
+	}
+	public int getMILHour() {
+		return MILHour;
+	}
+	public void setMILHour(int mILHour) {
+		MILHour = mILHour;
 	}
 	
 }

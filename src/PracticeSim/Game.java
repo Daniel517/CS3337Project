@@ -17,6 +17,7 @@ import PracticeSim.AnimalList.AnimalList;
 import PracticeSim.Assets.Assets;
 import PracticeSim.Menus.CreationMenu;
 import PracticeSim.Menus.Menu;
+import PracticeSim.Menus.deathState;
 import PracticeSim.actions.ActionSection;
 import PracticeSim.background.GameObject;
 import PracticeSim.background.Handler;
@@ -55,6 +56,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private Menu menu;
 	private CreationMenu creation;
+	private deathState death;
 	public enum STATE{
 		Menu, Creation, GameHome, GamePark, Death
 	};
@@ -63,6 +65,7 @@ public class Game extends Canvas implements Runnable{
 
 	public Game() {
 		handler = new Handler(this);
+		death = new deathState(this,handler);
 		menu = new Menu(this,handler);
 		aList = new AnimalList(handler);
 		creation = new CreationMenu(this,handler, aList);
@@ -70,6 +73,7 @@ public class Game extends Canvas implements Runnable{
 		
 		this.addMouseListener(menu);
 		this.addMouseListener(creation);
+		this.addMouseListener(death);
 		
 		
 		collision = false;
@@ -137,16 +141,17 @@ public class Game extends Canvas implements Runnable{
 		handler.tick();
 		keyManager.tick();
 		
-		
 		if(gameState == STATE.GameHome) {
+			if(user.getReport()==0) {
+				gameState = STATE.Death;
+			}
 			aList.tick();
 			addTextArea();
-			collision();
 			time.addMin(1);
+			collision2();
 			newVisable();
 		}
 		else if(gameState == STATE.GamePark) {
-			
 			
 			aList.tick();
 			spawn.tick();
@@ -162,6 +167,9 @@ public class Game extends Canvas implements Runnable{
 		}
 		else if(gameState == STATE.Creation) {
 			creation.tick();
+		}
+		else if(gameState == STATE.Death) {
+			death.tick();
 		}
 		
 	}
@@ -204,6 +212,11 @@ public class Game extends Canvas implements Runnable{
 			g.setColor(Color.black);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 			creation.render(g);
+		}
+		else if(gameState == STATE.Death) {
+			g.setColor(Color.black);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
+			death.render(g);
 		}
 		
 		g.dispose();
@@ -283,6 +296,46 @@ public class Game extends Canvas implements Runnable{
 			}
 		}
 	}
+
+	public void collision2() {
+		for (int i = 0; i < handler.object.size() - 1; i++) {
+			for (int j = i + 1; j < handler.object.size(); j++) {
+				GameObject tempObject = handler.object.get(i);
+				GameObject tempObject2 = handler.object.get(j);
+
+				if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+					// collision code
+					collision = true;
+					tempObject.awayAction();
+					tempObject2.awayAction();
+					window.area.append(tempObject.getAwayAction() + " " + tempObject2.getName() + "\n");
+					window.area.append(tempObject2.getAwayAction() + " " + tempObject.getName() + "\n");
+
+					if (tempObject.isFighting()) {
+						fightingResponse((Animal) tempObject);
+					}
+				} else {
+					collision = false;
+				}
+
+			}
+		}
+	}
+	
+	public void fightingResponse(Animal e) {
+		String[] options= {"Good Job!","Do Nothing", "Hit and say NO!"};
+		
+		int choice = JOptionPane.showOptionDialog(null, "Your animal is Fighting with another animal.",
+				"Fight!", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+				options, options[0]);
+		if(choice == 0) {
+			e.Hit();
+		}
+		else if(choice == 2) {
+			e.GoodJob();
+		}
+		
+	}
 	
 	public void pickAanimal() {
 		if(user.pets.size()==1) {
@@ -355,15 +408,21 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public int getOpenHour() {
-		return time.getHour();
+		return time.getMILHour();
 	}
 	
 	public int getOpenMin() {
 		return time.getMinutes();
 	}
+	public int getAmOrPm() {
+		return time.getAmOrPm();
+	}
 	
 	public void changeTime(int h, int m) {
 		time.changeTime(h, m);
+	}
+	public void reset() {
+		 new Game();
 	}
 	
 	public static void main(String args[]) {

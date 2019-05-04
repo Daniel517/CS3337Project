@@ -9,12 +9,14 @@ public abstract class GameObject {
 	protected ID id;
 	protected int velX, velY;
 	public String awayaction;
+	protected boolean fighting;
 	
 	public GameObject(int x, int y,ID id) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
 		awayaction="";
+		fighting = false;
 	}
 	
 	public abstract void tick();
@@ -22,6 +24,8 @@ public abstract class GameObject {
 	public abstract Rectangle getBounds();
 	public abstract void awayAction();
 	public abstract String getName();
+	public abstract void setFighting(boolean e);
+	public abstract boolean isFighting();
 
 	public int getX() {
 		return x;

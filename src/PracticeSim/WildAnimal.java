@@ -77,6 +77,18 @@ public class WildAnimal extends GameObject{
 	public void setImage(BufferedImage image) {
 		this.image = image;
 	}
+
+	@Override
+	public void setFighting(boolean e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isFighting() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 

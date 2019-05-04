@@ -100,7 +100,7 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(game.getOpenHour() >= 7 && game.getOpenMin() >= 0) {
+				if(game.getOpenHour() >= 7 && game.getOpenMin() >= 0 && game.getAmOrPm() >=1) {
 					game.window.area.append(game.user.getHumanName()+" has choosen to go to the Park!\n");
 					game.user.WentToPark();
 					game.gameState = STATE.GamePark;
@@ -364,7 +364,7 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append(game.user.getHumanName()+"says 'Good Job' to "+game.user.activePet.getName()+"\n");	
+				game.window.area.append(game.user.getHumanName()+" says 'Good Job' to "+game.user.activePet.getName()+"\n");	
 				game.user.activePet.GoodJob();
 				action2 = false;
 				action3 = true;

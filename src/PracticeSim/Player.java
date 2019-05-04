@@ -50,4 +50,16 @@ public class Player extends GameObject{
 		return null;
 	}
 
+	@Override
+	public void setFighting(boolean e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isFighting() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

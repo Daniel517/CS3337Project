@@ -101,9 +101,9 @@ public class Spawn {
 	public humanOwner getComHuman() {
 		int NumberOfPets= r.nextInt(3)+1;
 		int NameSelection = r.nextInt(HumanName.length-1);
-		int x=r.nextInt(900);
-		int y=r.nextInt(900);
 		for(int i =0;i<NumberOfPets;i++) {
+			int x=r.nextInt(900);
+			int y=r.nextInt(900);
 			int t = r.nextInt(type.length);
 			int PetSelection = r.nextInt(PetNames.length-1);
 		//	int breedInt = r.nextInt(breeds.length);
