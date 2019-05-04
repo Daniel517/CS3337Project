@@ -31,7 +31,7 @@ public class Spawn {
 		this.time = time;
 	}
 	public void tick() {
-		if(time.getHour() % 2 == 1 && time.getMinutes() == 59) {
+		if(time.getMILHour() % 2 == 1 && time.getMinutes() == 59) {
 			if(!added) {
 				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));

@@ -144,6 +144,7 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.GameHome) {
 			if(user.getReport()==0) {
 				gameState = STATE.Death;
+				window.sbar.setVisible(false);
 			}
 			aList.tick();
 			addTextArea();
@@ -154,14 +155,15 @@ public class Game extends Canvas implements Runnable{
 		else if(gameState == STATE.GamePark) {
 			if(user.getReport() == 0) {
 				gameState = STATE.Death;
+				window.sbar.setVisible(false);
 			}
 			aList.tick();
 			spawn.tick();
 			time.addMin(1);
-			if(user.pets.size()>=1 && !picked) {
+			if(user.pets.size()>=1 && !picked && getOpenHour() >=7) {
 				pickAanimal();
 			}
-			collision();
+			collision2();
 			newVisable();
 		}
 		else if(gameState == STATE.Menu) {
@@ -240,7 +242,19 @@ public class Game extends Canvas implements Runnable{
 				GameObject tempObject = handler.object.get(i);
 				GameObject tempObject2 = handler.object.get(j);
 
-				if (tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.WildAnimal) {
+				if (tempObject.getId() == ID.player && tempObject2.getId() == ID.UserPet || 
+						tempObject.getId() == ID.player && tempObject2.getId() == ID.Pet || 
+						tempObject.getId() == ID.player && tempObject2.getId() == ID.WildAnimal) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						window.area.append(tempObject.getName()+" is playing with "+tempObject2.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
+				}
+				else {
 					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
 						// collision code
 						collision = true;
@@ -254,47 +268,47 @@ public class Game extends Canvas implements Runnable{
 					}
 				}
 				
-				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.WildAnimal || tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.UserPet) {
-					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-						// collision code
-						collision = true;
-						tempObject.awayAction();
-						tempObject2.awayAction();
-						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
-						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
-					}
-					else {
-						collision=false;
-					}
-				}
+//				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.WildAnimal || tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.UserPet) {
+//					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+//						// collision code
+//						collision = true;
+//						tempObject.awayAction();
+//						tempObject2.awayAction();
+//						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+//						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+//					}
+//					else {
+//						collision=false;
+//					}
+//				}
 				
-				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet || tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet) {
-					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-						// collision code
-						collision = true;
-						tempObject.awayAction();
-						tempObject2.awayAction();
-						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
-						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
-					}
-					else {
-						collision=false;
-					}
-				}
+//				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet || tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet) {
+//					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+//						// collision code
+//						collision = true;
+//						tempObject.awayAction();
+//						tempObject2.awayAction();
+//						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+//						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+//					}
+//					else {
+//						collision=false;
+//					}
+//				}
 				
-				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.Pet || tempObject.getId() == ID.Pet && tempObject2.getId() == ID.UserPet) {
-					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-						// collision code
-						collision = true;
-						tempObject.awayAction();
-						tempObject2.awayAction();
-						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
-						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
-					}
-					else {
-						collision=false;
-					}
-				}
+//				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.Pet || tempObject.getId() == ID.Pet && tempObject2.getId() == ID.UserPet) {
+//					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+//						// collision code
+//						collision = true;
+//						tempObject.awayAction();
+//						tempObject2.awayAction();
+//						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+//						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+//					}
+//					else {
+//						collision=false;
+//					}
+//				}
 			}
 		}
 	}
