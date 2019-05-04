@@ -129,7 +129,6 @@ public class Game extends Canvas implements Runnable{
 				delta--;
 			}
 			if(timer >= 1000000000) {
-				//System.out.println("Ticks and Frames: "+ ticks);
 				ticks = 0;
 				timer = 0;
 			}
@@ -372,7 +371,6 @@ public class Game extends Canvas implements Runnable{
 			int choice = JOptionPane.showOptionDialog(null, "Which animal would you like to play with?",
 					"Chose who to play with?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 					options, options[0]);
-			System.out.println(choice);
 			if(choice == -1) {
 				gameState = STATE.GameHome;
 				window.ReactionPanel.setVisible(false);
