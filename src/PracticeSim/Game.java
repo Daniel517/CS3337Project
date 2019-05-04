@@ -152,7 +152,9 @@ public class Game extends Canvas implements Runnable{
 			newVisable();
 		}
 		else if(gameState == STATE.GamePark) {
-			
+			if(user.getReport() == 0) {
+				gameState = STATE.Death;
+			}
 			aList.tick();
 			spawn.tick();
 			time.addMin(1);
@@ -333,6 +335,9 @@ public class Game extends Canvas implements Runnable{
 		}
 		else if(choice == 2) {
 			e.GoodJob();
+			if(gameState == STATE.GamePark) {
+				user.reportMade();
+			}
 		}
 		
 	}
