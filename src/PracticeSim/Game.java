@@ -358,13 +358,22 @@ public class Game extends Canvas implements Runnable{
 			int choice = JOptionPane.showOptionDialog(null, "Which animal would you like to play with?",
 					"Chose who to play with?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 					options, options[0]);
-
-			user.activePet = user.pets.get(choice);
-			user.activePet.setIsNotActive(false);
-			user.activePet.setId(ID.ActivePet);
+			System.out.println(choice);
+			if(choice == -1) {
+				gameState = STATE.GameHome;
+				window.ReactionPanel.setVisible(false);
+				window.ParkActionPanel.setVisible(false);
+				action.tick();
+				tick();
+			}
+			else {
+				System.out.println(choice);
+				user.activePet = user.pets.get(choice);
+				user.activePet.setIsNotActive(false);
+				user.activePet.setId(ID.ActivePet);
+				picked = true;
+			}
 		}
-		
-		picked = true;
 	}
 	
 	public void newVisable() {
