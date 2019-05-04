@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import PracticeSim.Animal;
+import PracticeSim.Player;
 import PracticeSim.WildAnimal;
 import PracticeSim.humanOwner;
 import PracticeSim.AnimalList.AnimalList;
@@ -24,6 +25,8 @@ public class Spawn {
 	private String[] breedB = {"Pigeon", "Hawk", "Parrot", "Parakeet"};
 	private String[] PetNames = {"Max","Fluffy","Dragon","Pat","Million","Billion","Boss","King","Queen","Prince","Royal","Being","Love","Drake","Sam","Bella","Grace","Luke","Vader","Star"};
 	private String[] HumanName = {"Olivia","Oliver","Amelia","Harry","Isla","Jack","Emily","George","Ava","Noah","Lily","Charlie","Mia","Jacob","Sophia","Alfie","Isabella","Freddie","Grace","Oscar"};
+	private Player player;
+	
 	
 	public Spawn(Handler handler,AnimalList animalList,Time time) {
 		this.handler = handler;
@@ -33,8 +36,9 @@ public class Spawn {
 	public void tick() {
 		if(time.getMILHour() % 2 == 1 && time.getMinutes() == 59) {
 			if(!added) {
-				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				AddComputerPlayer();
+				//Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				//Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 				//for testing animalList
 //				Animal an3 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 //				Animal an23 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
@@ -48,8 +52,8 @@ public class Spawn {
 //				Animal an27 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 //				Animal an8 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 //				Animal an28 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-				handler.addObject(an);
-				handler.addObject(an2);
+			//	handler.addObject(an);
+				//handler.addObject(an2);
 				//For testing animalList
 //				handler.addObject(an3);
 //				handler.addObject(an23);
@@ -120,7 +124,7 @@ public class Spawn {
 				RandomPets.add(new Animal(getType(t),getBreedB(breedInt),getPName(PetSelection),ID.Pet,x,y,getImage(getBreedB(breedInt))));
 			}
 		}
-		humanOwner computer=new humanOwner(getHName(NameSelection),RandomPets);
+		humanOwner computer = new humanOwner(getHName(NameSelection),RandomPets);
 		return computer;
 	}
 	public BufferedImage getImage(String e) {
@@ -172,6 +176,20 @@ public class Spawn {
 	public String getHumanName(int e) {
 		return HumanName[e];
 	}
-	
+	public void AddComputerPlayer() {
+		humanOwner com = getComHuman();
+		int x = r.nextInt(900);
+		int y = r.nextInt(900)+700;
+		player= new Player(x,y,ID.player,com.getHumanName(),com.getPets());
+		for(int i=0;i<player.Cpets.size();i++) {
+			x = r.nextInt(900);
+			y = r.nextInt(900);
+			player.Cpets.get(i).setX(x);
+			player.Cpets.get(i).setY(y);
+
+			handler.addObject(player.Cpets.get(i));
+		}
+		handler.addPlayer(player);
+	}
 	
 }

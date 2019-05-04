@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import PracticeSim.Animal;
 import PracticeSim.Game;
 import PracticeSim.Game.STATE;
+import PracticeSim.Player;
 
 public class Handler {
 	
@@ -38,6 +39,9 @@ public class Handler {
 	public void addObject(GameObject object) {
 		this.object.add(object);
 		game.addtoAList((Animal) object);
+	}
+	public void addPlayer(Player ob) {
+		this.object.add(ob);
 	}
 	
 	public void removeObject(GameObject object) {
