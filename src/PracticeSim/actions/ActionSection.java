@@ -119,7 +119,7 @@ public class ActionSection extends JPanel{
 					tick();
 				}
 				else {
-					game.window.area.append(game.user.getHumanName()+" the Park isn't Open Yet.");
+					game.window.area.append(game.user.getHumanName()+" the Park isn't Open Yet.\n");
 				}
 			}
 			
@@ -315,7 +315,7 @@ public class ActionSection extends JPanel{
 			
 		});
 		spacer += 90;
-		JButton b12 = new JButton("Exist Simulator");
+		JButton b12 = new JButton("Exit Simulator");
 		b12.setBounds(980, spacer, 150, 50);
 		b12.setBackground(Color.ORANGE);
 		b12.addActionListener(new ActionListener() {

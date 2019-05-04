@@ -158,7 +158,7 @@ public class Game extends Canvas implements Runnable{
 			}
 			collision();
 			if(collision) {
-				System.out.println("interacted");
+				//System.out.println("interacted");
 			}
 			newVisable();
 		}
