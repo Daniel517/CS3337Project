@@ -14,19 +14,7 @@ import PracticeSim.background.Handler;
 
 @SuppressWarnings("serial")
 public class ActionSection extends JPanel{
-	/*
-	 * this will be where the actions will be chosen. if the game is in the game.home state than the home 
-	 * will be shown. the animal list will be changed to take out all the inactive pets.
-	 * the inactive pets are those not being used by the player.
-	 * 
-	 * the user will have one of the actions possible be to go to the park quit or stay at home. if the action stay is used than the 
-	 * animal or animals will have 1 subtracted from there emotion level.
-	 * 
-	 * if the user chose to go to the park than the background will change and the animals will be populated.
-	 * 
-	 * the actions will be for now all possible actions for an animal. after a delay they will be a response by the user.
-	 * these responses will not change. 
-	 */
+	
 	String[] actions = {"Fly","Catch","Speak","Chase","Flee","Bite","Play","Fetch","Lick","Rest","Leave Park","Exit Simulator"};
 	JButton[] buttons= new JButton[12];
 	private Game game;
@@ -101,6 +89,7 @@ public class ActionSection extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				game.window.area.append(game.user.getHumanName()+" has choosen to stay home\n");
 				game.user.StayHome();
+				game.changeTime(6, 45);
 			}
 			
 		});
@@ -111,7 +100,7 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(game.getOpenHour()>7 && game.getOpenMin()>0) {
+				if(game.getOpenHour() >= 7 && game.getOpenMin() >= 0 && game.getAmOrPm() >=1) {
 					game.window.area.append(game.user.getHumanName()+" has choosen to go to the Park!\n");
 					game.user.WentToPark();
 					game.gameState = STATE.GamePark;
@@ -335,7 +324,7 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Going Home\n");
+				game.window.area.append(game.user.getHumanName()+" is going Home\n");
 				game.leavingPark();
 				game.gameState = STATE.GameHome;
 				action1= false;
@@ -343,7 +332,7 @@ public class ActionSection extends JPanel{
 				game.setPicked(false);
 				game.window.ReactionPanel.setVisible(false);
 				game.window.ParkActionPanel.setVisible(false);
-				game.changeTime(6, 0);
+				game.changeTime(6, 45);
 				tick();
 			}
 			
@@ -375,7 +364,8 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append("Good Job was pressed\n");	
+				game.window.area.append(game.user.getHumanName()+" says 'Good Job' to "+game.user.activePet.getName()+"\n");	
+				game.user.activePet.GoodJob();
 				action2 = false;
 				action3 = true;
 				game.window.ReactionPanel.setVisible(false);
@@ -409,6 +399,14 @@ public class ActionSection extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				game.window.area.append(game.user.activePet.getName()+" hit "+game.user.activePet.getName()+".\n");
 				game.user.HitAnimal();
+				if(game.user.activePet.getEmotion() < 3) {
+					game.user.reportMade();
+					game.window.area.append(game.user.getHumanName()+" has been reported for hitting "+ game.user.activePet.getName() + " because "
+							+ game.user.getHumanName() + " neglected "+game.user.activePet.getName()+ "\n");
+
+				}
+				action2=false;
+				action3=true;
 				game.window.ReactionPanel.setVisible(false);
 				tick();
 			}

@@ -1,7 +1,17 @@
 <<<<<<< HEAD
 Daniel Geiser
 So far just the the idea but we are doing a collective mix on the document.
+
+worked on the code for the project. making edits and corrections.
 =======
 Daniel Ramirez
-Responsibilities TBD
+Responsibilities helping with the code.
 >>>>>>> DanielRamirez
+
+Edit Vosganians
+Editer and document creation. working on the two documents need for the project. Being helped with speacfics by Daniel Geiser and DanielRamirez  about code.
+
+Jacob Frausto
+Also an editer of documents. Profreader of the documents and co-creation with edit.
+
+All people are giving ideas and pointing out problems with documents or code based on how they see them.

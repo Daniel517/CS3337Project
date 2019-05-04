@@ -19,7 +19,9 @@ public class Spawn {
 	private boolean added= false;
 	private ArrayList<Animal> RandomPets= new ArrayList<Animal>();
 	private String[] type = {"Dog", "Cat", "Bird"};
-	private String[] breeds = {"Pitbull","Hawk","Siamese","Poodle","Pigeon","Tabicat","Maltese","Parrot","Persian","Sphinx","Rat Terrier","Parakeet","Husky"};
+	private String[] breedD = {"Pitbull", "Rat Terrier", "Poodle", "Husky", "Maltese"};
+	private String[] breedC = {"Siamese", "Tabicat", "Persian", "Sphinx"};
+	private String[] breedB = {"Pigeon", "Hawk", "Parrot", "Parakeet"};
 	private String[] PetNames = {"Max","Fluffy","Dragon","Pat","Million","Billion","Boss","King","Queen","Prince","Royal","Being","Love","Drake","Sam","Bella","Grace","Luke","Vader","Star"};
 	private String[] HumanName = {"Olivia","Oliver","Amelia","Harry","Isla","Jack","Emily","George","Ava","Noah","Lily","Charlie","Mia","Jacob","Sophia","Alfie","Isabella","Freddie","Grace","Oscar"};
 	
@@ -33,8 +35,34 @@ public class Spawn {
 			if(!added) {
 				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				//for testing animalList
+//				Animal an3 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an23 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an4 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an24 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an5 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an25 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an6 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an26 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an7 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an27 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an8 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+//				Animal an28 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 				handler.addObject(an);
 				handler.addObject(an2);
+				//For testing animalList
+//				handler.addObject(an3);
+//				handler.addObject(an23);
+//				handler.addObject(an4);
+//				handler.addObject(an24);
+//				handler.addObject(an5);
+//				handler.addObject(an25);
+//				handler.addObject(an6);
+//				handler.addObject(an26);
+//				handler.addObject(an7);
+//				handler.addObject(an27);
+//				handler.addObject(an8);
+//				handler.addObject(an28);
 				added = true;
 			}
 		}
@@ -45,20 +73,54 @@ public class Spawn {
 	public ArrayList<Animal> getRandomPets() {
 		return RandomPets;
 	}
+	
 	public String getType(int e) {
 		return type[e];
 	}
-	public String getBreeds(int e) {
-		return breeds[e];
+	
+	public String getBreedD(int e) {
+		return breedD[e];
+	}
+	
+	public String getBreedC(int e) {
+		return breedC[e];
+	}
+	
+	public String getBreedB(int e) {
+		return breedB[e];
+	}
+	
+	public String getHName(int e) {
+		return HumanName[e];
+	}
+	
+	public String getPName(int e) {
+		return PetNames[e];
 	}
 	
 	public humanOwner getComHuman() {
-		humanOwner computer=null;
-		int breedInt = r.nextInt(breeds.length);
-		int x=r.nextInt(900);
-		int y=r.nextInt(900);
-		RandomPets.add(new Animal(getType(r.nextInt(type.length)),getBreeds(breedInt),getPetNames(r.nextInt(PetNames.length)),ID.Pet,x,y,getImage(getBreeds(breedInt))));
-		
+		int NumberOfPets= r.nextInt(3)+1;
+		int NameSelection = r.nextInt(HumanName.length-1);
+		for(int i =0;i<NumberOfPets;i++) {
+			int x=r.nextInt(900);
+			int y=r.nextInt(900);
+			int t = r.nextInt(type.length);
+			int PetSelection = r.nextInt(PetNames.length-1);
+		//	int breedInt = r.nextInt(breeds.length);
+			if(t == 0) {
+				int breedInt = r.nextInt(breedD.length);
+				RandomPets.add(new Animal(getType(t),getBreedD(breedInt),getPName(PetSelection),ID.Pet,x,y,getImage(getBreedD(breedInt))));
+			}
+			if(t == 1) {
+				int breedInt = r.nextInt(breedC.length);
+				RandomPets.add(new Animal(getType(t),getBreedC(breedInt),getPName(PetSelection),ID.Pet,x,y,getImage(getBreedC(breedInt))));
+			}
+			if(t == 2) {
+				int breedInt = r.nextInt(breedB.length);
+				RandomPets.add(new Animal(getType(t),getBreedB(breedInt),getPName(PetSelection),ID.Pet,x,y,getImage(getBreedB(breedInt))));
+			}
+		}
+		humanOwner computer=new humanOwner(getHName(NameSelection),RandomPets);
 		return computer;
 	}
 	public BufferedImage getImage(String e) {

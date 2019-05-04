@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class humanOwner {
 	
-	public String humanName;
+	private String humanName;
 	public ArrayList<Animal> pets;
 	public Animal activePet;
 	private int report = 2;
