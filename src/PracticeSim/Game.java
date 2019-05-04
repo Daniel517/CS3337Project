@@ -151,7 +151,7 @@ public class Game extends Canvas implements Runnable{
 			aList.tick();
 			spawn.tick();
 			time.addMin(1);
-			if(user.pets.size()>=1 && !picked) {
+			if(user.pets.size()>=1 && !picked && getOpenHour() >=7) {
 				pickAanimal();
 			}
 			collision();
