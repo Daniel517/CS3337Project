@@ -25,7 +25,6 @@ public class Animal extends GameObject implements AnimalActions{
 	protected final int birdID =2;
 	protected int ID=4;
 	//actions when away and keeping track of user pets
-	private boolean fighting= false;
 	private boolean IsUserPet= false;
 	private boolean IsNotActive = false;
 	
@@ -113,9 +112,11 @@ public class Animal extends GameObject implements AnimalActions{
 	public void setAction(String act) {
 		this.action = act;
 	}
+	@Override
 	public boolean isFighting() {
 		return fighting;
 	}
+	@Override
 	public void setFighting(boolean fighting) {
 		this.fighting = fighting;
 	}
@@ -287,13 +288,14 @@ public class Animal extends GameObject implements AnimalActions{
 	@Override
 	public void awayAction() {
 		
-		if(emotion >7) {
+		if(emotion >= 7) {
 			setAwayAction(getName() + " is playing with ");
 		}
-		else if(emotion >3 && emotion<7) {
+		else if(emotion >=3 && emotion<7) {
 			setAwayAction(getName() + " is walking slowly around with ");
+			setFighting(false);
 		}
-		else if(emotion >3) {
+		else if(emotion < 3) {
 			setAwayAction(getName() + " is fighting with ");
 			setFighting(true);
 		}
