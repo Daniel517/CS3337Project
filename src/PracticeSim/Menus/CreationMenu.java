@@ -1,4 +1,3 @@
-
 package PracticeSim.Menus;
 
 import java.awt.Color;
@@ -216,17 +215,13 @@ public class CreationMenu extends MouseAdapter{
 	}
 	
 	public void getName() {
-<<<<<<< HEAD
 		String inStr="";
 		do {
-			 inStr = JOptionPane.showInputDialog("What name to use?", "Nobody!");
-		} while(inStr == null);
-		name = inStr;
-=======
-		do {
-			name = JOptionPane.showInputDialog("Enter the name you would like to use?");
-		} while(name.equals(""));
->>>>>>> DanielRamirez
+			inStr = JOptionPane.showInputDialog("What name to use?", "Nobody!");
+		} while(inStr != null && inStr.equals(""));
+		if(inStr != null) {
+			name = inStr;
+		}
 	}
 	public void makePet(String type, String breed, String name) {
 		//making sure the user has the pet saved as well.
@@ -287,72 +282,54 @@ public class CreationMenu extends MouseAdapter{
 		String[] breedD = {"Pitbull", "Rat Terrier", "Poodle", "Husky", "Maltese"};
 		String[] breedC = {"Siamese", "Tabicat", "Persian", "Sphinx"};
 		String[] breedB = {"Pigeon", "Hawk", "Parrot", "Parakeet"};
-<<<<<<< HEAD
+
 		String[] options = {"OK"};
 		int selection = -1;
 		
-		do {
-			PetType = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, null, type, "Dog");
-		} while(PetType == null);
-		
-		if(PetType == "Dog") {
-			do {
-				selection = JOptionPane.showOptionDialog(null,new JPanel() , "Pet Breed", JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, breedD , options[0]);
-			} while(selection == -1);
-			PetBreed = breedD[selection];
-			Petname = getPETName();
+		PetType = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, null, type, "Dog");
+		if(PetType != null) {
+			if(PetType == "Dog") {
+				PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, null, breedD, "Pitbull");
+				if(PetBreed != null) {
+					Petname = getPETName();
+					if(Petname != null) {
+						count +=1;
+						makePet(PetType,PetBreed,Petname);
+					}
+				}
+			}
+			else if(PetType == "Cat") {
+				PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, null, breedC, "Siamese");
+				if(PetBreed != null) {
+					Petname = getPETName();
+					if(Petname != null) {
+						count +=1;
+						makePet(PetType,PetBreed,Petname);
+					}
+				}	
+			}
+			else if(PetType == "Bird") {
+				PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, null, breedB, "Pigeon");
+				if(PetBreed != null) {
+					Petname = getPETName();
+					if(Petname != null) {
+						count +=1;
+						makePet(PetType,PetBreed,Petname);
+					}
+				}	
+			}
 		}
-		else if(PetType == "Cat") {
-			do {
-				selection = JOptionPane.showOptionDialog(null,new JPanel() , "Pet Breed", JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, breedC , options[0]);
-			} while(selection == -1);
-			PetBreed = breedC[selection];
-			Petname = getPETName();		
-		}
-		else if(PetType == "Bird") {
-			do {
-				selection = JOptionPane.showOptionDialog(null,new JPanel() , "Pet Breed", JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, breedB , options[0]);
-			} while(selection == -1);
-			PetBreed = breedB[selection];
-			Petname = getPETName();		
-=======
-		
-		PetType = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, type, "Dog");
-		
-		if(PetType == "Dog") {
-			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedD, "Pitbull");
-			getPetName();
-			//Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
-		}
-		else if(PetType == "Cat") {
-			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedC, "Siamese");
-			//Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
-			getPetName();
-		}
-		else if(PetType == "Bird") {
-			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedB, "Pigeon");
-			//Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
-			getPetName();
->>>>>>> DanielRamirez
-		}
-		count +=1;
-		makePet(PetType,PetBreed,Petname);
 	}
-<<<<<<< HEAD
 	public String getPETName() {
 		String nametemp = "";
 		
 		do {
 			nametemp = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.CLOSED_OPTION);
-		} while(nametemp == null);
-		
-		return nametemp;
-=======
-	public void getPetName() {
-		do {
-			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
-		} while(Petname.equals(""));
->>>>>>> DanielRamirez
+		} while(nametemp != null && nametemp.equals(""));
+		if(nametemp != null) {
+			return nametemp;
+		}
+		return null;
 	}
 	
 
