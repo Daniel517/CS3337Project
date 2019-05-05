@@ -216,11 +216,17 @@ public class CreationMenu extends MouseAdapter{
 	}
 	
 	public void getName() {
+<<<<<<< HEAD
 		String inStr="";
 		do {
 			 inStr = JOptionPane.showInputDialog("What name to use?", "Nobody!");
 		} while(inStr == null);
 		name = inStr;
+=======
+		do {
+			name = JOptionPane.showInputDialog("Enter the name you would like to use?");
+		} while(name.equals(""));
+>>>>>>> DanielRamirez
 	}
 	public void makePet(String type, String breed, String name) {
 		//making sure the user has the pet saved as well.
@@ -281,6 +287,7 @@ public class CreationMenu extends MouseAdapter{
 		String[] breedD = {"Pitbull", "Rat Terrier", "Poodle", "Husky", "Maltese"};
 		String[] breedC = {"Siamese", "Tabicat", "Persian", "Sphinx"};
 		String[] breedB = {"Pigeon", "Hawk", "Parrot", "Parakeet"};
+<<<<<<< HEAD
 		String[] options = {"OK"};
 		int selection = -1;
 		
@@ -308,10 +315,30 @@ public class CreationMenu extends MouseAdapter{
 			} while(selection == -1);
 			PetBreed = breedB[selection];
 			Petname = getPETName();		
+=======
+		
+		PetType = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, type, "Dog");
+		
+		if(PetType == "Dog") {
+			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedD, "Pitbull");
+			getPetName();
+			//Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+		}
+		else if(PetType == "Cat") {
+			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedC, "Siamese");
+			//Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+			getPetName();
+		}
+		else if(PetType == "Bird") {
+			PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.QUESTION_MESSAGE, null, breedB, "Pigeon");
+			//Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+			getPetName();
+>>>>>>> DanielRamirez
 		}
 		count +=1;
 		makePet(PetType,PetBreed,Petname);
 	}
+<<<<<<< HEAD
 	public String getPETName() {
 		String nametemp = "";
 		
@@ -320,6 +347,12 @@ public class CreationMenu extends MouseAdapter{
 		} while(nametemp == null);
 		
 		return nametemp;
+=======
+	public void getPetName() {
+		do {
+			Petname = JOptionPane.showInputDialog(null, "What name do you want to use?", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+		} while(Petname.equals(""));
+>>>>>>> DanielRamirez
 	}
 	
 
