@@ -3,6 +3,7 @@ package PracticeSim;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import PracticeSim.background.GameObject;
 import PracticeSim.background.Handler;
@@ -11,10 +12,16 @@ import PracticeSim.background.ID;
 public class Player extends GameObject{
 	
 	Handler handler;
+	private String ComName;
+	public ArrayList<Animal> Cpets;
 
-	public Player(int x, int y, ID id,Handler handler) {
+	public Player(int x, int y, ID id,String name,ArrayList<Animal> pets) {
 		super(x, y, id);
-		this.handler = handler;
+		this.setComName(name);
+		this.Cpets = pets;
+		
+		velX = 15;
+		velY = 15;
 	}
 
 	@Override
@@ -22,9 +29,10 @@ public class Player extends GameObject{
 		x += velX;
 		y += velY;
 		
-		x = Game.clamp(x, 0, Game.WIDTH);
-		y = Game.clamp(y, 0, Game.HEIGHT);
-		
+		if (y <= 0 || y >= Game.HEIGHT - 38)
+			velY *= -1;
+		if (x <= 0 || x >= Game.WIDTH - 300)
+			velX *= -1;		
 	}
 	
 
@@ -46,8 +54,7 @@ public class Player extends GameObject{
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return ComName;
 	}
 
 	@Override
@@ -60,6 +67,10 @@ public class Player extends GameObject{
 	public boolean isFighting() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void setComName(String comName) {
+		ComName = comName;
 	}
 
 }

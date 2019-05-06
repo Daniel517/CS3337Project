@@ -94,6 +94,7 @@ public class AnimalList {
 		g.drawImage(animal.getAsset(), AImageWidth, AImageHeight, null);
 		Text.drawString(g,"\u2191 \u2191 \u2191 \u2191", ACountX+60, 95, true, c, font);
 		Text.drawString(g,"Selected", ACountX+60, 125, true, c, font);
+		Text.drawString(g, animal.getName(), ACountX+60, 155, true, c, font);
 		Text.drawString(g, Integer.toString(animalsInPark.size()), ACountX, ACountY, true, c, font);
 		Text.drawString(g, Integer.toString(countDog), ACountX, 55, true, c, font);
 		Text.drawString(g, Integer.toString(countCat), ACountX, 85, true, c, font);
@@ -106,7 +107,12 @@ public class AnimalList {
 	public Animal getAnimal(int index) {
 		return animalsInPark.get(index);
 	}
-
+	public void clearList() {
+		animalsInPark.clear();
+	}
+	public int size() {
+		return animalsInPark.size();
+	}
 	public void addToList(Animal a) {
 		if(a.getType()=="Dog") {
 			countDog++;

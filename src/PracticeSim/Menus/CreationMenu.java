@@ -1,4 +1,3 @@
-
 package PracticeSim.Menus;
 
 import java.awt.Color;
@@ -110,6 +109,8 @@ public class CreationMenu extends MouseAdapter{
 		
 	}
 	public void doRandom() {
+		pets.clear();
+		count = 0;
 		humanOwner temp = game.doingRandom();
 		name = temp.getHumanName();
 		for(int i=0;i<temp.pets.size();i++) {

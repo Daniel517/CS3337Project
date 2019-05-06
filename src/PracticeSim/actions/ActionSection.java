@@ -16,6 +16,7 @@ import PracticeSim.background.Handler;
 public class ActionSection extends JPanel{
 	
 	String[] actions = {"Fly","Catch","Speak","Chase","Flee","Bite","Play","Fetch","Lick","Rest","Leave Park","Exit Simulator"};
+
 	JButton[] buttons= new JButton[12];
 	private Game game;
 	private JPanel actionPanel;
