@@ -36,20 +36,22 @@ public class Spawn {
 		
 	}
 	public void tick() {
-		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 5) {
+		if(time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 0) {
 			if(!added) {
 				AddComputerPlayer();
-				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-				//for testing animalList
-				handler.addObject(an);
-				handler.addObject(an2);
+				added = true;
+			}
+		}
+		
+		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 5 && time.getSeconds() == 0) {
+			if(!added) {
+				AddComputerPlayer();
 				//For testing animalList
 				added = true;
 			}
 		}
 		
-		if(time.getMILHour() % 4 == 3 && time.getMinutes() == 20) {
+		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 20) {
 			if(!added) {
 				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
@@ -70,13 +72,24 @@ public class Spawn {
 		
 		if(time.getMILHour() % 4 == 2 && time.getMinutes() == 20) {
 			if(!added) {
-				handler.removeWild();
+				handler.removePlayerandPets();
 				added = true;
 			}
 		}
-		if(time.getHour() % 4 == 3 && time.getMinutes() == 20 && time.getSeconds() == 1 
+		
+		if(time.getMILHour() % 4 == 3 && time.getMinutes() == 50) {
+			if(!added) {
+				handler.removePlayerandPets();
+				added = true;
+			}
+		}
+		
+		if(time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 1 
 				|| time.getMILHour() % 4 == 0 && time.getMinutes() == 5 && time.getSeconds() == 1 
-				|| time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 1) {
+				|| time.getMILHour() % 4 == 0 && time.getMinutes() == 20 && time.getSeconds() == 1 
+				|| time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 1
+				|| time.getMILHour() % 4 == 2 && time.getMinutes() == 20 && time.getSeconds() == 1 
+				|| time.getMILHour() % 4 == 3 && time.getMinutes() == 50 && time.getSeconds() == 1) {
 			added = false;
 		}
 	}
@@ -204,10 +217,6 @@ public class Spawn {
 		int y = r.nextInt(900);
 		player= new Player(x,y,ID.player,com.getHumanName(),com.getPets());
 		for(int i = 0;i<player.Cpets.size();i++) {
-	//		x = r.nextInt(900);
-	//		y = r.nextInt(900);
-			//player.Cpets.get(i).setX(x);
-			//player.Cpets.get(i).setY(y);
 			handler.addObject(player.Cpets.get(i));
 		}
 		handler.addPlayer(player);
