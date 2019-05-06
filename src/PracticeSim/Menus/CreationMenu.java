@@ -133,7 +133,7 @@ public class CreationMenu extends MouseAdapter{
 		
 		g.setFont(fnt2);
 		g.setColor(Color.WHITE);
-		g.drawString("Enter Name", 235,285);
+		g.drawString("Enter Name:", 235,285);
 		
 		g.setFont(fnt2);
 		g.setColor(Color.WHITE);
