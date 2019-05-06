@@ -90,6 +90,9 @@ public class Game extends Canvas implements Runnable{
 		r = new Random();
 		
 	}
+	public void WildOut() {
+		aList.WildOut();
+	}
 
 	public synchronized  void start() {
 		thread = new Thread(this);

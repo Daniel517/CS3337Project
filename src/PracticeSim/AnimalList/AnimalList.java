@@ -146,6 +146,15 @@ public class AnimalList {
 		}
 		
 	}
+	public void WildOut() {
+		int count = 0;
+		for(int i =0;i<animalsInPark.size();i++) {
+			if(count < 1 && animalsInPark.get(i).getId() == ID.WildAnimal) {
+				animalsInPark.remove(animalsInPark.get(i));
+				count++;
+			}
+		}
+	}
 	public void reset() {
 		animalsInPark.clear();
 		countDog=0;

@@ -62,6 +62,24 @@ public class Handler {
 	public STATE setGameState() {
 		return game.gameState = STATE.GamePark;
 	}
+
+	public void removeWild() {
+		game.WildOut();
+		int count = 0;
+		for(int i =0; i<object.size();i++) {
+			if(count < 1) {
+				if(object.get(i).getId() == ID.WildAnimal) {
+					object.remove(i);
+					count++;
+				}
+			}
+			
+		}
+	}
+	
+	public void removePlayerandPets() {
+		
+	}
 	
 	public void addTextToArea(String str) {
 		game.window.area.append(str+"\n");

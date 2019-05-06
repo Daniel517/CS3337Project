@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import PracticeSim.Animal;
+import PracticeSim.Game;
 import PracticeSim.Player;
 import PracticeSim.WildAnimal;
 import PracticeSim.humanOwner;
@@ -32,45 +33,50 @@ public class Spawn {
 		this.handler = handler;
 		this.animalList = animalList;
 		this.time = time;
+		
 	}
 	public void tick() {
-		if(time.getMILHour() % 2 == 1 && time.getMinutes() == 59) {
+		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 5) {
 			if(!added) {
 				AddComputerPlayer();
-				//Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-				//Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 				//for testing animalList
-//				Animal an3 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an23 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an4 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an24 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an5 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an25 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an6 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an26 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an7 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an27 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an8 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an28 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-			//	handler.addObject(an);
-				//handler.addObject(an2);
+				handler.addObject(an);
+				handler.addObject(an2);
 				//For testing animalList
-//				handler.addObject(an3);
-//				handler.addObject(an23);
-//				handler.addObject(an4);
-//				handler.addObject(an24);
-//				handler.addObject(an5);
-//				handler.addObject(an25);
-//				handler.addObject(an6);
-//				handler.addObject(an26);
-//				handler.addObject(an7);
-//				handler.addObject(an27);
-//				handler.addObject(an8);
-//				handler.addObject(an28);
 				added = true;
 			}
 		}
-		if(time.getHour() % 2 == 0 && time.getMinutes() == 0 && time.getSeconds() == 1) {
+		
+		if(time.getMILHour() % 4 == 3 && time.getMinutes() == 20) {
+			if(!added) {
+				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				//for testing animalList
+				handler.addObject(an);
+				handler.addObject(an2);
+				//For testing animalList
+				added = true;
+			}
+		}
+		
+		if(time.getMILHour() % 4 == 1 && time.getMinutes() == 5) {
+			if(!added) {
+				handler.removeWild();
+				added = true;
+			}
+		}
+		
+		if(time.getMILHour() % 4 == 2 && time.getMinutes() == 20) {
+			if(!added) {
+				handler.removeWild();
+				added = true;
+			}
+		}
+		if(time.getHour() % 4 == 3 && time.getMinutes() == 20 && time.getSeconds() == 1 
+				|| time.getMILHour() % 4 == 0 && time.getMinutes() == 5 && time.getSeconds() == 1 
+				|| time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 1) {
 			added = false;
 		}
 	}
