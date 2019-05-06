@@ -109,9 +109,14 @@ public class CreationMenu extends MouseAdapter{
 		
 	}
 	public void doRandom() {
+		pets.clear();
+		count = 0;
 		humanOwner temp = game.doingRandom();
 		name = temp.getHumanName();
 		for(int i=0;i<temp.pets.size();i++) {
+			temp.pets.get(i).setId(ID.UserPet);
+			temp.pets.get(i).setIsUserPet(true);
+			temp.pets.get(i).setIsNotActive(true);
 			pets.add(temp.pets.get(i));
 			count++;
 		}
@@ -330,6 +335,12 @@ public class CreationMenu extends MouseAdapter{
 			return nametemp;
 		}
 		return null;
+	}
+	
+	public void reset() {
+		pets.clear();
+		count = 0;
+		name = "";
 	}
 	
 

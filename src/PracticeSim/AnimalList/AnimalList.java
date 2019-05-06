@@ -124,7 +124,7 @@ public class AnimalList {
 		animalsInPark.add(a);
 	}
 	public void GoingHomeFromPark() {
-		
+		handler.removePlayer();
 		for(int i =0;i<animalsInPark.size();i++) {
 			if(!animalsInPark.get(i).isIsUserPet()) {
 				if(animalsInPark.get(i).getType()=="Dog") {
@@ -145,6 +145,14 @@ public class AnimalList {
 			}
 		}
 		
+	}
+	public void reset() {
+		animalsInPark.clear();
+		countDog=0;
+		countCat=0;
+		countBird=0;
+		countWild=0;
+		selectedAnimal = 0;
 	}
 
 }

@@ -43,6 +43,13 @@ public class Handler {
 	public void addPlayer(Player ob) {
 		this.object.add(ob);
 	}
+	public void removePlayer() {
+		for(int i =0; i<object.size();i++) {
+			if(object.get(i).getId() == ID.player) {
+				object.remove(i);
+			}
+		}
+	}
 	
 	public void removeObject(GameObject object) {
 		this.object.remove(object);

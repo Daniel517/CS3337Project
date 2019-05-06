@@ -91,6 +91,7 @@ public class ActionSection extends JPanel{
 				game.window.area.append(game.user.getHumanName()+" has choosen to stay home\n");
 				game.user.StayHome();
 				game.changeTime(6, 45);
+				game.window.area.append(game.user.getHumanName() + " has woken up!\n");
 			}
 			
 		});
@@ -334,6 +335,7 @@ public class ActionSection extends JPanel{
 				game.window.ReactionPanel.setVisible(false);
 				game.window.ParkActionPanel.setVisible(false);
 				game.changeTime(6, 45);
+				game.window.area.append(game.user.getHumanName() + " has woken up!\n");
 				tick();
 			}
 			
@@ -398,7 +400,7 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append(game.user.activePet.getName()+" hit "+game.user.activePet.getName()+".\n");
+				game.window.area.append(game.user.getHumanName()+" hit "+game.user.activePet.getName()+".\n");
 				game.user.HitAnimal();
 				if(game.user.activePet.getEmotion() < 3) {
 					game.user.reportMade();

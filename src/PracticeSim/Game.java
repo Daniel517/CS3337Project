@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
 
 import PracticeSim.AnimalList.AnimalList;
@@ -193,7 +194,7 @@ public class Game extends Canvas implements Runnable{
 		
 		if(gameState == STATE.GameHome) {
 			
-			g.drawImage(Assets.home, 0, 0, null);
+			//g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
@@ -248,13 +249,14 @@ public class Game extends Canvas implements Runnable{
 					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
 						// collision code
 						collision = true;
-						window.area.append(tempObject.getName()+" is playing with "+tempObject2.getName()+"\n");
+						window.area.append(tempObject.getName()+" is playing with " + tempObject2.getName() + "\n");
 					}
 					else {
 						collision=false;
 					}
 				}
-				else {
+				
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.WildAnimal || tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.UserPet) {
 					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
 						// collision code
 						collision = true;
@@ -268,47 +270,33 @@ public class Game extends Canvas implements Runnable{
 					}
 				}
 				
-//				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.WildAnimal || tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.UserPet) {
-//					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-//						// collision code
-//						collision = true;
-//						tempObject.awayAction();
-//						tempObject2.awayAction();
-//						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
-//						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
-//					}
-//					else {
-//						collision=false;
-//					}
-//				}
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet || tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
+				}
 				
-//				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet || tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet) {
-//					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-//						// collision code
-//						collision = true;
-//						tempObject.awayAction();
-//						tempObject2.awayAction();
-//						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
-//						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
-//					}
-//					else {
-//						collision=false;
-//					}
-//				}
-				
-//				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.Pet || tempObject.getId() == ID.Pet && tempObject2.getId() == ID.UserPet) {
-//					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-//						// collision code
-//						collision = true;
-//						tempObject.awayAction();
-//						tempObject2.awayAction();
-//						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
-//						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
-//					}
-//					else {
-//						collision=false;
-//					}
-//				}
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.Pet || tempObject.getId() == ID.Pet && tempObject2.getId() == ID.UserPet) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						collision = true;
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+					}
+					else {
+						collision=false;
+					}
+				}
 			}
 		}
 	}
@@ -441,9 +429,14 @@ public class Game extends Canvas implements Runnable{
 		time.changeTime(h, m);
 	}
 	public void reset() {
-		 new Game();
+		handler.object.clear();
+		user.reset();
+		aList.reset();
+		creation.reset();
+		window.area.setText("A new Day has come\n");
+		gameState = STATE.Menu; 
 	}
-	
+
 	public static void main(String args[]) {
 		new Game();
 	}

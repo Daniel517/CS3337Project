@@ -101,13 +101,28 @@ public class Spawn {
 	public String getPName(int e) {
 		return PetNames[e];
 	}
+	public void RandomInPlace(String[] list) {
+		int num=list.length-1;
+		for(int i=0;i<num;i++) {
+			int n=randomInt(i,num);
+			String temp=list[i];
+			list[i]=list[n];
+			list[n]=temp;
+		}
+	}
+	public int randomInt(int a, int b) {
+		Random rad=new Random();
+		return rad.nextInt((b-a)+1)+a;
+	}
 	
 	public humanOwner getComHuman() {
+		RandomPets.clear();
 		int NumberOfPets= r.nextInt(3)+1;
 		int NameSelection = r.nextInt(HumanName.length-1);
 		for(int i =0;i<NumberOfPets;i++) {
-			int x=r.nextInt(900);
-			int y=r.nextInt(900);
+			RandomInPlace(PetNames);
+			int x=randomInt(25,900);
+			int y=randomInt(25,900);
 			int t = r.nextInt(type.length);
 			int PetSelection = r.nextInt(PetNames.length-1);
 		//	int breedInt = r.nextInt(breeds.length);
@@ -124,6 +139,7 @@ public class Spawn {
 				RandomPets.add(new Animal(getType(t),getBreedB(breedInt),getPName(PetSelection),ID.Pet,x,y,getImage(getBreedB(breedInt))));
 			}
 		}
+		RandomInPlace(HumanName);
 		humanOwner computer = new humanOwner(getHName(NameSelection),RandomPets);
 		return computer;
 	}
@@ -179,14 +195,13 @@ public class Spawn {
 	public void AddComputerPlayer() {
 		humanOwner com = getComHuman();
 		int x = r.nextInt(900);
-		int y = r.nextInt(900)+700;
+		int y = r.nextInt(900);
 		player= new Player(x,y,ID.player,com.getHumanName(),com.getPets());
-		for(int i=0;i<player.Cpets.size();i++) {
-			x = r.nextInt(900);
-			y = r.nextInt(900);
-			player.Cpets.get(i).setX(x);
-			player.Cpets.get(i).setY(y);
-
+		for(int i = 0;i<player.Cpets.size();i++) {
+	//		x = r.nextInt(900);
+	//		y = r.nextInt(900);
+			//player.Cpets.get(i).setX(x);
+			//player.Cpets.get(i).setY(y);
 			handler.addObject(player.Cpets.get(i));
 		}
 		handler.addPlayer(player);

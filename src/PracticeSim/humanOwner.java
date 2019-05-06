@@ -57,4 +57,9 @@ public class humanOwner {
 	public int getReport() {
 		return report;
 	}
+	public void reset() {
+		this.humanName = "";
+		pets.clear();
+		activePet=null;
+	}
 }

@@ -28,7 +28,6 @@ public class deathState extends MouseAdapter{
 		if(game.gameState == STATE.Death) {
 			//play button
 			if(mouseOver(mx,my,135, 750, 200, 755)) {
-				System.out.println("was pressed");
 				game.reset();
 			}
 		
@@ -65,7 +64,7 @@ public class deathState extends MouseAdapter{
 		g.setColor(Color.RED);
 		g.drawString("You have come to Death.", 10, 50);
 		g.drawString("Your actions have", 10, 100);
-		g.drawString("borught into Deaths", 10, 150);
+		g.drawString("brought you into Deaths", 10, 150);
 		g.drawString("domain but Death says,", 10, 200);
 		g.drawString("'It is not your time", 10, 250);
 		g.drawString("to die but be warned. If ", 10, 300);
