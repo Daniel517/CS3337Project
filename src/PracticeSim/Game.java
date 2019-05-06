@@ -192,7 +192,7 @@ public class Game extends Canvas implements Runnable{
 		
 		if(gameState == STATE.GameHome) {
 			
-			g.drawImage(Assets.home, 0, 0, null);
+			//g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
@@ -280,7 +280,7 @@ public class Game extends Canvas implements Runnable{
 //						collision=false;
 //					}
 //				}
-				
+//				
 //				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet || tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet) {
 //					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
 //						// collision code
@@ -294,7 +294,7 @@ public class Game extends Canvas implements Runnable{
 //						collision=false;
 //					}
 //				}
-				
+//				
 //				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.Pet || tempObject.getId() == ID.Pet && tempObject2.getId() == ID.UserPet) {
 //					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
 //						// collision code
