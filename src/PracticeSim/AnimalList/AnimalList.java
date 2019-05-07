@@ -149,6 +149,26 @@ public class AnimalList {
 			if(count < 1 && animalsInPark.get(i).getId() == ID.WildAnimal) {
 				animalsInPark.remove(animalsInPark.get(i));
 				count++;
+				countWild--;				
+			}
+		}
+	}
+	
+	public void PlayerPetOut(int playerPetSize) {
+		int count = 0;
+		for(int i =0;i<animalsInPark.size();i++) {
+			if(count < playerPetSize && animalsInPark.get(i).getId() == ID.Pet) {
+				if(animalsInPark.get(i).getType()=="Dog") {
+					countDog--;
+				}
+				else if(animalsInPark.get(i).getType()=="Cat") {
+					countCat--;
+				}
+				else if(animalsInPark.get(i).getType() == "Bird") {
+					countBird--;
+				}
+				animalsInPark.remove(animalsInPark.get(i));
+				count++;
 			}
 		}
 	}

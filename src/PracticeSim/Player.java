@@ -20,7 +20,7 @@ public class Player extends GameObject{
 		super(x, y, id);
 		this.setComName(name);
 		this.Cpets = pets;
-		
+		setCpetsSize(pets.size());
 		velX = 15;
 		velY = 15;
 	}

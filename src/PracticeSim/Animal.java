@@ -140,7 +140,7 @@ public class Animal extends GameObject implements AnimalActions{
 	public void Fly() {
 		
 		if(emotion<=3) {
-			action = getName() + "seems to be ignoring you";
+			action = getName() + " seems to be ignoring you";
 		}
 		else if(getType() == "Dog" || getType() == "Cat"){
 			action= getName()+" looks at you Funny!";
@@ -154,7 +154,7 @@ public class Animal extends GameObject implements AnimalActions{
 	@Override
 	public void Catch() {
 		if(emotion<=3) {
-			action = getName() + "seems to be ignoring you";
+			action = getName() + " seems to be ignoring you";
 		}
 		else if(getType() == "Dog"){
 			action= getName()+" trys to catch a squirrel.";
@@ -188,7 +188,7 @@ public class Animal extends GameObject implements AnimalActions{
 	@Override
 	public void Chase() {
 		if(emotion<=3) {
-			action = getName() + "seems to be ignoring you";
+			action = getName() + " seems to be ignoring you";
 		}
 		else if(getType() == "Bird" || getType() == "Cat"){
 			action= getName()+" ignores you!";
@@ -221,7 +221,7 @@ public class Animal extends GameObject implements AnimalActions{
 	@Override
 	public void Play() {
 		if(emotion<=3) {
-			action = getName() + "seems to be ignoring you";
+			action = getName() + " seems to be ignoring you";
 		}
 		else {
 			action= getName() + "is playing.";
@@ -231,7 +231,7 @@ public class Animal extends GameObject implements AnimalActions{
 	@Override
 	public void Fetch() {
 		if(emotion<=3) {
-			action = getName() + "seems to be ignoring you";
+			action = getName() + " seems to be ignoring you";
 		}
 		else if(getType() == "Dog" || getType() == "Cat"){
 			action= getName()+" looks at the directions and runs away from you.\nComes back with nothing";
@@ -244,7 +244,7 @@ public class Animal extends GameObject implements AnimalActions{
 	@Override
 	public void Lick() {
 		if(emotion<=3) {
-			action = getName() + "seems to be ignoring you";
+			action = getName() + " seems to be ignoring you";
 		}
 		else if(getType() == "Dog" || getType() == "Cat"){
 			action= getName()+" is trying to lick your face!";
@@ -257,7 +257,7 @@ public class Animal extends GameObject implements AnimalActions{
 	@Override
 	public void Rest() {
 		if(emotion<=3) {
-			action = getName() + "seems to be ignoring you";
+			action = getName() + " seems to be ignoring you";
 		}
 		else {
 			action = getName()+" is resting";

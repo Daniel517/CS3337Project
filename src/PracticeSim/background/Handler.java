@@ -78,7 +78,27 @@ public class Handler {
 	}
 	
 	public void removePlayerandPets() {
-		
+		int count = 0;
+		boolean next = false;
+		int size = 0;
+		for(int i =0; i<object.size();i++) {
+			if(count < 1) {
+				if(object.get(i).getId() == ID.player) {
+					game.PlayerPetOut(object.get(i).getCpetsSize());
+					size = object.get(i).getCpetsSize();
+					count++;
+					next=true;
+				}
+			}
+		}
+		removePlayer();
+		for(int i =0; i<object.size();i++) {
+			if(size > 0 && object.get(i).getId() ==ID.Pet) {
+				removeObject(object.get(i));
+				size--;
+				i--;
+			}
+		}		
 	}
 	
 	public void addTextToArea(String str) {

@@ -40,7 +40,8 @@ public class Game extends Canvas implements Runnable{
 	private Handler handler;
 	private AnimalList aList;
 	public ActionSection action;
-
+	
+	private int fightingCountHome = 0;
 
 	private boolean picked=false;
 	private KeyManager keyManager;
@@ -85,6 +86,10 @@ public class Game extends Canvas implements Runnable{
 	}
 	public void WildOut() {
 		aList.WildOut();
+	}
+	
+	public void PlayerPetOut(int num) {
+		aList.PlayerPetOut(num);
 	}
 
 	public synchronized  void start() {
@@ -193,7 +198,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		else if(gameState == STATE.GamePark) {
 			
-			//g.drawImage(Assets.park, 0, 0, null);
+			g.drawImage(Assets.park, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
@@ -261,6 +266,13 @@ public class Game extends Canvas implements Runnable{
 						tempObject2.awayAction();
 						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
 						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+						if (tempObject.isFighting()) {
+							Thread child = new Thread() {
+								public void run() {
+									fightingResponse((Animal) tempObject);
+								}
+							};
+							child.start();						}
 					}
 					else {
 					}
@@ -272,6 +284,14 @@ public class Game extends Canvas implements Runnable{
 						tempObject2.awayAction();
 						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
 						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+						if (tempObject.isFighting()) {
+							Thread child = new Thread() {
+								public void run() {
+									fightingResponse((Animal) tempObject);
+								}
+							};
+							child.start();
+						}
 					}
 					else {
 					}
@@ -286,16 +306,34 @@ public class Game extends Canvas implements Runnable{
 				GameObject tempObject = handler.object.get(i);
 				GameObject tempObject2 = handler.object.get(j);
 
-				if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-					tempObject.awayAction();
-					tempObject2.awayAction();
-					window.area.append(tempObject.getAwayAction() + " " + tempObject2.getName() + "\n");
-					window.area.append(tempObject2.getAwayAction() + " " + tempObject.getName() + "\n");
+				if(fightingCountHome <= 2){
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction() + " " + tempObject2.getName() + "\n");
+						window.area.append(tempObject2.getAwayAction() + " " + tempObject.getName() + "\n");
 
-					if (tempObject.isFighting()) {
-						fightingResponse((Animal) tempObject);
+						if (tempObject.isFighting()) {
+							Thread child = new Thread() {
+								public void run() {
+									fightingResponse((Animal) tempObject);
+									fightingCountHome++;
+								}
+							};
+							child.start();
+						}
+						
+					}
+				}else {
+					int ran= r.nextInt(100);
+					if (tempObject2.getBounds().intersects(tempObject.getBounds()) && ran >= 20 && ran <= 45) {
+						window.area.append(tempObject2.getName() + " is in its carrying case.\n");
+						window.area.append(tempObject.getName() + " is in its carrying case.\n");
 					}
 				} 
+
 			}
 		}
 	}
