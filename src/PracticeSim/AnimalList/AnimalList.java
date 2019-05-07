@@ -3,12 +3,10 @@ package PracticeSim.AnimalList;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import PracticeSim.WildAnimal;
 import PracticeSim.Animal;
 import PracticeSim.AnimalList.Text;
 import PracticeSim.background.Handler;
@@ -19,7 +17,6 @@ import PracticeSim.Assets.Assets;;
 public class AnimalList {
 	
 	private Handler handler;
-	private boolean active = false;
 	private ArrayList<Animal> animalsInPark;
 
 	private int countDog=0;
@@ -34,7 +31,7 @@ public class AnimalList {
 			alcy = 235 + 70,
 			spacing = 25;
 	private int AImageX = 1100,
-			AImageY = 50, AImageWidth =  AImageX,
+			AImageWidth =  AImageX,
 					AImageHeight = 17;
 	private int ACountX = 1070, ACountY = 25;
 	

@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import PracticeSim.Animal;
-import PracticeSim.Game;
 import PracticeSim.Player;
-import PracticeSim.WildAnimal;
 import PracticeSim.humanOwner;
 import PracticeSim.AnimalList.AnimalList;
 import PracticeSim.Assets.Assets;
@@ -15,6 +13,7 @@ import PracticeSim.Assets.Assets;
 public class Spawn {
 	
 	private Handler handler;
+	@SuppressWarnings("unused")
 	private AnimalList animalList;
 	private Time time;
 	private Random r= new Random();

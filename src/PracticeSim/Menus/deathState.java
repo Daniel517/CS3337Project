@@ -9,17 +9,12 @@ import java.awt.event.MouseEvent;
 import PracticeSim.Game;
 import PracticeSim.Assets.Assets;
 import PracticeSim.Game.STATE;
-import PracticeSim.background.Handler;
 
 public class deathState extends MouseAdapter{
 	
 	private Game game;
-	private Handler handler;
-	
-	
-	public deathState(Game game, Handler handler) {
+	public deathState(Game game) {
 		this.game = game;
-		this.handler = handler;
 	}
 	public void mousePressed(MouseEvent e) {
 		int mx = e.getX();

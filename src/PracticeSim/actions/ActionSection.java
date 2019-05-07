@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 
 import PracticeSim.Game;
 import PracticeSim.Game.STATE;
-import PracticeSim.background.Handler;
 
 @SuppressWarnings("serial")
 public class ActionSection extends JPanel{
@@ -22,7 +21,6 @@ public class ActionSection extends JPanel{
 	private JPanel actionPanel;
 	private JPanel ParkActionPanel;
 	private JPanel ReactionPanel;
-	private boolean action;
 	private boolean added= false;
 	private boolean SecondAdd= false;
 	
@@ -35,7 +33,6 @@ public class ActionSection extends JPanel{
 	//Add a Jpanel to the window
 	public ActionSection(Game game) {
 		this.game = game;
-		action = false;
 		actionPanel = game.window.getPanel();
 		ParkActionPanel = game.window.getParkActionPanel();
 		ReactionPanel = game.window.getReactionPanel();

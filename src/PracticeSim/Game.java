@@ -6,12 +6,10 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
 
 import PracticeSim.AnimalList.AnimalList;
@@ -37,7 +35,6 @@ public class Game extends Canvas implements Runnable{
 	
 	public Thread thread;
 	private boolean running =false;
-	private int Ccounter=0;
 	private Random r;
 	public Window window;
 	private Handler handler;
@@ -48,10 +45,8 @@ public class Game extends Canvas implements Runnable{
 	private boolean picked=false;
 	private KeyManager keyManager;
 	
-	private BufferStrategy bs;
 	private Graphics g;
 	
-	private boolean collision;
 	private Spawn spawn;
 	private Time time;
 	
@@ -66,7 +61,7 @@ public class Game extends Canvas implements Runnable{
 
 	public Game() {
 		handler = new Handler(this);
-		death = new deathState(this,handler);
+		death = new deathState(this);
 		menu = new Menu(this,handler);
 		aList = new AnimalList(handler);
 		creation = new CreationMenu(this,handler, aList);
@@ -77,8 +72,6 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseListener(death);
 		
 		
-		collision = false;
-		
 		window = new Window(WIDTH, HEIGHT, "PETS Simulator", this);
 		this.addKeyListener(getKeyManager());
 		
@@ -87,7 +80,7 @@ public class Game extends Canvas implements Runnable{
 		time = new Time();
 		spawn = new Spawn(handler,aList,time);
 		
-		r = new Random();
+		setR(new Random());
 		
 	}
 	public void WildOut() {
@@ -118,8 +111,6 @@ public class Game extends Canvas implements Runnable{
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		int ticks = 0;
-		
 		while(running) {
 			now = System.nanoTime();
 			delta += (now - lastTime) / timePerTick; 
@@ -129,12 +120,9 @@ public class Game extends Canvas implements Runnable{
 			if(delta >=1) {
 				tick();
 				render();
-				ticks++;
 				delta--;
 			}
 			if(timer >= 1000000000) {
-				//System.out.println("Ticks and Frames: "+ ticks);
-				ticks = 0;
 				timer = 0;
 			}
 		}
@@ -250,54 +238,42 @@ public class Game extends Canvas implements Runnable{
 						tempObject.getId() == ID.player && tempObject2.getId() == ID.Pet || 
 						tempObject.getId() == ID.player && tempObject2.getId() == ID.WildAnimal) {
 					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-						// collision code
-						collision = true;
 						window.area.append(tempObject.getName()+" is playing with " + tempObject2.getName() + "\n");
 					}
 					else {
-						collision=false;
 					}
 				}
 				
 				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.WildAnimal || tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.UserPet) {
 					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-						// collision code
-						collision = true;
 						tempObject.awayAction();
 						tempObject2.awayAction();
 						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
 						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
 					}
 					else {
-						collision=false;
 					}
 				}
 				
 				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet || tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet) {
 					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-						// collision code
-						collision = true;
 						tempObject.awayAction();
 						tempObject2.awayAction();
 						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
 						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
 					}
 					else {
-						collision=false;
 					}
 				}
 				
 				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.Pet || tempObject.getId() == ID.Pet && tempObject2.getId() == ID.UserPet) {
 					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-						// collision code
-						collision = true;
 						tempObject.awayAction();
 						tempObject2.awayAction();
 						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
 						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
 					}
 					else {
-						collision=false;
 					}
 				}
 			}
@@ -311,8 +287,6 @@ public class Game extends Canvas implements Runnable{
 				GameObject tempObject2 = handler.object.get(j);
 
 				if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-					// collision code
-					collision = true;
 					tempObject.awayAction();
 					tempObject2.awayAction();
 					window.area.append(tempObject.getAwayAction() + " " + tempObject2.getName() + "\n");
@@ -321,10 +295,7 @@ public class Game extends Canvas implements Runnable{
 					if (tempObject.isFighting()) {
 						fightingResponse((Animal) tempObject);
 					}
-				} else {
-					collision = false;
-				}
-
+				} 
 			}
 		}
 	}
@@ -442,6 +413,12 @@ public class Game extends Canvas implements Runnable{
 
 	public static void main(String args[]) {
 		new Game();
+	}
+	public Random getR() {
+		return r;
+	}
+	public void setR(Random r) {
+		this.r = r;
 	}
 
 }

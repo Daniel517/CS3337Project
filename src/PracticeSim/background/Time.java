@@ -16,8 +16,8 @@ public class Time {
 	
 	public Time() {
 		seconds = 0;
-		minutes = 56;
-		hour =11;
+		minutes = 7;
+		hour =7;
 		MILHour=hour;
 		AmOrPm = 1;
 	}

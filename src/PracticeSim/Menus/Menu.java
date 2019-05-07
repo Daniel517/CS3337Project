@@ -18,7 +18,7 @@ public class Menu extends MouseAdapter{
 	
 	public Menu(Game game, Handler handler) {
 		this.game = game;
-		this.handler = handler;
+		this.setHandler(handler);
 	}
 	
 	public void mousePressed(MouseEvent e) {
@@ -76,6 +76,14 @@ public class Menu extends MouseAdapter{
 		g.setFont(fnt2);
 		g.setColor(Color.WHITE);
 		g.drawString("Quit", 550, 640);
+	}
+
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
 	}
 
 }
