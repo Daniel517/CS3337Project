@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import PracticeSim.Animal;
 import PracticeSim.Game;
 import PracticeSim.Game.STATE;
 
@@ -338,6 +339,26 @@ public class ActionSection extends JPanel{
 			
 		});
 		spacer += 90;
+		JButton b14 = new JButton("Change Active");
+		b14.setBounds(980, spacer, 150, 50);
+		b14.setBackground(Color.ORANGE);
+		b14.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Thread child = new Thread() {
+					public void run() {
+						game.pickAanimalAtPark();
+					}
+				};
+				child.start();		
+				
+				
+			}
+			
+		});
+		spacer += 90;
 		
 		//Bite","Play","Fetch","Lick","Rest","Leave Park","Exist Simulator"
 		ParkActionPanel.add(b1);
@@ -352,6 +373,7 @@ public class ActionSection extends JPanel{
 		ParkActionPanel.add(b11);
 		ParkActionPanel.add(b12);
 		ParkActionPanel.add(b13);
+		ParkActionPanel.add(b14);
 		ParkActionPanel.setVisible(false);
 	}
 	public void ActionReponse() {
