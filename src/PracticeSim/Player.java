@@ -14,12 +14,13 @@ public class Player extends GameObject{
 	Handler handler;
 	private String ComName;
 	public ArrayList<Animal> Cpets;
+	private int size =25;
 
 	public Player(int x, int y, ID id,String name,ArrayList<Animal> pets) {
 		super(x, y, id);
 		this.setComName(name);
 		this.Cpets = pets;
-		
+		setCpetsSize(pets.size());
 		velX = 15;
 		velY = 15;
 	}
@@ -38,18 +39,18 @@ public class Player extends GameObject{
 
 	@Override
 	public void render(Graphics g) {
-		
+		g.setColor(Color.pink);
+		g.fillRect(x, y, size, size);
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(x,y,16,16);
+		return new Rectangle(x,y,size,size);
 	}
 
 	@Override
 	public void awayAction() {
-		// TODO Auto-generated method stub
-		
+		setAwayAction("I am MAN and i shall play with you ");
 	}
 
 	@Override

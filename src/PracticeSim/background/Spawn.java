@@ -6,7 +6,6 @@ import java.util.Random;
 
 import PracticeSim.Animal;
 import PracticeSim.Player;
-import PracticeSim.WildAnimal;
 import PracticeSim.humanOwner;
 import PracticeSim.AnimalList.AnimalList;
 import PracticeSim.Assets.Assets;
@@ -14,6 +13,7 @@ import PracticeSim.Assets.Assets;
 public class Spawn {
 	
 	private Handler handler;
+	@SuppressWarnings("unused")
 	private AnimalList animalList;
 	private Time time;
 	private Random r= new Random();
@@ -32,45 +32,63 @@ public class Spawn {
 		this.handler = handler;
 		this.animalList = animalList;
 		this.time = time;
+		
 	}
 	public void tick() {
-		if(time.getMILHour() % 2 == 1 && time.getMinutes() == 59) {
+		if(time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 0) {
 			if(!added) {
 				AddComputerPlayer();
-				//Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-				//Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-				//for testing animalList
-//				Animal an3 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an23 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an4 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an24 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an5 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an25 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an6 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an26 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an7 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an27 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an8 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-//				Animal an28 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
-			//	handler.addObject(an);
-				//handler.addObject(an2);
-				//For testing animalList
-//				handler.addObject(an3);
-//				handler.addObject(an23);
-//				handler.addObject(an4);
-//				handler.addObject(an24);
-//				handler.addObject(an5);
-//				handler.addObject(an25);
-//				handler.addObject(an6);
-//				handler.addObject(an26);
-//				handler.addObject(an7);
-//				handler.addObject(an27);
-//				handler.addObject(an8);
-//				handler.addObject(an28);
 				added = true;
 			}
 		}
-		if(time.getHour() % 2 == 0 && time.getMinutes() == 0 && time.getSeconds() == 1) {
+		
+		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 5 && time.getSeconds() == 0) {
+			if(!added) {
+				AddComputerPlayer();
+				//For testing animalList
+				added = true;
+			}
+		}
+		
+		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 20) {
+			if(!added) {
+				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
+				//for testing animalList
+				handler.addObject(an);
+				handler.addObject(an2);
+				//For testing animalList
+				added = true;
+			}
+		}
+		
+		if(time.getMILHour() % 4 == 1 && time.getMinutes() == 5) {
+			if(!added) {
+				handler.removeWild();
+				added = true;
+			}
+		}
+		
+		if(time.getMILHour() % 4 == 2 && time.getMinutes() == 20) {
+			if(!added) {
+				handler.removePlayerandPets();
+				added = true;
+			}
+		}
+		
+		if(time.getMILHour() % 4 == 3 && time.getMinutes() == 50) {
+			if(!added) {
+				handler.removePlayerandPets();
+				added = true;
+			}
+		}
+		
+		if(time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 1 
+				|| time.getMILHour() % 4 == 0 && time.getMinutes() == 5 && time.getSeconds() == 1 
+				|| time.getMILHour() % 4 == 0 && time.getMinutes() == 20 && time.getSeconds() == 1 
+				|| time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 1
+				|| time.getMILHour() % 4 == 2 && time.getMinutes() == 20 && time.getSeconds() == 1 
+				|| time.getMILHour() % 4 == 3 && time.getMinutes() == 50 && time.getSeconds() == 1) {
 			added = false;
 		}
 	}
@@ -101,14 +119,28 @@ public class Spawn {
 	public String getPName(int e) {
 		return PetNames[e];
 	}
+	public void RandomInPlace(String[] list) {
+		int num=list.length-1;
+		for(int i=0;i<num;i++) {
+			int n=randomInt(i,num);
+			String temp=list[i];
+			list[i]=list[n];
+			list[n]=temp;
+		}
+	}
+	public int randomInt(int a, int b) {
+		Random rad=new Random();
+		return rad.nextInt((b-a)+1)+a;
+	}
 	
 	public humanOwner getComHuman() {
 		RandomPets.clear();
 		int NumberOfPets= r.nextInt(3)+1;
 		int NameSelection = r.nextInt(HumanName.length);
 		for(int i =0;i<NumberOfPets;i++) {
-			int x=r.nextInt(900);
-			int y=r.nextInt(900);
+			RandomInPlace(PetNames);
+			int x=randomInt(25,900);
+			int y=randomInt(25,900);
 			int t = r.nextInt(type.length);
 			int PetSelection = r.nextInt(PetNames.length-1);
 			if(t == 0) {
@@ -124,6 +156,7 @@ public class Spawn {
 				RandomPets.add(new Animal(getType(t),getBreedB(breedInt),getPName(PetSelection),ID.Pet,x,y,getImage(getBreedB(breedInt))));
 			}
 		}
+		RandomInPlace(HumanName);
 		humanOwner computer = new humanOwner(getHName(NameSelection),RandomPets);
 		return computer;
 	}
@@ -179,14 +212,9 @@ public class Spawn {
 	public void AddComputerPlayer() {
 		humanOwner com = getComHuman();
 		int x = r.nextInt(900);
-		int y = r.nextInt(900)+700;
+		int y = r.nextInt(900);
 		player= new Player(x,y,ID.player,com.getHumanName(),com.getPets());
-		for(int i=0;i<player.Cpets.size();i++) {
-			x = r.nextInt(900);
-			y = r.nextInt(900);
-			player.Cpets.get(i).setX(x);
-			player.Cpets.get(i).setY(y);
-
+		for(int i = 0;i<player.Cpets.size();i++) {
 			handler.addObject(player.Cpets.get(i));
 		}
 		handler.addPlayer(player);

@@ -10,6 +10,7 @@ public abstract class GameObject {
 	protected int velX, velY;
 	public String awayaction;
 	protected boolean fighting;
+	private int CpetsSize;
 	
 	public GameObject(int x, int y,ID id) {
 		this.x = x;
@@ -71,5 +72,13 @@ public abstract class GameObject {
 	}
 	public void setAwayAction(String action) {
 		this.awayaction = action;
+	}
+
+	public int getCpetsSize() {
+		return CpetsSize;
+	}
+
+	public void setCpetsSize(int cpetsSize) {
+		CpetsSize = cpetsSize;
 	}
 }

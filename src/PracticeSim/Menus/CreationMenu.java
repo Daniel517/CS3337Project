@@ -8,10 +8,9 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.ImageIcon;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import PracticeSim.Animal;
 import PracticeSim.Game;
 import PracticeSim.Game.STATE;
@@ -30,20 +29,18 @@ public class CreationMenu extends MouseAdapter{
 	private String PetType="";
 	private String PetBreed="";
 	private Random r;
-	private AnimalList aList;
-	private ArrayList<Animal> pets; 
+	private ArrayList<Animal> pets;
 	
 	private int count = 0;
-	private int spacerforpets = 5;
-
 	public CreationMenu(Game game, Handler handler, AnimalList aList) {
 		this.game = game;
 		this.handler = handler;
-		this.aList = aList;
 		r = new Random();
 		pets = new ArrayList<Animal>();
 	}
 	
+	
+
 	public void mousePressed(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
@@ -114,6 +111,9 @@ public class CreationMenu extends MouseAdapter{
 		humanOwner temp = game.doingRandom();
 		name = temp.getHumanName();
 		for(int i=0;i<temp.pets.size();i++) {
+			temp.pets.get(i).setId(ID.UserPet);
+			temp.pets.get(i).setIsUserPet(true);
+			temp.pets.get(i).setIsNotActive(true);
 			pets.add(temp.pets.get(i));
 			count++;
 		}
@@ -233,7 +233,6 @@ public class CreationMenu extends MouseAdapter{
 		PetType ="";
 		PetBreed="";
 		Petname="";
-		spacerforpets *= 5;
 	}
 	public BufferedImage getImage(String e) {
 		BufferedImage pic=null;
@@ -285,13 +284,14 @@ public class CreationMenu extends MouseAdapter{
 		String[] breedC = {"Siamese", "Tabicat", "Persian", "Sphinx"};
 		String[] breedB = {"Pigeon", "Hawk", "Parrot", "Parakeet"};
 
-		String[] options = {"OK"};
-		int selection = -1;
+		ImageIcon dog= new ImageIcon(Assets.dog);
+		 ImageIcon cat= new ImageIcon(Assets.cat);
+		 ImageIcon bird= new ImageIcon(Assets.bird);
 		
 		PetType = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, null, type, "Dog");
 		if(PetType != null) {
 			if(PetType == "Dog") {
-				PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, null, breedD, "Pitbull");
+				PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, dog, breedD, "Pitbull");
 				if(PetBreed != null) {
 					Petname = getPETName();
 					if(Petname != null) {
@@ -301,7 +301,7 @@ public class CreationMenu extends MouseAdapter{
 				}
 			}
 			else if(PetType == "Cat") {
-				PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, null, breedC, "Siamese");
+				PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, cat, breedC, "Siamese");
 				if(PetBreed != null) {
 					Petname = getPETName();
 					if(Petname != null) {
@@ -311,7 +311,7 @@ public class CreationMenu extends MouseAdapter{
 				}	
 			}
 			else if(PetType == "Bird") {
-				PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, null, breedB, "Pigeon");
+				PetBreed = (String) JOptionPane.showInputDialog(null, "Select Type ","Pet Creation", JOptionPane.CLOSED_OPTION, bird, breedB, "Pigeon");
 				if(PetBreed != null) {
 					Petname = getPETName();
 					if(Petname != null) {
@@ -332,6 +332,12 @@ public class CreationMenu extends MouseAdapter{
 			return nametemp;
 		}
 		return null;
+	}
+	
+	public void reset() {
+		pets.clear();
+		count = 0;
+		name = "";
 	}
 	
 

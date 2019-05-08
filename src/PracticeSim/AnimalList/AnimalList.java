@@ -3,12 +3,10 @@ package PracticeSim.AnimalList;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import PracticeSim.WildAnimal;
 import PracticeSim.Animal;
 import PracticeSim.AnimalList.Text;
 import PracticeSim.background.Handler;
@@ -19,7 +17,6 @@ import PracticeSim.Assets.Assets;;
 public class AnimalList {
 	
 	private Handler handler;
-	private boolean active = false;
 	private ArrayList<Animal> animalsInPark;
 
 	private int countDog=0;
@@ -34,7 +31,7 @@ public class AnimalList {
 			alcy = 235 + 70,
 			spacing = 25;
 	private int AImageX = 1100,
-			AImageY = 50, AImageWidth =  AImageX,
+			AImageWidth =  AImageX,
 					AImageHeight = 17;
 	private int ACountX = 1070, ACountY = 25;
 	
@@ -129,7 +126,7 @@ public class AnimalList {
 		animalsInPark.add(a);
 	}
 	public void GoingHomeFromPark() {
-		
+		handler.removePlayer();
 		for(int i =0;i<animalsInPark.size();i++) {
 			if(!animalsInPark.get(i).isIsUserPet()) {
 				if(animalsInPark.get(i).getType()=="Dog") {
@@ -150,6 +147,43 @@ public class AnimalList {
 			}
 		}
 		
+	}
+	public void WildOut() {
+		int count = 0;
+		for(int i =0;i<animalsInPark.size();i++) {
+			if(count < 1 && animalsInPark.get(i).getId() == ID.WildAnimal) {
+				animalsInPark.remove(animalsInPark.get(i));
+				count++;
+				countWild--;				
+			}
+		}
+	}
+	
+	public void PlayerPetOut(int playerPetSize) {
+		int count = 0;
+		for(int i =0;i<animalsInPark.size();i++) {
+			if(count < playerPetSize && animalsInPark.get(i).getId() == ID.Pet) {
+				if(animalsInPark.get(i).getType()=="Dog") {
+					countDog--;
+				}
+				else if(animalsInPark.get(i).getType()=="Cat") {
+					countCat--;
+				}
+				else if(animalsInPark.get(i).getType() == "Bird") {
+					countBird--;
+				}
+				animalsInPark.remove(animalsInPark.get(i));
+				count++;
+			}
+		}
+	}
+	public void reset() {
+		animalsInPark.clear();
+		countDog=0;
+		countCat=0;
+		countBird=0;
+		countWild=0;
+		selectedAnimal = 0;
 	}
 
 }

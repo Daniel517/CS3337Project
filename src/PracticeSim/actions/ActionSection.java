@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 
 import PracticeSim.Game;
 import PracticeSim.Game.STATE;
-import PracticeSim.background.Handler;
 
 @SuppressWarnings("serial")
 public class ActionSection extends JPanel{
@@ -22,7 +21,6 @@ public class ActionSection extends JPanel{
 	private JPanel actionPanel;
 	private JPanel ParkActionPanel;
 	private JPanel ReactionPanel;
-	private boolean action;
 	private boolean added= false;
 	private boolean SecondAdd= false;
 	
@@ -35,7 +33,6 @@ public class ActionSection extends JPanel{
 	//Add a Jpanel to the window
 	public ActionSection(Game game) {
 		this.game = game;
-		action = false;
 		actionPanel = game.window.getPanel();
 		ParkActionPanel = game.window.getParkActionPanel();
 		ReactionPanel = game.window.getReactionPanel();
@@ -91,6 +88,7 @@ public class ActionSection extends JPanel{
 				game.window.area.append(game.user.getHumanName()+" has choosen to stay home\n");
 				game.user.StayHome();
 				game.changeTime(6, 45);
+				game.window.area.append(game.user.getHumanName() + " has woken up!\n");
 			}
 			
 		});
@@ -334,6 +332,7 @@ public class ActionSection extends JPanel{
 				game.window.ReactionPanel.setVisible(false);
 				game.window.ParkActionPanel.setVisible(false);
 				game.changeTime(6, 45);
+				game.window.area.append(game.user.getHumanName() + " has woken up!\n");
 				tick();
 			}
 			
@@ -398,7 +397,7 @@ public class ActionSection extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game.window.area.append(game.user.activePet.getName()+" hit "+game.user.activePet.getName()+".\n");
+				game.window.area.append(game.user.getHumanName()+" hit "+game.user.activePet.getName()+".\n");
 				game.user.HitAnimal();
 				if(game.user.activePet.getEmotion() < 3) {
 					game.user.reportMade();

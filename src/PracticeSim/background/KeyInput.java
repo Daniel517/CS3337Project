@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter{
 	
+	@SuppressWarnings("unused")
 	private Handler handler;
 	
 	public KeyInput(Handler handler) {
@@ -19,6 +20,7 @@ public class KeyInput extends KeyAdapter{
 	}
 	
 	public void keyReleased(KeyEvent e) {
+		@SuppressWarnings("unused")
 		int key = e.getKeyCode();
 	}
 	

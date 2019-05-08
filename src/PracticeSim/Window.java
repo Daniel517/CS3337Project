@@ -4,13 +4,10 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
-import PracticeSim.background.KeyManager;
 
 
 public class Window extends Canvas{
@@ -23,11 +20,7 @@ public class Window extends Canvas{
 	public JPanel actionPanel;
 	public JPanel ParkActionPanel;
 	public JPanel ReactionPanel;
-//	public JPanel actionPanel;
-	private KeyManager keymanager= new KeyManager();
-
-
-	public Window(int width, int height , String title, Game game)
+public Window(int width, int height , String title, Game game)
 	{
 		frame = new JFrame(title);
 		

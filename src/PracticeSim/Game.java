@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -36,21 +35,19 @@ public class Game extends Canvas implements Runnable{
 	
 	public Thread thread;
 	private boolean running =false;
-	private int Ccounter=0;
 	private Random r;
 	public Window window;
 	private Handler handler;
 	private AnimalList aList;
 	public ActionSection action;
-
+	
+	private int fightingCountHome = 0;
 
 	private boolean picked=false;
 	private KeyManager keyManager;
 	
-	private BufferStrategy bs;
 	private Graphics g;
 	
-	private boolean collision;
 	private Spawn spawn;
 	private Time time;
 	
@@ -65,7 +62,7 @@ public class Game extends Canvas implements Runnable{
 
 	public Game() {
 		handler = new Handler(this);
-		death = new deathState(this,handler);
+		death = new deathState(this);
 		menu = new Menu(this,handler);
 		aList = new AnimalList(handler);
 		creation = new CreationMenu(this,handler, aList);
@@ -76,8 +73,6 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseListener(death);
 		
 		
-		collision = false;
-		
 		window = new Window(WIDTH, HEIGHT, "PETS Simulator", this);
 		this.addKeyListener(getKeyManager());
 		
@@ -86,8 +81,15 @@ public class Game extends Canvas implements Runnable{
 		time = new Time();
 		spawn = new Spawn(handler,aList,time);
 		
-		r = new Random();
+		setR(new Random());
 		
+	}
+	public void WildOut() {
+		aList.WildOut();
+	}
+	
+	public void PlayerPetOut(int num) {
+		aList.PlayerPetOut(num);
 	}
 
 	public synchronized  void start() {
@@ -114,8 +116,6 @@ public class Game extends Canvas implements Runnable{
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		int ticks = 0;
-		
 		while(running) {
 			now = System.nanoTime();
 			delta += (now - lastTime) / timePerTick; 
@@ -125,11 +125,9 @@ public class Game extends Canvas implements Runnable{
 			if(delta >=1) {
 				tick();
 				render();
-				ticks++;
 				delta--;
 			}
 			if(timer >= 1000000000) {
-				ticks = 0;
 				timer = 0;
 			}
 		}
@@ -200,7 +198,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		else if(gameState == STATE.GamePark) {
 			
-			//g.drawImage(Assets.park, 0, 0, null);
+			g.drawImage(Assets.park, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
@@ -245,69 +243,58 @@ public class Game extends Canvas implements Runnable{
 						tempObject.getId() == ID.player && tempObject2.getId() == ID.Pet || 
 						tempObject.getId() == ID.player && tempObject2.getId() == ID.WildAnimal) {
 					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-						// collision code
-						collision = true;
-						window.area.append(tempObject.getName()+" is playing with "+tempObject2.getName()+"\n");
+						window.area.append(tempObject.getName()+" is playing with " + tempObject2.getName() + "\n");
 					}
 					else {
-						collision=false;
 					}
 				}
-				else {
+				
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.WildAnimal || tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.UserPet) {
 					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-						// collision code
-						collision = true;
 						tempObject.awayAction();
 						tempObject2.awayAction();
 						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
 						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
 					}
 					else {
-						collision=false;
+					}
+				}
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet || tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+						if (tempObject.isFighting()) {
+							Thread child = new Thread() {
+								public void run() {
+									fightingResponse((Animal) tempObject);
+								}
+							};
+							child.start();						}
+					}
+					else {
 					}
 				}
 				
-//				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.WildAnimal || tempObject.getId() == ID.WildAnimal && tempObject2.getId() == ID.UserPet) {
-//					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-//						// collision code
-//						collision = true;
-//						tempObject.awayAction();
-//						tempObject2.awayAction();
-//						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
-//						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
-//					}
-//					else {
-//						collision=false;
-//					}
-//				}
-//				
-//				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet || tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.UserPet) {
-//					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-//						// collision code
-//						collision = true;
-//						tempObject.awayAction();
-//						tempObject2.awayAction();
-//						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
-//						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
-//					}
-//					else {
-//						collision=false;
-//					}
-//				}
-//				
-//				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.Pet || tempObject.getId() == ID.Pet && tempObject2.getId() == ID.UserPet) {
-//					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-//						// collision code
-//						collision = true;
-//						tempObject.awayAction();
-//						tempObject2.awayAction();
-//						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
-//						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
-//					}
-//					else {
-//						collision=false;
-//					}
-//				}
+				if (tempObject.getId() == ID.UserPet && tempObject2.getId() == ID.Pet || tempObject.getId() == ID.Pet && tempObject2.getId() == ID.UserPet) {
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction()+" "+tempObject2.getName()+"\n");
+						window.area.append(tempObject2.getAwayAction()+" "+tempObject.getName()+"\n");
+						if (tempObject.isFighting()) {
+							Thread child = new Thread() {
+								public void run() {
+									fightingResponse((Animal) tempObject);
+								}
+							};
+							child.start();
+						}
+					}
+					else {
+					}
+				}
 			}
 		}
 	}
@@ -318,20 +305,33 @@ public class Game extends Canvas implements Runnable{
 				GameObject tempObject = handler.object.get(i);
 				GameObject tempObject2 = handler.object.get(j);
 
-				if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
-					// collision code
-					collision = true;
-					tempObject.awayAction();
-					tempObject2.awayAction();
-					window.area.append(tempObject.getAwayAction() + " " + tempObject2.getName() + "\n");
-					window.area.append(tempObject2.getAwayAction() + " " + tempObject.getName() + "\n");
+				if(fightingCountHome <= 2){
+					if (tempObject2.getBounds().intersects(tempObject.getBounds())) {
+						// collision code
+						
+						tempObject.awayAction();
+						tempObject2.awayAction();
+						window.area.append(tempObject.getAwayAction() + " " + tempObject2.getName() + "\n");
+						window.area.append(tempObject2.getAwayAction() + " " + tempObject.getName() + "\n");
 
-					if (tempObject.isFighting()) {
-						fightingResponse((Animal) tempObject);
+						if (tempObject.isFighting()) {
+							Thread child = new Thread() {
+								public void run() {
+									fightingResponse((Animal) tempObject);
+									fightingCountHome++;
+								}
+							};
+							child.start();
+						}
+						
 					}
-				} else {
-					collision = false;
-				}
+				}else {
+					int ran= r.nextInt(100);
+					if (tempObject2.getBounds().intersects(tempObject.getBounds()) && ran >= 20 && ran <= 45) {
+						window.area.append(tempObject2.getName() + " is in its carrying case.\n");
+						window.area.append(tempObject.getName() + " is in its carrying case.\n");
+					}
+				} 
 
 			}
 		}
@@ -379,7 +379,6 @@ public class Game extends Canvas implements Runnable{
 				tick();
 			}
 			else {
-				System.out.println(choice);
 				user.activePet = user.pets.get(choice);
 				user.activePet.setIsNotActive(false);
 				user.activePet.setId(ID.ActivePet);
@@ -448,11 +447,22 @@ public class Game extends Canvas implements Runnable{
 		time.changeTime(h, m);
 	}
 	public void reset() {
-		 new Game();
+		handler.object.clear();
+		user.reset();
+		aList.reset();
+		creation.reset();
+		window.area.setText("A new Day has come\n");
+		gameState = STATE.Menu; 
 	}
-	
+
 	public static void main(String args[]) {
 		new Game();
+	}
+	public Random getR() {
+		return r;
+	}
+	public void setR(Random r) {
+		this.r = r;
 	}
 
 }
