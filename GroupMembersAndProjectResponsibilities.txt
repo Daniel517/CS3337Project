@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Daniel Geiser
 So far just the the idea but we are doing a collective mix on the document.
 
@@ -15,3 +16,16 @@ Jacob Frausto
 Also an editer of documents. Profreader of the documents and co-creation with edit.
 
 All people are giving ideas and pointing out problems with documents or code based on how they see them.
+=======
+Daniel Ramirez
+Responsibilities TBD
+
+Daniel Geiser
+So far just the the idea but we are doing a collective mix on the document.
+
+Edit Vosganians
+Continue to work on the SRS until further discussion with group members.
+
+Jacob Frausto
+Responsibilities TBD
+>>>>>>> JacobFrausto
