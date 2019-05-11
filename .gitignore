@@ -5,4 +5,8 @@
 /bin
 build.fxbuild
 .DS_Store
+<<<<<<< HEAD
+/.metadata/
+=======
 .metadata
+>>>>>>> DanielRamirez
