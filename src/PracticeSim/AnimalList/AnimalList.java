@@ -89,7 +89,9 @@ public class AnimalList {
 		
 		
 		Animal animal = animalsInPark.get(selectedAnimal);
-		if(animal.getEmotion() > 3 && animal.getEmotion() < 7) {
+		if(animal.getEmotion() >= 7) {
+			c3 = Color.green;
+		}else if(animal.getEmotion() > 3 && animal.getEmotion() < 7) {
 			c3 = Color.DARK_GRAY;
 		}
 		else if(animal.getEmotion()>=0 && animal.getEmotion() <= 3) {
