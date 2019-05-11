@@ -62,21 +62,21 @@ public class Spawn {
 			}
 		}
 		
-		if(time.getMILHour() % 4 == 1 && time.getMinutes() == 5) {
+		if(time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 0) {
 			if(!added) {
 				handler.removeWild();
 				added = true;
 			}
 		}
 		
-		if(time.getMILHour() % 4 == 2 && time.getMinutes() == 20) {
+		if(time.getMILHour() % 4 == 2 && time.getMinutes() == 20 && time.getSeconds() == 0) {
 			if(!added) {
 				handler.removePlayerandPets();
 				added = true;
 			}
 		}
 		
-		if(time.getMILHour() % 4 == 3 && time.getMinutes() == 50) {
+		if(time.getMILHour() % 4 == 3 && time.getMinutes() == 50 && time.getSeconds() == 0) {
 			if(!added) {
 				handler.removePlayerandPets();
 				added = true;
