@@ -35,14 +35,14 @@ public class Spawn {
 		
 	}
 	public void tick() {
-		if(time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 0) {
+		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 25 && time.getSeconds() == 0) {
 			if(!added) {
 				AddComputerPlayer();
 				added = true;
 			}
 		}
 		
-		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 5 && time.getSeconds() == 0) {
+		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 45 && time.getSeconds() == 0) {
 			if(!added) {
 				AddComputerPlayer();
 				//For testing animalList
@@ -50,7 +50,7 @@ public class Spawn {
 			}
 		}
 		
-		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 20 && time.getSeconds() == 0) {
+		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 30 && time.getSeconds() == 0) {
 			if(!added) {
 				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
@@ -83,9 +83,9 @@ public class Spawn {
 			}
 		}
 		
-		if(time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 1 
-				|| time.getMILHour() % 4 == 0 && time.getMinutes() == 5 && time.getSeconds() == 1 
-				|| time.getMILHour() % 4 == 0 && time.getMinutes() == 20 && time.getSeconds() == 1 
+		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 25 && time.getSeconds() == 1 
+				|| time.getMILHour() % 4 == 0 && time.getMinutes() == 45 && time.getSeconds() == 1 
+				|| time.getMILHour() % 4 == 0 && time.getMinutes() == 30 && time.getSeconds() == 1 
 				|| time.getMILHour() % 4 == 1 && time.getMinutes() == 5 && time.getSeconds() == 1
 				|| time.getMILHour() % 4 == 2 && time.getMinutes() == 20 && time.getSeconds() == 1 
 				|| time.getMILHour() % 4 == 3 && time.getMinutes() == 50 && time.getSeconds() == 1) {
