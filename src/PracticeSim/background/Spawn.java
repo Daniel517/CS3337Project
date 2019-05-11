@@ -50,7 +50,7 @@ public class Spawn {
 			}
 		}
 		
-		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 20) {
+		if(time.getMILHour() % 4 == 0 && time.getMinutes() == 20 && time.getSeconds() == 0) {
 			if(!added) {
 				Animal an = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));
 				Animal an2 = new Animal(ID.WildAnimal,r.nextInt(900),r.nextInt(900));

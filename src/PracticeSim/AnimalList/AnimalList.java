@@ -25,7 +25,8 @@ public class AnimalList {
 	private int countWild=0;
 	private Font font= new Font("Times New Roman", 10, 25);
 	private Color c = Color.white;
-	private Color c2 = Color.red;
+	private Color c2 = Color.blue;
+	private Color c3 = Color.green;
 	
 	private int alcx = 900 + 70,
 			alcy = 235 + 70,
@@ -88,15 +89,25 @@ public class AnimalList {
 		
 		
 		Animal animal = animalsInPark.get(selectedAnimal);
+		if(animal.getEmotion() > 3 && animal.getEmotion() < 7) {
+			c3 = Color.DARK_GRAY;
+		}
+		else if(animal.getEmotion()>=0 && animal.getEmotion() <= 3) {
+			c3 = Color.red;
+		}
 		g.drawImage(animal.getAsset(), AImageWidth, AImageHeight, null);
 		Text.drawString(g,"\u2191 \u2191 \u2191 \u2191", ACountX+60, 95, true, c, font);
 		Text.drawString(g,"Selected", ACountX+60, 125, true, c, font);
+		Text.drawString(g, "E L",ACountX+65, 185, true, c, font);
+		Text.drawString(g, animal.getEmotion().toString(), ACountX+62, 215, true, c, font);
 		Text.drawString(g, animal.getName(), ACountX+60, 155, true, c, font);
 		Text.drawString(g, Integer.toString(animalsInPark.size()), ACountX, ACountY, true, c, font);
 		Text.drawString(g, Integer.toString(countDog), ACountX, 55, true, c, font);
 		Text.drawString(g, Integer.toString(countCat), ACountX, 85, true, c, font);
 		Text.drawString(g, Integer.toString(countBird), ACountX, 115, true, c, font);
 		Text.drawString(g, Integer.toString(countWild), ACountX, 145, true, c, font);
+		Text.drawString(g, animal.getEmotion().toString(), ACountX+62, 215, true, c3, font);
+
 	}
 	public void addAnimal(String type, String breed, String name, ID id,BufferedImage img) {
 		animalsInPark.add(new Animal(type, breed, name, id,0,0,img));
@@ -177,6 +188,11 @@ public class AnimalList {
 			}
 		}
 	}
+	
+	public int getSizeofPark() {
+		return animalsInPark.size();
+	}
+	
 	public void reset() {
 		animalsInPark.clear();
 		countDog=0;

@@ -68,7 +68,7 @@ public class Animal extends GameObject implements AnimalActions{
 		
 	}
 	public void stayedHome() {
-		if(emotion<=10 && emotion>0) {
+		if(emotion <= 10 && emotion > 0) {
 			emotion -= 1;
 		}
 		else {
@@ -77,7 +77,7 @@ public class Animal extends GameObject implements AnimalActions{
 		
 	}
 	public void WentToPark() {
-		if(emotion<10 && emotion>=0) {
+		if(emotion < 10 && emotion >= 0) {
 			emotion += 1;
 		}
 		else {
@@ -85,7 +85,12 @@ public class Animal extends GameObject implements AnimalActions{
 		}
 	}
 	public void Hit() {
-		emotion -= 1;
+		if(emotion <= 10 && emotion > 0) {
+			emotion -= 1;
+		}
+		else {
+			emotion=0;
+		}
 	}
 	public Integer getEmotion() {
 		return emotion;
@@ -133,7 +138,13 @@ public class Animal extends GameObject implements AnimalActions{
 		IsNotActive = isNotActive;
 	}
 	public void GoodJob() {
-		emotion += 1;
+		
+		if(emotion < 10) {
+			emotion += 1;
+		}else {
+			emotion = 10;
+		}
+		
 	}
 	
 	@Override

@@ -44,6 +44,7 @@ public class Game extends Canvas implements Runnable{
 	private int fightingCountHome = 0;
 
 	private boolean picked=false;
+	private boolean pickedPark = false;
 	private KeyManager keyManager;
 	
 	private Graphics g;
@@ -190,7 +191,7 @@ public class Game extends Canvas implements Runnable{
 		
 		if(gameState == STATE.GameHome) {
 			
-			//g.drawImage(Assets.home, 0, 0, null);
+			g.drawImage(Assets.home, 0, 0, null);
 			aList.render(g);
 			action.render(g);
 			time.render(g);
@@ -271,7 +272,8 @@ public class Game extends Canvas implements Runnable{
 									fightingResponse((Animal) tempObject);
 								}
 							};
-							child.start();						}
+							child.start();						
+							}
 					}
 					else {
 					}
@@ -385,6 +387,41 @@ public class Game extends Canvas implements Runnable{
 				picked = true;
 			}
 		}
+	}
+	
+	public void pickAanimalAtPark() {
+		if(user.activePet.isIsUserPet()){
+			user.activePet.setId(ID.UserPet);
+			user.activePet.setIsNotActive(true);
+		}else if(user.activePet.getName() == "Squirrel") {
+			user.activePet.setId(ID.WildAnimal);
+		}
+		else {
+			user.activePet.setId(ID.Pet);
+		}
+		
+			
+		Object[] options = new Object[aList.getSizeofPark()];
+		for (int i = 0; i < aList.getSizeofPark(); i++) {
+			options[i] = aList.getAnimal(i).getName();
+		}
+		int choice = JOptionPane.showOptionDialog(null, "Which animal would you like to play with?",
+				"Chose who to play with?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+				options, options[0]);
+
+			
+		user.activePet = aList.getAnimal(choice);
+		if(user.activePet.getId() == ID.UserPet) {
+			user.activePet.setIsNotActive(false);
+			user.activePet.setId(ID.ActivePet);
+		}
+		else {
+			user.activePet.setId(ID.ActivePet);
+		}
+		
+		
+		
+		//picked = true;
 	}
 	
 	public void newVisable() {
