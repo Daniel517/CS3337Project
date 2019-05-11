@@ -68,7 +68,7 @@ public class deathState extends MouseAdapter{
 		g.drawString("I may have to come ", 10, 450);
 		g.drawString("get you before your time", 10, 500);
 		g.drawString(" is up' Death turns.", 10, 550);
-		g.drawString("Death is turing you away", 10, 600);
+		g.drawString("Death is turning you away", 10, 600);
 		g.drawString("take this chance to ", 10, 650);
 		g.drawString("live in peace with animals", 10, 700);
 		
