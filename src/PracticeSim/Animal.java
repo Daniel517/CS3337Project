@@ -174,7 +174,7 @@ public class Animal extends GameObject implements AnimalActions{
 			action = getName()+" trys to catch something";
 		}
 		else if(getType() == "Cat") {
-			action = getName() + "trys to catch a bird.";
+			action = getName() + " trys to catch a bird.";
 					
 		}
 		setAction(action);
@@ -191,7 +191,7 @@ public class Animal extends GameObject implements AnimalActions{
 			action = getName()+" makes a noise";
 		}
 		else if(getType() == "Cat") {
-			action = getName() + "MEOW!!";
+			action = getName() + " MEOW!!";
 					
 		}
 		setAction(action);
@@ -235,7 +235,7 @@ public class Animal extends GameObject implements AnimalActions{
 			action = getName() + " seems to be ignoring you";
 		}
 		else {
-			action= getName() + "is playing.";
+			action= getName() + " is playing.";
 		}
 		setAction(action);
 	}
